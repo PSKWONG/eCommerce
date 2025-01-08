@@ -1,19 +1,47 @@
-// ---------------------- Import Modules -----------
-const express = require('express');
-const morgan = require('morgan');
-const bodyParser = require('body-parser');
-const errorhandler = require("errorhandler");
-const cors = require('cors');
 
 // ---------------------- Global Variable -----------
+require('dotenv').config();
 const port = process.env.PORT || 3008;
 
-// ---------------------- Apply Modules -----------
+// ----------------- ----- ----- Core Modules -----------
+const express = require('express');
 const app = express();
-app.use(bodyParser.json());
+
+
+// ----------------- ----- ----- Imported Modules -----------
+
+//Error Handler
+const errorhandler = require("errorhandler");
+// Error Handler located at the end of the file
+
+// Morgan 
+const morgan = require('morgan');
 app.use(morgan('tiny'));
-app.use(errorhandler());
+
+//CORS
+const cors = require('cors');
 app.use(cors());
+
+//Body Parser
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
+
+//Session
+const sessionConfiguration = require('./controller/session');
+app.use(sessionConfiguration); 
+
+
+
+
+
+
+
+
+
+
+//------------------Error Handling 
+app.use(errorhandler());
+
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
