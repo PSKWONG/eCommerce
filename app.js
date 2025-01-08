@@ -33,15 +33,9 @@ app.use(sessionConfiguration);
 
 // ----------------- ----- ----- Routes -----------
 
-app.get('/test-session', (req, res) => {
-  if (req.session.views) {
-    req.session.views++;
-    res.send(`Number of views: ${req.session.views}`);
-  } else {
-    req.session.views = 1;
-    res.send('Welcome to the session demo. Refresh!');
-  }
-});
+//Session Route ( Testing Purpose ) 
+const sessionRouter = require('./routes/session');
+app.use('/test-session', sessionRouter);
 
 
 //------------------Error Handling 
