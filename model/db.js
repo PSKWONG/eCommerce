@@ -13,10 +13,10 @@ const pool = new Pool({
   });
 
   // --- Create a function "query" for executing SQL queries
-  const query = async (sqlQuery) => {
+  const dbQuery = async (sqlQuery, params = []) => {
     try{
         const client = await pool.connect();
-        const result = await client.query(sqlQuery);
+        const result = await client.query(sqlQuery, params);
         client.release();
         return result ;
     }catch(err){
@@ -25,4 +25,4 @@ const pool = new Pool({
     }
   }
 
-  module.exports = {pool, query};
+  module.exports = {pool, dbQuery};
