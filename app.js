@@ -31,19 +31,22 @@ const sessionConfiguration = require('./controller/session');
 app.use(sessionConfiguration); 
 
 
+// ----------------- ----- ----- Routes -----------
 
-
-
-
-
-
+app.get('/test-session', (req, res) => {
+  if (req.session.views) {
+    req.session.views++;
+    res.send(`Number of views: ${req.session.views}`);
+  } else {
+    req.session.views = 1;
+    res.send('Welcome to the session demo. Refresh!');
+  }
+});
 
 
 //------------------Error Handling 
 app.use(errorhandler());
 
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+module.exports = app;
 

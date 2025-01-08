@@ -1,4 +1,4 @@
-const {dbQuery} = require('./db'); 
+const {pool, dbQuery} = require('./db'); 
 const {UserDB} = require('./users');
 
 // Arrange user data
@@ -37,6 +37,10 @@ describe ('Tests on connection with Database', () => {
         await HelperFunction.clearUserData();
         await HelperFunction.resetUserIDSeq();
     }); 
+
+    afterAll(async () => {
+        await pool.end();
+    });
 
 
     test ('Database connection should be successful', async () => {
