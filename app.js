@@ -27,8 +27,13 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 //Session
-const sessionConfiguration = require('./controller/session');
-app.use(sessionConfiguration); 
+const session = require('./controller/modules/session');
+app.use(session); 
+
+//Passport
+const passport = require('./controller/modules/passport');
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 // ----------------- ----- ----- Routes -----------
