@@ -4,7 +4,7 @@
   "description": "eCommerce_dev",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test:backend": "jest --config=jest/jest.backend.config.js"
   },
   "author": "Edward Kwong",
   "license": "ISC",

@@ -1,5 +1,5 @@
-const {pool, dbQuery} = require('./db'); 
-const {UserDB} = require('./users');
+const {pool, dbQuery} = require('../../model/db'); 
+const {UserDB} = require('../../model/users');
 
 // Arrange user data
 const userData = [

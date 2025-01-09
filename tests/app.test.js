@@ -1,7 +1,7 @@
 //  Core Modules to import 
-const {pool, dbQuery} = require('./model/db'); 
+const {pool, dbQuery} = require('../../model/db'); 
 const request = require('supertest');
-const app = require('./app');
+const app = require('../../app');
 
 
 
