@@ -18,7 +18,7 @@ const passwordencryption = async (password) => {
     return encryptedPassword;
 };
 // User Info Response Constructor 
-exports.userInfoResponse = (result) => {
+const userInfoResponse = (result) => {
     result = [result]
     const newUserArray = result.map((user) => {
         return {
@@ -57,7 +57,7 @@ exports.userInfoChecking = async (req, res, next) => {
     //Check if email is duplicated
     if (email) {
         const inputEmail = email.toLowerCase();
-        const isEmailDuplicated = await User.findByEmail(inputEmail);
+        const isEmailDuplicated = await UserDB.findByEmail(inputEmail);
         if (isEmailDuplicated) {
             return next(siteError(400, 'Email is already existed'));
         }
@@ -106,6 +106,7 @@ exports.createUser = async (req, res, next) => {
         const newUser = await UserDB.create(username, email, encryptedPassword);
         //Construct a unified user response
         const response = userInfoResponse(newUser);
+        console.log(response);
         //return the response
         return res.status(200).json(response);
     } catch (err) {

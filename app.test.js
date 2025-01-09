@@ -33,15 +33,9 @@ const HelperFunction = {
     }
 }
 
-// Test Suite
+// ---------------------Session Function testing ---------------------
 
 describe('Session Tests', () => {
-
-     // Close the pool after all tests are done
-    afterAll(async () => {
-        await pool.end();
-    });
-
 
     it('should create a session and increment views', async () => {
       const agent = request.agent(app);
@@ -55,3 +49,68 @@ describe('Session Tests', () => {
       expect(response.text).toBe('Number of views: 2');
     });
   });
+
+// ---------------------User Authentication testing ---------------------
+describe ('User Regsitration and Authentication', () => {
+    // Clear the user data before each test
+    const agent = request.agent(app);
+
+    beforeEach(async () => {
+        await HelperFunction.clearUserData();
+        await HelperFunction.resetUserIDSeq();
+    });
+
+
+    it('should register a user', async () => {
+        // Register a user
+        let response = await agent.post('/registration').send(userData[0]);
+        expect(response.status).toBe(200);
+        expect(response.body.users[0]).toHaveProperty('username', userData[0].username);
+        expect(response.body.users[0]).toHaveProperty('email', userData[0].email);
+    });
+
+    it('should not register a user with missing fields', async () => {
+        // Register a user with missing fields
+        let response = await agent.post('/registration').send({
+            username: userData[0].username,
+            email: userData[0].email
+        });
+        expect(response.status).toBe(400);
+        expect(response.text).toBe('Missing required fields');
+    });
+
+    it('should not register a user with invalid email', async () => {
+
+        // Register a user with invalid email
+        let response = await agent.post('/registration').send({
+            username: userData[0].username,
+            email: 'invalid-email',
+            password: userData[0].password
+        });
+        expect(response.status).toBe(400);
+        expect(response.text).toBe('Invalid Email');
+    });
+
+    it('should not register a user with invalid password', async () => {
+
+        // Register a user with invalid password
+        let response = await agent.post('/registration').send({
+            username: userData[0].username,
+            email: userData[0].email,
+            password: 'invalid-password'
+        });
+        expect(response.status).toBe(400);
+    });
+
+    it('should not register a user with duplicated email', async () => {
+
+        // Register a user
+        let response = await agent.post('/registration').send(userData[0]);
+        expect(response.status).toBe(200);
+
+        // Register another user with the same email
+        response = await agent.post('/registration').send(userData[0]);
+        expect(response.status).toBe(400);
+        expect(response.text).toBe('Email is already existed');
+    });
+});
