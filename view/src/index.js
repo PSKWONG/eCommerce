@@ -1,13 +1,31 @@
+// ------ ------ ------ ------ ------ ------ Import Modules ------ ------ ------ ------ ------ ------
+// Core Modules
 import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
+import { createRoot } from 'react-dom/client';
+
+// Redux
+import {Provider} from 'react-redux';
+
+//Reporting 
 import reportWebVitals from './reportWebVitals';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+// Sample Modules
+import './index.css';
+import App from './App';
+// -----------------------
+
+//----------------------- Import components -----------------------
+import store from './store/store';
+
+
+// ------ ------ ------ ------ ------ ------ Rendering  ------ ------ ------ ------ ------ ------
+const root = createRoot(document.getElementById('root'));
 root.render(
+
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
