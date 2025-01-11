@@ -2,4 +2,7 @@
 .env
 
 # Ignore Visual Studio Code folder 
-.vscode/
+vscode/
+
+# Ignore Modules Files 
+node_modules/
