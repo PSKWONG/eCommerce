@@ -11,11 +11,12 @@ import reportWebVitals from './reportWebVitals';
 
 // Sample Modules
 import './index.css';
-import App from './App';
+
 // -----------------------
 
 //----------------------- Import components -----------------------
 import store from './store/store';
+import App from './containers/AppContainer';
 
 
 // ------ ------ ------ ------ ------ ------ Rendering  ------ ------ ------ ------ ------ ------

@@ -1,5 +1,11 @@
-import logo from './logo.svg';
-import './App.css';
+// ------------------- Import Modules -------------------
+//Core Modules
+import React from 'react';
+
+// ------------------- Import Components -------------------
+//Import Assets 
+import logo from '../assets/images/logo.svg';
+import '../assets/styles/App.css';
 
 function App() {
   return (
