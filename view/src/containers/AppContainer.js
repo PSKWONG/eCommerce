@@ -6,13 +6,14 @@ import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} fr
 
 
 // ------------------- Import Components -------------------
-import App from '../components/App';
+//import App from '../components/App';
+import Page from './PageContainer';
 
 
 //-------------------- Router --------------------
 const appRouter = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />} />
+    <Route path="/" element={<Page />} />
   ) 
 );
 // ------------------- AppContainer -------------------

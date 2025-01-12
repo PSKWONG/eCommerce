@@ -10,7 +10,7 @@ import {Provider} from 'react-redux';
 import reportWebVitals from './reportWebVitals';
 
 // Sample Modules
-import './index.css';
+import './assets/styles/index.css';
 
 // -----------------------
 
