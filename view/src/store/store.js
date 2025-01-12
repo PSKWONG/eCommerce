@@ -4,7 +4,7 @@ import {configureStore} from '@reduxjs/toolkit';
 
 
 // ------------------------ Import Reducers ------------------------
-
+import rootReducer from './rootReducers';
 
 
 // ------------------------ Import Middleware ------------------------
@@ -22,9 +22,6 @@ import {configureStore} from '@reduxjs/toolkit';
 
 // ------------------------ Create Store ------------------------
 const store = configureStore({
-  reducer: {
-    // Add reducers here
-  }
+  reducer: rootReducer,
 });
-
 export default store;
