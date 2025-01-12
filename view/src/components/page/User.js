@@ -8,8 +8,8 @@ import loginBtn from '../../assets/images/loginBtn.png';
 import userIcon from '../../assets/images/userIcon.png';
 
 // ------------------------------ User Component ------------------------------
-const User = () => {
-  const iconType = 'Profile'; // Default condition
+const User = ({auth}) => {
+  const iconType = auth ||'Login'; // Default condition
 
   let content;
   if (iconType === 'Login') {

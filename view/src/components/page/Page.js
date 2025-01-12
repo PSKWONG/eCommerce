@@ -12,16 +12,16 @@ import styles from './page.module.css';
 
 // ------------------- Page Component -------------------
 
-const Page = () => {
+const Page = ({ authenticatingState }) => {
   return (
     <>
-        <header>
-            <span></span>
-            <Logo />
-            <span></span>
-            <User />
-            <Cart />
-        </header>
+      <header>
+        <span></span>
+        <Logo />
+        <span></span>
+        <User auth={authenticatingState ? "Profile" : "Login"} />
+        <Cart />
+      </header>
     </>
   );
 };
