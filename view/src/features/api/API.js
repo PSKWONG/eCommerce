@@ -4,10 +4,10 @@ import axios from 'axios';
 
 //-------------------- Variables --------------------//
 //envrioment
-const environment = process.env.NODE_ENV;
+const environment = process.env.REACT_APP_ENV;
 //API URL
-const API_URL = environment === 'production' ? process.env.REACT_API_URL_PROD : process.env.REACT_APP_API_URL;
-
+const API_URL = environment === 'production' ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
+console.log('TheAPI:',API_URL);
 
 //-------------------- API Functions --------------------//
 // Basic API call 
@@ -63,17 +63,17 @@ const deleteAPI = async (path) => {
 //---------------------Authentication API ---------------------//
 //Login
 export const loginAPI = async (body) => {
-    return postAPI(`/auth/login`, body);
+    return postAPI(`/authen/login`, body);
 };
 
 //Check Authentication Status
 export const checkAuthAPI = async () => {
-    return getAPI(`/auth/check`);
+    return getAPI(`/authen/check`);
 };
 
 //Logout
 export const logoutAPI = async () => {
-    return getAPI(`/auth/logout`);
+    return getAPI(`/authen/logout`);
 };
 
 //---------------------User API---------------------//

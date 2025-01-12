@@ -14,7 +14,13 @@ import Page from './PageContainer';
 const appRouter = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Page />} />
-  ) 
+  ), 
+  {
+    future: {
+      v7_startTransition: true,
+      v7_relativeSplatPath: true
+    }
+  }
 );
 // ------------------- AppContainer -------------------
 function AppContainer() {

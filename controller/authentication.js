@@ -45,8 +45,11 @@ exports.authericationCheck = (req, res, next ) => {
 
     // Request from Status Checking ( Icon Status )
     if (requestPath === '/authen/check') {
-        return res.json({ result });
+        console.log(result);
+        return res.json(result);
+        
     }else if (result) {
+        console.log('Should not be here');
         return next();
     }else{
         return next(siteError(401, 'Unauthorized Access'));

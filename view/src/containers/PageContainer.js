@@ -1,6 +1,6 @@
 //-------------------------- Import Modules --------------------------
-import React, {useEffect, useState} from "react";
-import { useDispatch } from "react-redux";
+import React, {useEffect} from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 // ----------------------- Import components -----------------------
 import Page from "../components/page/Page";
@@ -9,8 +9,7 @@ import Page from "../components/page/Page";
 //------------------------ Import Actions ------------------------
 //dispatch actions
 
-import { checkAuth } from "../features/authentication/authenticationSlice";
-
+import { checkAuth, selectIsAuthenticated } from "../features/authentication/authenticationSlice";
 // ----------------------- Import Selectors -----------------------
 
 
@@ -20,19 +19,25 @@ const PageContainer = () => {
   const dispatch = useDispatch();
 
   //Component States
-  const [authenticatingState, setauthenticatingState] = useState(false);
+  const authenStatus = useSelector(selectIsAuthenticated);
 
   //Component Effect Hooks
-  /*
-  useEffect( async()=>{
-    const isAuthenticated = await dispatch(checkAuth());
-    setauthenticatingState(isAuthenticated); 
-  }, [dispatch]  )
-  */
+  
+  useEffect(() => {
+    const getAuthStatus = async () => {
+      try {
+        await dispatch(checkAuth());
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAuthStatus();
+  }, [dispatch]);
+  
 
   //Page States Props
   const pageStates = {
-    authenticatingState: authenticatingState,
+    authenticatingState: authenStatus,
   };
 
   return (
