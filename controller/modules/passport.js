@@ -19,12 +19,12 @@ passport.use(new LocalStrategy(
             // Find user by email
             const user = await UserDB.findByEmail(username);
             if (!user) {
-                return done(null, false);
+                return done(null, false , { message: 'Incorrect username.' });
             }         
             // Compare password
             const isPasswordValid = await bcrypt.compare(password, user.password);
             if (!isPasswordValid) {
-                return done(null, false);
+                return done(null, false , { message: 'Incorrect password.' });
             }
             // If user is found and password is correct
             return done(null, user);

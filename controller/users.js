@@ -118,3 +118,13 @@ exports.createUser = async (req, res, next) => {
     }
 
 };
+
+//get User Profile
+exports.getUserProfile = async (req, res, next) => {
+    //Destructuring the request user
+    const { user } = req;
+    //Construct a unified user response
+    const response = userInfoResponse(user);
+    //return the response
+    return res.status(200).json(response);
+}

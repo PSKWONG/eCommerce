@@ -130,7 +130,7 @@ describe ('User Authentication', () => {
         });
         console.log(response.body);
         expect(response.status).toBe(302);
-        expect(response.headers.location).toBe('/profile');
+        expect(response.headers.location).toBe('/user/profile');
     });
 
     it ('should not login a user with missing fields', async () => {    
@@ -138,8 +138,8 @@ describe ('User Authentication', () => {
         let response = await agent.post('/authen/login').send({
             username: userData[0].email
         });
-        expect(response.status).toBe(302);
-        expect(response.headers.location).toBe('/authen/login');
+        expect(response.status).toBe(401);
+        expect(response.text).toBe('Missing credentials');
     });
     
     it ('should not login a user with invalid credentials', async () => {
@@ -148,6 +148,48 @@ describe ('User Authentication', () => {
             username: userData[0].email,
             password: 'invalid-password'
         });
+        expect(response.status).toBe(401);
+        expect(response.text).toBe('Incorrect password.');
+    });
+
+    it ('should logout a user', async () => {
+        // Login a user
+        let response = await agent.post('/authen/login').send({
+            username: userData[0].email,
+            password: userData[0].password
+        });
+        expect(response.status).toBe(302);
+
+        // Logout a user
+        response = await agent.get('/authen/logout');
+        expect(response.status).toBe(302);
+        expect(response.headers.location).toBe('/');
+    });
+
+    it ('should check user authentication status', async () => {
+        // Check user authentication status
+        let response = await agent.get('/authen/check');
+        expect(response.status).toBe(200);
+        expect(response.body.result).toBe(false);
+
+        // Login a user
+        response = await agent.post('/authen/login').send({
+            username: userData[0].email,
+            password: userData[0].password
+        });
+        expect(response.status).toBe(302);
+
+        // Check user authentication status
+        response = await agent.get('/authen/check');
+        expect(response.status).toBe(200);
+        expect(response.body.result).toBe(true);
+    });
+
+    it ('should redirect to login page if not authenticated', async () => {
+        //Logout user
+        await agent.get('/authen/logout');
+        // Check user authentication status
+        let response = await agent.get('/user/profile');
         expect(response.status).toBe(302);
         expect(response.headers.location).toBe('/authen/login');
     });
