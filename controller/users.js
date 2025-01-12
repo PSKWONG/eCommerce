@@ -81,8 +81,9 @@ exports.userInfoChecking = async (req, res, next) => {
     }
 
     //Check the request path for response 
-    const requestPath = req.path;
-    if (requestPath === '/register' || '/user') {
+    const requestPath = req.originalUrl;
+    console.log('The requested path is : ' , requestPath);
+    if (requestPath === '/registration') {
         return next();
     };
 
@@ -106,7 +107,6 @@ exports.createUser = async (req, res, next) => {
         const newUser = await UserDB.create(username, email, encryptedPassword);
         //Construct a unified user response
         const response = userInfoResponse(newUser);
-        console.log(response);
         //return the response
         return res.status(200).json(response);
     } catch (err) {

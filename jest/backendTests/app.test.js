@@ -24,12 +24,10 @@ const userData = [
 const HelperFunction = {
     clearUserData: async () => {
         await dbQuery('DELETE FROM users');
-        console.log('User Data is cleared'); 
     }, 
 
     resetUserIDSeq: async() =>{
         await dbQuery(`ALTER SEQUENCE users_user_id_seq RESTART WITH 1`); 
-        console.log('User ID sequence reset');
     }
 }
 
