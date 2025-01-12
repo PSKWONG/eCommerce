@@ -1,2 +1,8 @@
+# Ignore the environment file
 .env
-node_modules
+
+# Ignore Visual Studio Code folder 
+vscode/
+
+# Ignore Modules Files 
+node_modules/
