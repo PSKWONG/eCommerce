@@ -48,7 +48,12 @@ app.use('/test-session', sessionRouter);
 
 // User Route
 const userRouter = require('./routes/users');
-app.use('/registration', userRouter);
+app.use('/registrationChecking', userRouter);
+app.use('/user', userRouter);
+
+//Authentication Route
+const authenRouter = require('./routes/authentication');
+app.use('/authen', authenRouter);
 
 
 //------------------Error Handling ----------------------

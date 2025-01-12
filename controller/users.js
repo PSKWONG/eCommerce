@@ -5,10 +5,13 @@ const express = require('express');
 const { UserDB } = require('../model/users');
 // Bcrypt
 const bcrypt = require("bcrypt");
+// Passport
+const passport = require('../controller/modules/passport')
 // Info Checking
 const inputChecking = require('./utilies/userInputChecking')
 //Custom Error Handler
 const { siteError } = require('./utilies/customErrorHandler');
+
 
 //--------------------------------Helper function-------------------------
 //Password Encryption
@@ -33,8 +36,10 @@ const userInfoResponse = (result) => {
     return body;
 };
 
-//-------------------------------User Info Checking ------------------------------
+//------------------------------- User Controller ------------------------------
+// UserInfo Input Vadility Checking
 exports.userInfoChecking = async (req, res, next) => {
+
     //Destructuring the request body
     const { username, email, password } = req.body;
 
@@ -81,17 +86,16 @@ exports.userInfoChecking = async (req, res, next) => {
     }
 
     //Check the request path for response 
-    const requestPath = req.originalUrl;
-    console.log('The requested path is : ' , requestPath);
-    if (requestPath === '/registration') {
-        return next();
+    const requestPath = req.originalUrl
+
+    if (requestPath === '/registrationChecking') {
+        return res.status(200).send('User information is valid');
     };
 
-    // Send HTTP Response if all the information is valid
-    res.status(200).send('User information is valid');
+    next();
 };
 
-//-------------------------------Create User Controller ------------------------------
+//create User
 exports.createUser = async (req, res, next) => {
     //Destructuring the request body
     const { username, email, password } = req.body;

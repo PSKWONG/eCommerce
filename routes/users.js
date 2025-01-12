@@ -3,11 +3,14 @@
 // ----------------- ----- ----- Imported Modules -----------
 const express = require('express');
 const userRouter = express.Router();
-const {createUser, userInfoChecking} = require('../controller/users');
+const { createUser, userInfoChecking, userAuthentication } = require('../controller/users');
+
+// ----------------- ----- ----- HelperFunction  -----------
+
 
 //---- -------------------------- Registration ---------------
-
-userRouter.post('/',userInfoChecking, createUser );
+//user Regiration
+userRouter.post('/registration', userInfoChecking, createUser);
 
 
 module.exports = userRouter;

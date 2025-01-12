@@ -6,6 +6,7 @@ const app = require('../../app');
 
 
 // Arrange user data
+const agent = request.agent(app);
 const userData = [
     {
         username: "testUser1",
@@ -36,8 +37,7 @@ const HelperFunction = {
 describe('Session Tests', () => {
 
     it('should create a session and increment views', async () => {
-      const agent = request.agent(app);
-  
+
       // First request to initialize session
       let response = await agent.get('/test-session');
       expect(response.text).toBe('Welcome to the session demo. Refresh!');
@@ -49,9 +49,8 @@ describe('Session Tests', () => {
   });
 
 // ---------------------User Authentication testing ---------------------
-describe ('User Regsitration and Authentication', () => {
+describe ('User Regsitration', () => {
     // Clear the user data before each test
-    const agent = request.agent(app);
 
     beforeEach(async () => {
         await HelperFunction.clearUserData();
@@ -61,7 +60,7 @@ describe ('User Regsitration and Authentication', () => {
 
     it('should register a user', async () => {
         // Register a user
-        let response = await agent.post('/registration').send(userData[0]);
+        let response = await agent.post('/user/registration').send(userData[0]);
         expect(response.status).toBe(200);
         expect(response.body.users[0]).toHaveProperty('username', userData[0].username);
         expect(response.body.users[0]).toHaveProperty('email', userData[0].email);
@@ -69,7 +68,7 @@ describe ('User Regsitration and Authentication', () => {
 
     it('should not register a user with missing fields', async () => {
         // Register a user with missing fields
-        let response = await agent.post('/registration').send({
+        let response = await agent.post('/user/registration').send({
             username: userData[0].username,
             email: userData[0].email
         });
@@ -80,7 +79,7 @@ describe ('User Regsitration and Authentication', () => {
     it('should not register a user with invalid email', async () => {
 
         // Register a user with invalid email
-        let response = await agent.post('/registration').send({
+        let response = await agent.post('/user/registration').send({
             username: userData[0].username,
             email: 'invalid-email',
             password: userData[0].password
@@ -92,7 +91,7 @@ describe ('User Regsitration and Authentication', () => {
     it('should not register a user with invalid password', async () => {
 
         // Register a user with invalid password
-        let response = await agent.post('/registration').send({
+        let response = await agent.post('/user/registration').send({
             username: userData[0].username,
             email: userData[0].email,
             password: 'invalid-password'
@@ -103,12 +102,34 @@ describe ('User Regsitration and Authentication', () => {
     it('should not register a user with duplicated email', async () => {
 
         // Register a user
-        let response = await agent.post('/registration').send(userData[0]);
+        let response = await agent.post('/user/registration').send(userData[0]);
         expect(response.status).toBe(200);
 
         // Register another user with the same email
-        response = await agent.post('/registration').send(userData[0]);
+        response = await agent.post('/user/registration').send(userData[0]);
         expect(response.status).toBe(400);
         expect(response.text).toBe('Email is already existed');
     });
+});
+
+describe ('User Authentication', () => {
+
+    beforeAll(async () => {
+        // Register a user
+        await HelperFunction.clearUserData();
+        await HelperFunction.resetUserIDSeq();
+        await agent.post('/user/registration').send(userData[0]);
+    });
+
+    it('should login a user', async () => {
+        // Login a user
+        let response = await agent.post('/authen/login').send({
+            username: userData[0].email,
+            password: userData[0].password
+        });
+        console.log(response.body);
+        expect(response.status).toBe(302);
+        expect(response.headers.location).toBe('/profile');
+    });
+
 });
