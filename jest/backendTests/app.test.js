@@ -120,6 +120,7 @@ describe ('User Authentication', () => {
         await HelperFunction.resetUserIDSeq();
         await agent.post('/user/registration').send(userData[0]);
     });
+    
 
     it('should login a user', async () => {
         // Login a user
@@ -130,6 +131,25 @@ describe ('User Authentication', () => {
         console.log(response.body);
         expect(response.status).toBe(302);
         expect(response.headers.location).toBe('/profile');
+    });
+
+    it ('should not login a user with missing fields', async () => {    
+        // Login a user with missing fields
+        let response = await agent.post('/authen/login').send({
+            username: userData[0].email
+        });
+        expect(response.status).toBe(302);
+        expect(response.headers.location).toBe('/authen/login');
+    });
+    
+    it ('should not login a user with invalid credentials', async () => {
+        // Login a user with invalid credentials
+        let response = await agent.post('/authen/login').send({
+            username: userData[0].email,
+            password: 'invalid-password'
+        });
+        expect(response.status).toBe(302);
+        expect(response.headers.location).toBe('/authen/login');
     });
 
 });

@@ -15,7 +15,6 @@ const LocalStrategy = require('passport-local').Strategy;
 passport.use(new LocalStrategy(
     async (username, password, done) => {
 
-
         try {
             // Find user by email
             const user = await UserDB.findByEmail(username);
