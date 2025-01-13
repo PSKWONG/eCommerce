@@ -20,7 +20,7 @@ const Registration = ({registrationForm, guidelines}) => {
                 <div className={`${styles.registrationWrapper} ${styles.contentWrapper}`}>
                     <h1>Registration</h1>
                     <p>Please fill in the following information to continue the registration</p>
-                    <RegForm formItems = {registrationForm}/>
+                    <RegForm  {...registrationForm} />
                 </div>
             </div>
         </div>

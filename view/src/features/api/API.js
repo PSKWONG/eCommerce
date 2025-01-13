@@ -81,3 +81,10 @@ export const logoutAPI = async () => {
 export const getUser = async (id) => {
     return getAPI(`/users/profile`);
 };
+
+
+//---------------------Registration API---------------------//
+//Check User Input 
+export const checkUserInput = async (body) => {
+    return postAPI(`/users/check`, body);
+};

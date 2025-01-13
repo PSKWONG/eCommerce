@@ -32,50 +32,47 @@ const RegContainer = () => {
             default:
                 break;
         }
-    }
+    }; 
+    
+
+
 
 
 
     //Registration form Object Constructor 
     const regFormData = {
-        registrationForm: [
-            {
-                name: 'username',
-                title: 'Username:',
-                type: 'text',
-                value: username,
-                action: {
-                    handleOnChange
+        registrationForm:
+        {
+            data: [
+                {
+                    name: 'username',
+                    title: 'Username:',
+                    type: 'text',
+                    value: username,
+                },
+                {
+                    name: 'email',
+                    title: 'Email:',
+                    type: 'email',
+                    value: email,
+                },
+                {
+                    name: 'password',
+                    title: 'Password:',
+                    type: 'password',
+                    value: password,
+                },
+                {
+                    name: 'confirmPassword',
+                    title: 'Confirm Password:',
+                    type: 'password',
+                    value: confirmPassword,
                 }
-            },
-            {
-                name: 'email',
-                title: 'Email:',
-                type: 'email',
-                value: email,
-                action: {
-                    handleOnChange
-                }
-            },
-            {
-                name: 'password',
-                title: 'Password:',
-                type: 'password',
-                value: password,
-                action: {
-                    handleOnChange
-                }
-            },
-            {
-                name: 'confirmPassword',
-                title: 'Confirm Password:',
-                type: 'password',
-                value: confirmPassword,
-                action: {
-                    handleOnChange
-                }
+            ],
+            actions: {
+                handleOnChange
             }
-        ]
+        }
         ,
         guidelines: {
             isValidUsername: {

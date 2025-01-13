@@ -11,17 +11,19 @@ import styles from './registration.module.css';
 // ----------------------------- Registration Form ------------------------------
 
 const RegistrationForm = (props) => {
-    const { username, email, password, confirmPassword } = props;
+    console.log(props);
+    const formItems = props.data;
+    const { handleOnChange } = props.actions;
 
     return (
 
         <form className={styles.registrationForm}>
             {
-                props.formItems.map((section, index) => {
+                formItems.map((section, index) => {
                     return (
                         <div key= {index}>
                             <label htmlFor={section.name}>{section.title}</label>
-                            <input type={section.type} id={section.name} name={section.name} value={section.value} onChange={section.action.handleOnChange} />
+                            <input type={section.type} id={section.name} name={section.name} value={section.value} onChange={handleOnChange} />
                         </div>
                     )
                 })
