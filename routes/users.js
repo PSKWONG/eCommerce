@@ -15,6 +15,7 @@ const { authericationCheck } = require('../controller/authentication');
 userRouter.get('/profile', authericationCheck, getUserProfile ) 
 
 userRouter.post('/registration', userInfoChecking, createUser);
+userRouter.post('/registration/check', userInfoChecking);
 
 
 module.exports = userRouter;
