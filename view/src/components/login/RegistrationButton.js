@@ -10,8 +10,8 @@ import styles from './login.module.css';
 const RegistrationButton = (iconInfo) => {
 const {image, description, alt, action} = iconInfo;
     return (
-        <div className={styles.registrationButton}>
-            <img src={image} alt={alt} onClick={action}/>
+        <div className={styles.registrationButton} onClick={action}>
+            <img src={image} alt={alt} />
             <span>{description}</span>
         </div>
     );

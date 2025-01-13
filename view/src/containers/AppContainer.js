@@ -10,6 +10,7 @@ import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} fr
 import Page from './PageContainer';
 import Home from './HomeContainer';
 import Login from './LoginContainer';
+import Registration from './RegContainer'
 
 
 //-------------------- Router --------------------
@@ -18,6 +19,7 @@ const appRouter = createBrowserRouter(
     <Route path="/" element={<Page />} > 
       <Route index element={<Home />} />
       <Route path="login" element={<Login />} />
+      <Route path="register" element={<Registration />} />
 
     </Route>
   ), 
