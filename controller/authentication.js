@@ -49,7 +49,7 @@ exports.authericationCheck = (req, res, next ) => {
     }else if (result) {
         return next();
     }else{
-        return res.redirect('/authen/login');
+        return res.redirect('/login');
     }
     
 }

@@ -191,7 +191,7 @@ describe ('User Authentication', () => {
         // Check user authentication status
         let response = await agent.get('/user/profile');
         expect(response.status).toBe(302);
-        expect(response.headers.location).toBe('/authen/login');
+        expect(response.headers.location).toBe('/login');
     });
 
 });
