@@ -35,21 +35,23 @@ const PageContainer = () => {
 
   // Component Actions 
   const navigate = useNavigate();
-  const handleLogin = () => { navigate("/authen/login"); };
+  const handleLogin = () => { navigate("/login"); };
   const handleProfile = () => { navigate("/user/profile"); };
+  const handleHome = () => { navigate("/"); };
   
 
   // Compoent States  
   const authenStatus = useSelector(selectIsAuthenticated);
 
-  // Component Object Constructor
-
-
+  // Component States Object Constructor
   const pageStates = {
     userIcon:{
       iconImage: authenStatus? userIcon : loginBtn,
       alt: authenStatus? "User Profile" : "Login",
       action: authenStatus? handleProfile : handleLogin
+    },
+    logoIcon: {
+      action: handleHome
     }
   };
 

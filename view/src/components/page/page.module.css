@@ -1,10 +1,15 @@
+/* Page Variable  */
+:root {
+    --headerHeight: 80px;
+    --headerShaddow: 10px; 
+  }
+
 
 /* Header */
-
-
 header {
     box-sizing: border-box;
     width: 100%;
+    height: var(--headerHeight);
     padding: 20px ;
     z-index: 10;
 
@@ -42,4 +47,18 @@ header img {
 .logo span{
     color: white;
     font-weight: bolder;
+}
+
+/* Content Container */
+.content {
+    margin-top: calc(var(--headerHeight) - var(--headerShaddow)); 
+    width: 100%;
+    height: calc(100vh - var(--headerHeight) + var(--headerShaddow)); ;
+    background-image: url('../../assets/images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    
+    /*background-color:#e8e8e5
+     #eee6a2;*/
 }
