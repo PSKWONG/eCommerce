@@ -109,10 +109,18 @@ exports.createUser = async (req, res, next) => {
         const encryptedPassword = await passwordencryption(password);
         //Call the DB Query
         const newUser = await UserDB.create(username, email, encryptedPassword);
+
+        //Auto login after registration
+        req.login(newUser, function (err) {
+            if (err) { return next(err); }
+            return res.redirect('/');   //Redirect to the home page
+        });
+        /*
         //Construct a unified user response
         const response = userInfoResponse(newUser);
         //return the response
         return res.status(200).json(response);
+        */
     } catch (err) {
         return next(err);
     }

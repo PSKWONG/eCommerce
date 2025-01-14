@@ -53,6 +53,7 @@ describe ('User Regsitration', () => {
     // Clear the user data before each test
 
     beforeEach(async () => {
+        await agent.get('/authen/logout');
         await HelperFunction.clearUserData();
         await HelperFunction.resetUserIDSeq();
     });
@@ -61,9 +62,8 @@ describe ('User Regsitration', () => {
     it('should register a user', async () => {
         // Register a user
         let response = await agent.post('/user/registration').send(userData[0]);
-        expect(response.status).toBe(200);
-        expect(response.body.users[0]).toHaveProperty('username', userData[0].username);
-        expect(response.body.users[0]).toHaveProperty('email', userData[0].email);
+        expect(response.status).toBe(302);
+        expect(response.headers.location).toBe('/');
     });
 
     it('should not register a user with missing fields', async () => {
@@ -103,7 +103,6 @@ describe ('User Regsitration', () => {
 
         // Register a user
         let response = await agent.post('/user/registration').send(userData[0]);
-        expect(response.status).toBe(200);
 
         // Register another user with the same email
         response = await agent.post('/user/registration').send(userData[0]);
@@ -115,10 +114,15 @@ describe ('User Regsitration', () => {
 describe ('User Authentication', () => {
 
     beforeAll(async () => {
-        // Register a user
+        // Make sure it is logged out
+        await agent.get('/authen/logout');
+        // Clear the user data before each test
         await HelperFunction.clearUserData();
         await HelperFunction.resetUserIDSeq();
-        await agent.post('/user/registration').send(userData[0]);
+        // Register a user
+        const response = await agent.post('/user/registration').send(userData[0]);
+        // Make sure it is logged out
+        await agent.get('/authen/logout');
     });
     
 
