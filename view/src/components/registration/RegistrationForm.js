@@ -11,9 +11,9 @@ import styles from './registration.module.css';
 // ----------------------------- Registration Form ------------------------------
 
 const RegistrationForm = (props) => {
-    console.log(props);
     const formItems = props.data;
-    const { handleOnChange } = props.actions;
+    const submitBtn = props.submit;
+    const { handleOnChange, handleValidation, handleSubmission } = props.actions;
 
     return (
 
@@ -21,14 +21,19 @@ const RegistrationForm = (props) => {
             {
                 formItems.map((section, index) => {
                     return (
-                        <div key= {index}>
+                        <div key={index}>
                             <label htmlFor={section.name}>{section.title}</label>
-                            <input type={section.type} id={section.name} name={section.name} value={section.value} onChange={handleOnChange} />
+                            <input type={section.type} id={section.name} name={section.name} value={section.value} onChange={handleOnChange} onBlur={handleValidation} className={section.error} />
                         </div>
                     )
                 })
             }
-            
+            <div className={styles.submitButtonWrapper}>
+                <div className={submitBtn.style} onClick={handleSubmission}>
+                    Submit
+                </div>
+            </div>
+
         </form>
     );
 }

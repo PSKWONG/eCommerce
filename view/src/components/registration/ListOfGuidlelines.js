@@ -4,14 +4,23 @@ import React from 'react';
 
 
 // ------------------------ Import Components --------------------------
+//Assets
+import styles from './registration.module.css';
 
 
 // ------------------------ List of Guidelines --------------------------
-const ListOfGuidelines = () => {
+const ListOfGuidelines = ({data}) => {
     return (
-        <div>
-            <h1>Guidelines</h1>
-            <p>Guidelines for registration</p>
+        <div className={styles.guidelineList}>
+            {
+                data.map((guideline, index) => {
+                    return (
+                        <div key={index} className={styles.guidelineRow}>
+                            {guideline}
+                        </div>
+                    );
+                })
+            }
         </div>
     );
 };

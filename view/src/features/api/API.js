@@ -7,7 +7,6 @@ import axios from 'axios';
 const environment = process.env.REACT_APP_ENV;
 //API URL
 const API_URL = environment === 'production' ? process.env.REACT_APP_API_URL_PROD : process.env.REACT_APP_API_URL_DEV;
-console.log('TheAPI:',API_URL);
 
 //-------------------- API Functions --------------------//
 // Basic API call 
@@ -24,7 +23,7 @@ const api = axios.create(
 const getAPI = async (path) => {
     try {
         const response = await api.get(path);
-        return response.data;
+        return response;
     } catch (error) {
         return error;
     }
@@ -34,8 +33,9 @@ const getAPI = async (path) => {
 const postAPI = async (path, body) => {
     try {
         const response = await api.post(path, body);
-        return response.data;
+        return response;
     } catch (error) {
+        console.error('API error:', error);
         return error;
     }
 };
@@ -86,5 +86,10 @@ export const getUser = async (id) => {
 //---------------------Registration API---------------------//
 //Check User Input 
 export const checkUserInput = async (body) => {
-    return postAPI(`/users/check`, body);
+    return postAPI(`/user/registration/check`, body);
+};
+
+//Submite for Registration
+export const submitRegistration = async (body) => {
+    return postAPI(`/user/registration`, body);
 };

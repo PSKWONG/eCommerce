@@ -15,7 +15,7 @@ const Registration = ({registrationForm, guidelines}) => {
             <div className={styles.formAndGuidelinenWrapper}>
                 <div className= {`${styles.guidelineWrapper} ${styles.contentWrapper}`}>
                     <h1>Guideline</h1>
-                    <ListOfGuidelines />
+                    <ListOfGuidelines {...guidelines} />
                 </div>
                 <div className={`${styles.registrationWrapper} ${styles.contentWrapper}`}>
                     <h1>Registration</h1>

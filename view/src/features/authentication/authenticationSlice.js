@@ -26,7 +26,7 @@ const checkAuth = createAsyncThunk(
     'authentication/checkAuth',
     async () => {
         const response = await checkAuthAPI();
-        return response;
+        return response.data;
     }
 );
 
