@@ -1,10 +1,13 @@
 // ------------------------ Import Modules --------------------------
 import React, { useState, useEffect } from 'react';
 import { checkUserInput, submitRegistration } from '../features/api/API';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // ------------------------ Import Components --------------------------
 import RegPage from '../components/registration/Registration';
 import styles from '../components/registration/registration.module.css';
+import { selectIsAuthenticated } from "../features/authentication/authenticationSlice";
 
 
 // ------------------------ Registration Container --------------------------
@@ -20,6 +23,17 @@ const RegContainer = () => {
     const [isValidConfirmPassword, setIsValidConfirmPassword] = useState();
     const [isFormCompleted, setIsFormCompleted] = useState(false);
     const [guideline, setGuideline] = useState([]);
+
+    // Compoent States  
+    const authenStatus = useSelector(selectIsAuthenticated);
+
+    //Redirect to Home page if authenticated
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (authenStatus) {
+            navigate('/');
+        }   
+    }, [authenStatus]);
 
     //Actions for registration form
     const handleOnChange = (e) => {
@@ -111,7 +125,7 @@ const RegContainer = () => {
         let isValid = false;
 
         switch (true) {
-            
+
             case !isFormCompleted:
                 message = 'Please complete the form';
                 break;
@@ -154,10 +168,10 @@ const RegContainer = () => {
             }
         }
         //Set the error message in the guideline
-        if (message){
+        if (message) {
             setGuideline(() => [message, ...guideline]);
         }
-        return; 
+        return;
     };
 
 
@@ -182,7 +196,8 @@ const RegContainer = () => {
         setIsFormCompleted(isCompleted);
     }, [isValidUsername, isValidEmail, isValidPassword]);
 
- 
+
+
     //Registration form Object Constructor 
     const regFormData = {
         registrationForm:
@@ -227,7 +242,6 @@ const RegContainer = () => {
                 handleOnChange,
                 handleValidation,
                 handleSubmission
-
             }
         }
         ,

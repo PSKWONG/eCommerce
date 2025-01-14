@@ -10,6 +10,9 @@ import ListOfGuidelines from './ListOfGuidlelines'
 
 // ------------------------ Registration Component --------------------------
 const Registration = ({registrationForm, guidelines}) => {
+
+ 
+
     return (
         <div className={styles.regsitrationPageWarpper}>
             <div className={styles.formAndGuidelinenWrapper}>
