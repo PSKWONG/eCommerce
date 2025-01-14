@@ -62,8 +62,8 @@ describe ('User Regsitration', () => {
     it('should register a user', async () => {
         // Register a user
         let response = await agent.post('/user/registration').send(userData[0]);
-        expect(response.status).toBe(302);
-        expect(response.headers.location).toBe('/');
+        expect(response.status).toBe(200);
+        expect(response.text).toBe('User is successfully registered');
     });
 
     it('should not register a user with missing fields', async () => {
@@ -133,8 +133,7 @@ describe ('User Authentication', () => {
             password: userData[0].password
         });
         console.log(response.body);
-        expect(response.status).toBe(302);
-        expect(response.headers.location).toBe('/user/profile');
+        expect(response.status).toBe(200);
     });
 
     it ('should not login a user with missing fields', async () => {    
@@ -162,12 +161,11 @@ describe ('User Authentication', () => {
             username: userData[0].email,
             password: userData[0].password
         });
-        expect(response.status).toBe(302);
+        expect(response.status).toBe(200);
 
         // Logout a user
         response = await agent.get('/authen/logout');
-        expect(response.status).toBe(302);
-        expect(response.headers.location).toBe('/');
+        expect(response.status).toBe(200);
     });
 
     it ('should check user authentication status', async () => {
@@ -181,7 +179,7 @@ describe ('User Authentication', () => {
             username: userData[0].email,
             password: userData[0].password
         });
-        expect(response.status).toBe(302);
+        expect(response.status).toBe(200);
 
         // Check user authentication status
         response = await agent.get('/authen/check');
@@ -194,8 +192,8 @@ describe ('User Authentication', () => {
         await agent.get('/authen/logout');
         // Check user authentication status
         let response = await agent.get('/user/profile');
-        expect(response.status).toBe(302);
-        expect(response.headers.location).toBe('/login');
-    });
+        expect(response.status).toBe(401);
+        expect(response.text).toBe('Unauthorized Access');
+    }); 
 
 });

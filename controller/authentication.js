@@ -20,7 +20,7 @@ exports.userAuthentication = (req, res, next) => {
             if (err) {
                 return next(err);
             }
-            return res.redirect('/user/profile');
+            return res.status(200).json({ message: 'Login Successful!' });
         });
 
     })(req, res, next);
@@ -35,7 +35,7 @@ passport.authenticate('local', {
 */
 exports.userLogout = (req, res) => {
     req.logout(() => {
-        res.redirect('/');
+        res.status(200).json({ message: 'Logout Successful!' });
     });
 }; 
 
@@ -49,7 +49,7 @@ exports.authericationCheck = (req, res, next ) => {
     }else if (result) {
         return next();
     }else{
-        return res.redirect('/login');
+        return next(siteError(401, 'Unauthorized Access'));
     }
     
 }
