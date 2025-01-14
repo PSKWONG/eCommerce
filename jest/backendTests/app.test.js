@@ -132,7 +132,6 @@ describe ('User Authentication', () => {
             username: userData[0].email,
             password: userData[0].password
         });
-        console.log(response.body);
         expect(response.status).toBe(200);
     });
 
@@ -171,8 +170,11 @@ describe ('User Authentication', () => {
     it ('should check user authentication status', async () => {
         // Check user authentication status
         let response = await agent.get('/authen/check');
+
+        console.log('Response of authen check is : ', response.body);
+
         expect(response.status).toBe(200);
-        expect(response.body.result).toBe(false);
+        expect(response.body).toBe(false);
 
         // Login a user
         response = await agent.post('/authen/login').send({
@@ -184,7 +186,7 @@ describe ('User Authentication', () => {
         // Check user authentication status
         response = await agent.get('/authen/check');
         expect(response.status).toBe(200);
-        expect(response.body.result).toBe(true);
+        expect(response.body).toBe(true);
     });
 
     it ('should redirect to login page if not authenticated', async () => {
