@@ -23,8 +23,8 @@ const morgan = require('morgan');
 app.use(morgan('tiny'));
 
 //CORS
-const cors = require('cors');
-app.use(cors());
+const cors = require('./controller/modules/cors');
+app.use(cors);
 
 //Body Parser
 const bodyParser = require('body-parser');

@@ -12,8 +12,10 @@ const sessionConfiguration =
     saveUninitialized: false,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 30,
+        resave: false,
+        saveUninitialized: false,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'   
     },
     store: new pgSession({
         pool: pool,
