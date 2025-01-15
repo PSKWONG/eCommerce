@@ -1,5 +1,8 @@
 // --------------------------- Import modules ---------------------------
 import { checkUserInput, submitRegistration } from '../../features/api/API';
+import { useNavigate } from 'react-router-dom';
+import { checkAuth } from "../../features/authentication/authenticationSlice";
+import { useDispatch } from 'react-redux';
 
 
 
@@ -10,9 +13,16 @@ const useFormActions = (states) => {
 
     // Form states
     const {
+        username,
+        email,
         password,
         confirmPassword,
         guideline,
+        isFormCompleted,
+        isValidPassword,
+        isValidEmail,
+        isValidConfirmPassword,
+        isValidUsername,
         setIsValidConfirmPassword,
         setGuideline,
         setUsername,
@@ -23,6 +33,11 @@ const useFormActions = (states) => {
         setIsValidEmail,
         setIsValidPassword
     } = states;
+
+    //Custom Actions 
+    //Naviagtion
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const handleOnChange = (e) => {
         // Update the state unpon change in the input field
@@ -105,9 +120,64 @@ const useFormActions = (states) => {
         return;
     };
 
+    const handleSubmission = async (e) => {
+
+        e.preventDefault(); // Prevent the default form submission behavior
+
+        let message;
+        let isValid = false;
+
+        switch (true) {
+
+            case !isFormCompleted:
+                message = 'Please complete the form';
+                break;
+            case !isValidConfirmPassword:
+                break;
+            case isValidUsername && isValidEmail && isValidPassword && isValidConfirmPassword:
+                isValid = true;
+                break;
+            default:
+                isValid = false;
+                break;
+        }
+
+        //Actions to take when the form is ready to be submitted
+        if (isValid) {
+            //Construct the body for the API call
+            let body = {
+                username: username,
+                email: email,
+                password: password
+            }
+            try {
+                //Call the API to register the user
+                const response = await submitRegistration(body);
+                const status = response.status;
+
+                if (status === 200) {
+                    dispatch(checkAuth()); //Check the authentication status
+                    navigate('/'); //Redirect to the home page
+                } else {
+                    message = `Fail to register. ${response.response.data.error.message}`;
+                }
+
+            } catch (err) {
+                console.log(err);
+            }
+        }
+        //Set the error message in the guideline
+        if (message) {
+            setGuideline(() => [message, ...guideline]);
+        }
+        return;
+    };
+
+
     return {
         handleOnChange,
-        handleValidation
+        handleValidation, 
+        handleSubmission
     };
 
 };

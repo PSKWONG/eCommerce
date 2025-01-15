@@ -1,0 +1,14 @@
+
+
+
+
+
+//------------------------ Effect Hooks ------------------------//
+
+const useEffectHook = ()=>{
+
+
+
+}; 
+
+export default useEffectHook;

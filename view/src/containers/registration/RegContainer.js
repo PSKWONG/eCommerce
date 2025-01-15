@@ -36,17 +36,19 @@ const RegContainer = () => {
     } = formStates;
 
     //Form Actions 
-    const { handleOnChange, handleValidation } = useFormActions(formStates);
+    const { handleOnChange, handleValidation, handleSubmission } = useFormActions(formStates);
 
 
 
     // Access to the authentication Slice 
-    const dispatch = useDispatch();
     const authenStatus = useSelector(selectIsAuthenticated);
 
+
+    //****************** Custom Actions *****************/
     //Naviagtion
     const navigate = useNavigate();
 
+    //****************** Effect Hook *****************/
     useEffect(() => {
         if (authenStatus) {
             navigate('/');
@@ -62,58 +64,6 @@ const RegContainer = () => {
     //Actions for registration form
 
 
-
-    const handleSubmission = async (e) => {
-
-        e.preventDefault(); // Prevent the default form submission behavior
-
-        let message;
-        let isValid = false;
-
-        switch (true) {
-
-            case !isFormCompleted:
-                message = 'Please complete the form';
-                break;
-            case !isValidConfirmPassword:
-                break;
-            case isValidUsername && isValidEmail && isValidPassword && isValidConfirmPassword:
-                isValid = true;
-                break;
-            default:
-                isValid = false;
-                break;
-        }
-
-        if (isValid) {
-            //Construct the body for the API call
-            let body = {
-                username: username,
-                email: email,
-                password: password
-            }
-            try {
-                //Call the API to register the user
-                const response = await submitRegistration(body);
-                const status = response.status;
-
-                if (status === 200) {
-                    dispatch(checkAuth()); //Check the authentication status
-                    navigate('/'); //Redirect to the home page
-                } else {
-                    message = `Fail to register. ${response.response.data.error.message}`;
-                }
-
-            } catch (err) {
-                console.log(err);
-            }
-        }
-        //Set the error message in the guideline
-        if (message) {
-            setGuideline(() => [message, ...guideline]);
-        }
-        return;
-    };
 
 
     //Reset Confirmed Password when password is changed
