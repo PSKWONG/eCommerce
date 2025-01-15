@@ -1,29 +1,41 @@
 // ------------------------ Import Modules --------------------------
-import React, { useState, useEffect } from 'react';
-import { checkUserInput, submitRegistration } from '../features/api/API';
+import React, { useEffect } from 'react';
+import { checkUserInput, submitRegistration } from '../../features/api/API';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 // ------------------------ Import Components --------------------------
-import RegPage from '../components/registration/Registration';
-import styles from '../components/registration/registration.module.css';
-import { selectIsAuthenticated, checkAuth } from "../features/authentication/authenticationSlice";
+import RegPage from '../../components/registration/Registration';
+import styles from '../../components/registration/registration.module.css';
+import { selectIsAuthenticated, checkAuth } from "../../features/authentication/authenticationSlice";
+// Form States 
+import useFormStates from './states';
+//Form Actions
+import useFormActions from './formHandlers';
 
 
 
 // ------------------------ Registration Container --------------------------
 const RegContainer = () => {
+
     //States in registration forms 
-    const [username, setUsername] = useState('');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [confirmPassword, setConfirmPassword] = useState('');
-    const [isValidUsername, setIsValidUsername] = useState();
-    const [isValidEmail, setIsValidEmail] = useState();
-    const [isValidPassword, setIsValidPassword] = useState();
-    const [isValidConfirmPassword, setIsValidConfirmPassword] = useState();
-    const [isFormCompleted, setIsFormCompleted] = useState(false);
-    const [guideline, setGuideline] = useState([]);
+    const {
+        username, setUsername,
+        email, setEmail,
+        password, setPassword,
+        confirmPassword, setConfirmPassword,
+        isValidUsername, setIsValidUsername,
+        isValidEmail, setIsValidEmail,
+        isValidPassword, setIsValidPassword,
+        isValidConfirmPassword, setIsValidConfirmPassword,
+        isFormCompleted, setIsFormCompleted,
+        guideline, setGuideline
+    } = useFormStates();
+
+    //Form Actions 
+    const { handleOnChange } = useFormActions();
+
+
 
     // Access to the authentication Slice 
     const dispatch = useDispatch();
@@ -31,12 +43,12 @@ const RegContainer = () => {
 
     //Naviagtion
     const navigate = useNavigate();
-    
+
     useEffect(() => {
         if (authenStatus) {
             navigate('/');
-        }   
-    }, [authenStatus]);
+        }
+    }, [authenStatus, navigate]);
 
     useEffect(() => {
         // Log cookies to verify their presence
@@ -45,26 +57,7 @@ const RegContainer = () => {
 
 
     //Actions for registration form
-    const handleOnChange = (e) => {
-        // Update the state unpon change in the input field
-        const { name, value } = e.target;
-        switch (name) {
-            case 'username':
-                setUsername(value);
-                break;
-            case 'email':
-                setEmail(value);
-                break;
-            case 'password':
-                setPassword(value);
-                break;
-            case 'confirmPassword':
-                setConfirmPassword(value);
-                break;
-            default:
-                break;
-        }
-    };
+    
     const handleValidation = async (e) => {
         // Validate the input field upon out of focus on the input field
         const { name, value } = e.target;
@@ -160,10 +153,10 @@ const RegContainer = () => {
                 const response = await submitRegistration(body);
                 const status = response.status;
 
-                if (status == 200) {
+                if (status === 200) {
                     dispatch(checkAuth()); //Check the authentication status
                     navigate('/'); //Redirect to the home page
-                }else{
+                } else {
                     message = `Fail to register. ${response.response.data.error.message}`;
                 }
 
@@ -181,24 +174,20 @@ const RegContainer = () => {
 
     //Reset Confirmed Password when password is changed
     useEffect(() => {
-        {
-            setConfirmPassword('');
-            setIsValidConfirmPassword();
-        }
-    }, [password]);
+        setConfirmPassword('');
+        setIsValidConfirmPassword();
+    }, [password, setConfirmPassword,setIsValidConfirmPassword ]);
 
     //Reset confirmed password when confirm password is changed
     useEffect(() => {
-        {
             setIsValidConfirmPassword();
-        }
-    }, [confirmPassword]);
+    }, [confirmPassword, setIsValidConfirmPassword]);
 
     //Check if the form is completed
     useEffect(() => {
         const isCompleted = isValidUsername && isValidEmail && isValidPassword ? true : false;
         setIsFormCompleted(isCompleted);
-    }, [isValidUsername, isValidEmail, isValidPassword]);
+    }, [isValidUsername, isValidEmail, isValidPassword, setIsFormCompleted]);
 
 
 

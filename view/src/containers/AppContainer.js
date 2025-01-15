@@ -10,7 +10,7 @@ import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} fr
 import Page from './PageContainer';
 import Home from './HomeContainer';
 import Login from './LoginContainer';
-import Registration from './RegContainer'
+import Registration from './registration/RegContainer'
 
 
 //-------------------- Router --------------------
