@@ -6,15 +6,13 @@ import { checkUserInput, submitRegistration } from '../../features/api/API';
 
 //------------------------- Form actions ----------------------- //
 
-const useFormActions = ({states, actions}) => {
+const useFormActions = (states) => {
 
     // Form states
     const {
         password,
         confirmPassword,
         guideline,
-    } = states;
-    const {   
         setIsValidConfirmPassword,
         setGuideline,
         setUsername,
@@ -24,7 +22,7 @@ const useFormActions = ({states, actions}) => {
         setIsValidUsername,
         setIsValidEmail,
         setIsValidPassword
-    } = actions;
+    } = states;
 
     const handleOnChange = (e) => {
         // Update the state unpon change in the input field
@@ -106,7 +104,6 @@ const useFormActions = ({states, actions}) => {
         }
         return;
     };
-    
 
     return {
         handleOnChange,

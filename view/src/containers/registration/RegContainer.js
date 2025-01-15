@@ -20,6 +20,8 @@ import useFormActions from './formHandlers';
 const RegContainer = () => {
 
     //States in registration forms 
+    const formStates = useFormStates();
+
     const {
         username, setUsername,
         email, setEmail,
@@ -31,29 +33,10 @@ const RegContainer = () => {
         isValidConfirmPassword, setIsValidConfirmPassword,
         isFormCompleted, setIsFormCompleted,
         guideline, setGuideline
-    } = useFormStates();
-
-    const statesConnection = {
-        states: {
-            password,
-            confirmPassword,
-            guideline,
-        },
-        actions: {
-            setIsValidConfirmPassword,
-            setGuideline,
-            setUsername,
-            setEmail,
-            setPassword,
-            setConfirmPassword,
-            setIsValidUsername,
-            setIsValidEmail,
-            setIsValidPassword
-        }
-    }
+    } = formStates;
 
     //Form Actions 
-    const { handleOnChange, handleValidation } = useFormActions({...statesConnection});
+    const { handleOnChange, handleValidation } = useFormActions(formStates);
 
 
 
