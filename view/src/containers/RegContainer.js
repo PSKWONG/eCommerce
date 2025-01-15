@@ -1,13 +1,14 @@
 // ------------------------ Import Modules --------------------------
 import React, { useState, useEffect } from 'react';
 import { checkUserInput, submitRegistration } from '../features/api/API';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 // ------------------------ Import Components --------------------------
 import RegPage from '../components/registration/Registration';
 import styles from '../components/registration/registration.module.css';
-import { selectIsAuthenticated } from "../features/authentication/authenticationSlice";
+import { selectIsAuthenticated, checkAuth } from "../features/authentication/authenticationSlice";
+
 
 
 // ------------------------ Registration Container --------------------------
@@ -24,16 +25,24 @@ const RegContainer = () => {
     const [isFormCompleted, setIsFormCompleted] = useState(false);
     const [guideline, setGuideline] = useState([]);
 
-    // Compoent States  
+    // Access to the authentication Slice 
+    const dispatch = useDispatch();
     const authenStatus = useSelector(selectIsAuthenticated);
 
-    //Redirect to Home page if authenticated
+    //Naviagtion
     const navigate = useNavigate();
+    
     useEffect(() => {
         if (authenStatus) {
             navigate('/');
         }   
     }, [authenStatus]);
+
+    useEffect(() => {
+        // Log cookies to verify their presence
+        console.log('Cookies:', document.cookie);
+    }, []);
+
 
     //Actions for registration form
     const handleOnChange = (e) => {
@@ -151,15 +160,10 @@ const RegContainer = () => {
                 const response = await submitRegistration(body);
                 const status = response.status;
 
-                // *****************************Set the server to redirect to login page if the registration is successful *****************************
-
-                if (response.status === 200) {
-                    //Redirect to the login page
-                    window.location.href = '/login';
-                }
-
-                //********************************************************************************************************* */
-                if (status !== 200) {
+                if (status == 200) {
+                    dispatch(checkAuth()); //Check the authentication status
+                    navigate('/'); //Redirect to the home page
+                }else{
                     message = `Fail to register. ${response.response.data.error.message}`;
                 }
 
