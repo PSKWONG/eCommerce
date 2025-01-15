@@ -13,6 +13,8 @@ import { selectIsAuthenticated, checkAuth } from "../../features/authentication/
 import useFormStates from './states';
 //Form Actions
 import useFormActions from './formHandlers';
+//Form Effect Hook 
+import useFormEffect from './effectHook';
 
 
 
@@ -38,50 +40,8 @@ const RegContainer = () => {
     //Form Actions 
     const { handleOnChange, handleValidation, handleSubmission } = useFormActions(formStates);
 
-
-
-    // Access to the authentication Slice 
-    const authenStatus = useSelector(selectIsAuthenticated);
-
-
-    //****************** Custom Actions *****************/
-    //Naviagtion
-    const navigate = useNavigate();
-
-    //****************** Effect Hook *****************/
-    useEffect(() => {
-        if (authenStatus) {
-            navigate('/');
-        }
-    }, [authenStatus, navigate]);
-
-    useEffect(() => {
-        // Log cookies to verify their presence
-        console.log('Cookies:', document.cookie);
-    }, []);
-
-
-    //Actions for registration form
-
-
-
-
-    //Reset Confirmed Password when password is changed
-    useEffect(() => {
-        setConfirmPassword('');
-        setIsValidConfirmPassword();
-    }, [password, setConfirmPassword, setIsValidConfirmPassword]);
-
-    //Reset confirmed password when confirm password is changed
-    useEffect(() => {
-        setIsValidConfirmPassword();
-    }, [confirmPassword, setIsValidConfirmPassword]);
-
-    //Check if the form is completed
-    useEffect(() => {
-        const isCompleted = isValidUsername && isValidEmail && isValidPassword ? true : false;
-        setIsFormCompleted(isCompleted);
-    }, [isValidUsername, isValidEmail, isValidPassword, setIsFormCompleted]);
+    //Effect Hook
+    useFormEffect(formStates);
 
 
 
