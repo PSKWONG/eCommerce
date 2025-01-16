@@ -6,15 +6,32 @@ const { siteError } = require('./utilies/customErrorHandler');
 
 // ---------------------------- Controller  ------------------------------
 //Local Authentication
-exports.userLocalAuthentication = passport.authenticate('local', {
-    failureRedirect: '/login',
-    successRedirect: '/',
-});
+exports.userLocalAuthentication = (req, res, next) => {
+
+    const localAuth =passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.status(401).json({ message: 'Authentication failed', info });       
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                return next(err);
+            }
+            return res.status(200).json({ message: 'Authentication successful', user });
+           
+        });
+    })(req, res, next);
+};
 
 
 exports.userLogout = (req, res) => {
-    req.logout(() => {
-        res.redirect('/');
+    req.logout((err) => {
+        if (err) {
+            return next(err);
+        }
+        return res.status(200).json({ message: 'Logout successful' });
     });
 }; 
 
