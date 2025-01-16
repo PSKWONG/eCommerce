@@ -4,7 +4,12 @@
   "description": "eCommerce_dev",
   "main": "index.js",
   "scripts": {
-    "test:backend": "jest --config=jest/jest.backend.config.js"
+    "test:backend": "jest --config=jest/jest.backend.config.js",
+    "start": "node server.js",
+    "dev": "concurrently \"npm run watch-client\" \"npm run watch-server\"",
+    "watch-client": "nodemon --watch view/src --exec \"npm run build-client\"",
+    "build-client": "cd view && npm run build",
+    "watch-server": "nodemon server.js"
   },
   "author": "Edward Kwong",
   "license": "ISC",
@@ -25,7 +30,10 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "concurrently": "^9.1.2",
     "jest": "^29.7.0",
-    "supertest": "^7.0.0"
+    "nodemon": "^3.1.9",
+    "supertest": "^7.0.0",
+    "watch": "^1.0.2"
   }
 }
