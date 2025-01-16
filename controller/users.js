@@ -88,7 +88,7 @@ exports.userInfoChecking = async (req, res, next) => {
     //Check the request path for response 
     const requestPath = req.originalUrl
 
-    if (requestPath === '/user/registration/check') {
+    if (requestPath === '/api/user/registration/check') {
         return res.status(200).send('User information is valid');
     };
 

@@ -52,12 +52,12 @@ app.use('/test-session', sessionRouter);
 
 // User Route
 const userRouter = require('./routes/users');
-app.use('/user', userRouter);
+app.use('/api/user', userRouter);
 
 //Authentication Route
 const authenRouter = require('./routes/authentication');
 
-app.use('/authen', authenRouter);
+app.use('/api/authen', authenRouter);
 
 // The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
 const frontEndRouter = require('./routes/frontend');

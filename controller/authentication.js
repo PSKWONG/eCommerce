@@ -39,7 +39,7 @@ exports.authericationCheck = (req, res, next ) => {
     console.log('the requestpath is : ' , requestPath);
 
     // Request from Status Checking ( Icon Status )
-    if (requestPath === '/authen/check') {
+    if (requestPath === '/api/authen/check') {
         console.log(result);
         return res.json(result);
         
