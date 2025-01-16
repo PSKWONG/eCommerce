@@ -25,7 +25,7 @@ const useEffectHook = (states) => {
 
     //Custom Actions
     //Naviagtion
-    const navigate = useNavigate
+    const navigate = useNavigate(); 
     //Selector for stores 
     const authenStatus = useSelector(selectIsAuthenticated);
 

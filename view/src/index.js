@@ -4,10 +4,13 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 // Redux
-import {Provider} from 'react-redux';
+import { Provider } from 'react-redux';
 
 //Reporting 
 import reportWebVitals from './reportWebVitals';
+
+//Error Catching
+import ErrorBoundary from './ErrorBoundary';
 
 // Sample Modules
 import './assets/styles/index.css';
@@ -25,7 +28,9 @@ root.render(
 
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </Provider>
   </React.StrictMode>
 );

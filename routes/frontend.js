@@ -6,8 +6,8 @@ const frontEndRouter = express.Router();
 
 
 
-frontEndRouter.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname + '../view/build/index.html'));
+frontEndRouter.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../view/build/index.html'));
 }); 
 
 module.exports = frontEndRouter;

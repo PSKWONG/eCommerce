@@ -3,12 +3,12 @@ const express = require('express');
 const authenticatingRouter = express.Router();
 
 //---------------------- Import Controller ---------------------
-const { userAuthentication, userLogout, authericationCheck } = require('../controller/authentication');
+const { userLocalAuthentication, userLogout, authericationCheck } = require('../controller/authentication');
 
 
 // ---------------------- Authentication Routing ---------------------
 // Login
-authenticatingRouter.post('/login', userAuthentication);
+authenticatingRouter.post('/login', userLocalAuthentication);
 
 // Logout
 authenticatingRouter.get('/logout', userLogout);

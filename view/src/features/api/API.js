@@ -12,7 +12,7 @@ const API_URL = environment === 'production' ? process.env.REACT_APP_API_URL_PRO
 // Basic API call 
 const api = axios.create(
     {
-        baseURL: '/api/',
+        baseURL: API_URL +'/api/',
         headers: {
             'Content-Type': 'application/json',
         },

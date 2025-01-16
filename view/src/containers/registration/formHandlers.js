@@ -155,9 +155,11 @@ const useFormActions = (states) => {
                 const response = await submitRegistration(body);
                 const status = response.status;
 
+                console.log(response, status);
+
                 if (status === 200) {
                     dispatch(checkAuth()); //Check the authentication status
-                    navigate('/'); //Redirect to the home page
+                    navigate('/'); //Navigate to the home page
                 } else {
                     message = `Fail to register. ${response.response.data.error.message}`;
                 }

@@ -113,7 +113,7 @@ exports.createUser = async (req, res, next) => {
         //Auto login after registration
         req.login(newUser, function (err) {
             if (err) { return next(err); }
-            return res.redirect('/');
+            return res.redirect("/");
         });
        
     } catch (err) {

@@ -5,7 +5,8 @@ const { siteError } = require('./utilies/customErrorHandler');
 
 
 // ---------------------------- Controller  ------------------------------
-exports.userAuthentication = passport.authenticate('local', {
+//Local Authentication
+exports.userLocalAuthentication = passport.authenticate('local', {
     failureRedirect: '/login',
     successRedirect: '/',
 });
