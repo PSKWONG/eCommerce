@@ -6,10 +6,14 @@ const environment = process.env.NODE_ENV || 'development';
 
 // ----------------- ----- ----- Core Modules -----------
 const express = require('express');
+const path = require('path');
 const app = express();
 
 
 // ----------------- ----- ----- Imported Modules -----------
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, 'view/build')));
 
 //Error Handler (Development)
 const errorhandler = require("errorhandler");
@@ -52,8 +56,12 @@ app.use('/user', userRouter);
 
 //Authentication Route
 const authenRouter = require('./routes/authentication');
+
 app.use('/authen', authenRouter);
 
+// The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
+const frontEndRouter = require('./routes/frontend');
+app.use('/', frontEndRouter);
 
 //------------------Error Handling ----------------------
 if( environment === 'development'){
