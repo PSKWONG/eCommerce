@@ -5,31 +5,15 @@ const { siteError } = require('./utilies/customErrorHandler');
 
 
 // ---------------------------- Controller  ------------------------------
-exports.userAuthentication = (req, res, next) => {
-
-    passport.authenticate('local', (err, user, info) => {
-        if (err) {
-            return next(err);
-        }
-
-        if (!user) {
-            return next(siteError(401, info.message)); 
-        }
-
-        req.logIn(user, (err) => {
-            if (err) {
-                return next(err);
-            }
-            return res.status(200).json({ message: 'Login Successful!' });
-        });
-
-    })(req, res, next);
-}
+exports.userAuthentication = passport.authenticate('local', {
+    failureRedirect: '/login',
+    successRedirect: '/',
+});
 
 
 exports.userLogout = (req, res) => {
     req.logout(() => {
-        res.status(200).json({ message: 'Logout Successful!' });
+        res.redirect('/');
     });
 }; 
 

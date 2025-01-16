@@ -113,14 +113,9 @@ exports.createUser = async (req, res, next) => {
         //Auto login after registration
         req.login(newUser, function (err) {
             if (err) { return next(err); }
-            return res.status(200).send('User is successfully registered');
+            return res.redirect('/');
         });
-        /*
-        //Construct a unified user response
-        const response = userInfoResponse(newUser);
-        //return the response
-        return res.status(200).json(response);
-        */
+       
     } catch (err) {
         return next(err);
     }
