@@ -4,24 +4,36 @@ const passport = require('./modules/passport');
 const { siteError } = require('./utilies/customErrorHandler');
 
 
-// ---------------------------- Controller  ------------------------------
-//Local Authentication
-exports.userLocalAuthentication = (req, res, next) => {
-
-    const localAuth =passport.authenticate('local', (err, user, info) => {
+// ---------------------------- Helper function   ------------------------------
+const authenticationLogic = (req, res, next, err, user, info) => {
+    if (err) {
+        return next(err);
+    }
+    if (!user) {
+        return next(siteError(401, 'Authentication failed', info));
+    }
+    req.logIn(user, (err) => {
         if (err) {
             return next(err);
         }
-        if (!user) {
-            return res.status(401).json({ message: 'Authentication failed', info });       
-        }
-        req.logIn(user, (err) => {
-            if (err) {
-                return next(err);
-            }
-            return res.status(200).json({ message: 'Authentication successful', user });
-           
-        });
+        return res.status(200).json({ message: 'Authentication successful', user });
+    });
+}; 
+
+
+// ---------------------------- Controller  ------------------------------
+//Local Authentication
+exports.userLocalAuthentication = (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        authenticationLogic(req, res, next, err, user, info);
+    })(req, res, next);
+};
+
+//Facebook Authentication
+exports.userFacebookAuthentication = (req, res, next) => {
+
+    passport.authenticate('facebook', (err, user, info) => {
+        authenticationLogic(req, res, next, err, user, info);
     })(req, res, next);
 };
 

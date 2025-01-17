@@ -3,6 +3,7 @@ const {dbQuery} = require('./db');
 
 const UserDB = {
 
+    // ---------------------- Local Strategy -----------
     create: async (username, email, password) => {
         const result = await dbQuery(
             `INSERT INTO users (username, email, password)
@@ -78,6 +79,29 @@ const UserDB = {
             WHERE user_id=$1`, 
             [id]
         );
+    }, 
+    // ---------------------- Facebook Strategy -----------
+    findByProviderId: async (provider, id) => {
+        const column = `${provider}_auth`
+        const query = 
+        `SELECT *
+        FROM users
+        WHERE ${column}->>id = $1`;
+
+        const result = await dbQuery(query, [id]);
+
+        return result.rows[0];
+    },
+    createUserByPRovider: async (provider, username, profile) => {
+        const column = `${provider}_auth`
+        const query = 
+        `INSERT INTO users (${column}, username)
+        VALUES ($1,$2)
+        RETURNING *`;
+
+        const result = await dbQuery(query, [profile, username]);
+
+        return result.rows[0];
     }
 };
 
