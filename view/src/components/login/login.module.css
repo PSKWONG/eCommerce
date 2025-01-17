@@ -86,6 +86,48 @@
     border: 1px solid #5b6150;
 }
 
+.loginForm .messgeWrapper{
+    background-color: #5a3b32;
+    text-align: center;
+    color: #e8e8e5;
+    font-size: 0.8em;
+    padding: 8px;
+    border-radius: 10px;
+}
+
+.loginForm .hide{
+    visibility: hidden;
+}
+
+
+.submitButtonWrapper{
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+}
+.submitButtonWrapper div {
+
+    margin: 10px;
+    margin-right: 0px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    
+
+}
+
+.submitButton{
+    background-color: #e8e8e5;
+    border: 1px solid #e8e8e5;
+    color: #255038;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/*hover */ 
+
+
+
+
 .providerOptionsWrapper h3 {
     font-weight: 200;
     text-align: center;
@@ -102,7 +144,6 @@
 
 
     padding: 5px;
-    border: 1px solid #848680;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
@@ -134,10 +175,17 @@ a.providerButton:visited{
 
 /* Registration */
 .registrationWrapper {
-    padding: 20px;
+    padding: 10px;
     background-color: #255038;
     color: #e8e8e5;
     flex-shrink: 4;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.registratioInfoWrapper{
+    flex-grow: 1;
 }
 
 .registerInstruct {
@@ -148,7 +196,6 @@ a.providerButton:visited{
 .registerOptions {
     display: flex;
     justify-content: space-around;
-    padding: 10px;
 }
 
 .registrationButton {

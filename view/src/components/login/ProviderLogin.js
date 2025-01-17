@@ -10,7 +10,6 @@ import styles from './login.module.css';
 
 const ProviderLogin = (props) => {
     const providerData = props.providers;
-    console.log('provider Data:', providerData);
     return (
         <div className={styles.providerOptionsWrapper} >
             <h3>Other login options</h3>

@@ -43,6 +43,10 @@ const useLoginData = (states , actions) => {
                 }
 
             ], 
+            error:{
+                message: message,
+                msgStyle: message? styles.messgeWrapper : styles.hide
+            }, 
             providers: [
                 {
                     image: facebookIcon,

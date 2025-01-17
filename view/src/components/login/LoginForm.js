@@ -11,10 +11,9 @@ import styles from './login.module.css';
 // ----------------------------- Registration Form ------------------------------
 
 const LoginForm = (props) => {
-    const submitBtn = props.submit;
+    const {msgStyle, message} = props.error;
     const formItems = props.local; 
-    console.log(props);
-    const { handleOnChange} = props.actions;
+    const { handleOnChange, handLoginSubmit} = props.actions;
 
 
     return (
@@ -30,8 +29,11 @@ const LoginForm = (props) => {
                     )
                 })
             }
+            <div className={msgStyle}>
+                {message}
+            </div>
             <div className={styles.submitButtonWrapper}>
-                <div className={""} onClick={''}>
+                <div className={styles.submitButton} onClick={handLoginSubmit}>
                     Submit
                 </div>
             </div>
