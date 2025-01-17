@@ -5,6 +5,7 @@ import React from 'react';
 
 //------------------------ Login Component  ------------------------
 //Assets
+import '../../assets/styles/App.css'
 import styles from './login.module.css';
 import RegButton from './RegistrationButton';
 import LoginForm from './LoginForm';
@@ -17,8 +18,8 @@ const Login = (props) => {
     const { registration, login } = props
 
     return (
-        <div className={styles.loginPageWarpper}>
-            <div className={styles.loginAndRegistrationWrapper}>
+        <div className="floatingPageWrapper">
+            <div className={`${styles.loginAndRegistrationWrapper} floatContentWrapper`}>
                 <div className={`${styles.loginFormWrapper} ${styles.formWrapper}`}>
                     <h1>Login</h1>
                     <LoginForm {...login} actions={props.actions} />

@@ -3,6 +3,7 @@ import React from 'react';
 
 // ------------------------ Import Components --------------------------
 //Assets
+import '../../assets/styles/App.css'; 
 import styles from './registration.module.css';
 import RegForm from './RegistrationForm'; 
 import ListOfGuidelines from './ListOfGuidlelines'
@@ -14,8 +15,8 @@ const Registration = ({registrationForm, guidelines}) => {
  
 
     return (
-        <div className={styles.regsitrationPageWarpper}>
-            <div className={styles.formAndGuidelinenWrapper}>
+        <div className="floatingPageWrapper">
+            <div className= {`${styles.formAndGuidelinenWrapper} floatContentWrapper `}>
                 <div className= {`${styles.guidelineWrapper} ${styles.contentWrapper}`}>
                     <h1>Guideline</h1>
                     <ListOfGuidelines {...guidelines} />
