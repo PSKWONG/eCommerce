@@ -4,7 +4,7 @@ const authenticatingRouter = express.Router();
 const passport = require('../controller/modules/passport');
 
 //---------------------- Import Controller ---------------------
-const { userLocalAuthentication, userLogout, authericationCheck } = require('../controller/authentication');
+const { userLocalAuthentication,userFacebookAuthentication , userLogout, authericationCheck } = require('../controller/authentication');
 
 
 // ---------------------- Authentication Routing ---------------------
@@ -13,7 +13,7 @@ authenticatingRouter.post('/login', userLocalAuthentication);
 
 // Login - Facebook Strategy
 authenticatingRouter.get('/login/facebook', passport.authenticate('facebook'));
-authenticatingRouter.get('/login/facebook/callback', userLocalAuthentication);
+authenticatingRouter.get('/login/facebook/callback', userFacebookAuthentication);
 
 
 // Logout

@@ -7,18 +7,22 @@ import React from 'react';
 //Assets
 import styles from './login.module.css';
 import RegButton from './RegistrationButton'; 
+import LoginForm from './LoginForm';
+import ProviderLogin from './ProviderLogin';
 
 
 
 const Login = (props) => {
 
-    const {registration} = props
+    const {registration, login} = props
 
     return (
         <div className={styles.loginPageWarpper}>
             <div className={styles.loginAndRegistrationWrapper}>
                 <div className= {`${styles.loginFormWrapper} ${styles.formWrapper}`}>
                     <h1>Login</h1>
+                    <LoginForm {...login} actions = {props.actions}/>
+                    <ProviderLogin {...login} />
                 </div>
                 <div className={`${styles.registrationWrapper} ${styles.formWrapper}`}>
                     <h1>Registration</h1>

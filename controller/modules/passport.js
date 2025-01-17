@@ -13,7 +13,7 @@ const { UserDB } = require('../../model/users');
 const callbackURLConstructor = (provider) => {
     const environment = process.env.NODE_ENV || 'development';
     const baseURL = environment === 'development' ? process.env.DEV_BACKEND_SERVER_URL : process.env.PRO_BACKEND_SERVER_URL;
-    return `${baseURL}/api/authen/login/${provider}/callback`;
+    return `${baseURL}/external/authen/login/${provider}/callback`;
 };
 
 // ---------------------- Global Variable-----------
@@ -55,27 +55,30 @@ passport.use(new FacebookStrategy(
         callbackURL: callbackURLConstructor('facebook'),
     },
     async (accessToken, refreshToken, profile, done) => {
-        // Declare Variables
-        provider = 'facebook';
 
-        const userProfile =
-        {
-            id: profile.id,
-            username: profile.displayName || 'User',
-            accessToken: accessToken,
-            profile
-        }
-
-        const { id, username } = profile;
 
 
         try {
+
+            // Declare Variables
+            provider = 'facebook';
+            const userProfile =
+            {
+                id: profile.id,
+                username: profile.displayName || 'User',
+                accessToken,
+                profile
+            }
+
+            const { id, username } = userProfile;
+
             //Check if the user already exists
             const user = await UserDB.findByProviderId(provider, id);
             // If user exists, return user
             if (user) {
                 return done(null, user);
             }
+            //Create new user if user does not exist
             const newUser = await UserDB.createUserByPRovider(provider, username, userProfile);
             done(null, newUser);
         } catch (error) {

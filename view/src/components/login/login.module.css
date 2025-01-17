@@ -24,15 +24,15 @@
 
     display: flex;
     flex-wrap: wrap;
-    overflow: hidden; 
+    overflow: hidden;
 }
 
-.loginAndRegistrationWrapper h1{
+.loginAndRegistrationWrapper h1 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-.formWrapper{
+.formWrapper {
     flex-basis: 200px;
     flex-grow: 1;
     flex-shrink: 1;
@@ -40,21 +40,104 @@
 
 /* Login */
 
-.loginFormWrapper{
+.loginFormWrapper {
     padding: 10px;
     flex-grow: 4;
-    
+
+    display: flex;
+    flex-direction: column;
+
+}
+
+.loginForm {
+    padding: 10px;
+    text-align: left;
+    flex-grow: 1;
+}
+
+
+.loginForm div {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.loginForm label {
+    flex-basis: 80px;
+    margin-right: 10px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.loginForm input {
+    flex-basis: 150px;
+    flex-grow: 1;
+    padding: 5px;
+    border-radius: 5px;
+    color: black;
+    margin-bottom: 10px;
+
+}
+
+.error {
+    border: 3px solid rgb(163, 10, 10);
+}
+
+.valid {
+    border: 1px solid #5b6150;
+}
+
+.providerOptionsWrapper h3 {
+    font-weight: 200;
+    text-align: center;
+    border-bottom: 1px solid #848680;
+}
+
+.providerList {
+    display: flex;
+    justify-content: space-around;
+    color: #5f5f5e;
+}
+
+.providerButton {
+
+
+    padding: 5px;
+    border: 1px solid #848680;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+
+    flex-basis: 70px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.providerButton img {
+    max-width: 30px;
+    max-height: 30px;
+}
+
+a.providerButton:visited{
+    color: #848680;
 }
 
 
 
 
+
+
+
 /* Registration */
-.registrationWrapper{
+.registrationWrapper {
     padding: 20px;
     background-color: #255038;
     color: #e8e8e5;
-    flex-shrink: 4;   
+    flex-shrink: 4;
 }
 
 .registerInstruct {
@@ -62,7 +145,7 @@
     border-bottom: 1px solid #e8e8e5;
 }
 
-.registerOptions{
+.registerOptions {
     display: flex;
     justify-content: space-around;
     padding: 10px;
@@ -74,16 +157,27 @@
     border: 1px solid #e8e8e5;
     border-radius: 5px;
     cursor: pointer;
+    text-decoration: none;
 
     flex-basis: 70px;
 
     display: flex;
-    flex-direction: column; 
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-.registrationButton img{
+.registrationButton img {
     max-width: 30px;
     max-height: 30px;
+}
+
+.registrationButton span,
+.registrationButton a ,
+.registrationButton a:link,
+.registrationButton a:visited,
+.registrationButton a:active,
+.registrationButton a:hover {
+    text-decoration: none;
+    color: #e8e8e5;
 }

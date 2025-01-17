@@ -10,13 +10,15 @@ const authenticationLogic = (req, res, next, err, user, info) => {
         return next(err);
     }
     if (!user) {
-        return next(siteError(401, 'Authentication failed', info));
+        return res.redirect('/login');
+        //return next(siteError(401, 'Authentication failed', info));
     }
     req.logIn(user, (err) => {
         if (err) {
             return next(err);
         }
-        return res.status(200).json({ message: 'Authentication successful', user });
+        //return res.status(200).json({ message: 'Authentication successful', user });
+        return res.redirect('/');
     });
 }; 
 

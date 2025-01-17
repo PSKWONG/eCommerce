@@ -80,13 +80,13 @@ const UserDB = {
             [id]
         );
     }, 
-    // ---------------------- Facebook Strategy -----------
+    // ---------------------- 3rd Party Strategy -----------
     findByProviderId: async (provider, id) => {
         const column = `${provider}_auth`
         const query = 
         `SELECT *
         FROM users
-        WHERE ${column}->>id = $1`;
+        WHERE ${column}->>'id' = $1`;
 
         const result = await dbQuery(query, [id]);
 

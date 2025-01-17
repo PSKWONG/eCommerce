@@ -9,7 +9,7 @@ import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} fr
 //import App from '../components/App';
 import Page from './PageContainer';
 import Home from './HomeContainer';
-import Login from './LoginContainer';
+import Login from './login/LoginContainer';
 import Registration from './registration/RegContainer'
 
 
