@@ -7,7 +7,7 @@ import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} fr
 
 // ------------------- Import Components -------------------
 //import App from '../components/App';
-import Page from './PageContainer';
+import Page from './page/PageContainer';
 import Home from './HomeContainer';
 import Login from './login/LoginContainer';
 import Registration from './registration/RegContainer'
