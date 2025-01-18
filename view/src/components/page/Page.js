@@ -13,7 +13,7 @@ import styles from './page.module.css';
 // ------------------- Page Component -------------------
 
 const Page = (props) => {
-  let { userIcon, logoIcon } = props;
+  let { userIcon, logoIcon, logoutIcon } = props;
 
   return (
     <>
@@ -21,6 +21,7 @@ const Page = (props) => {
         <span></span>
         <Logo logoinfo = {logoIcon}/>
         <span></span>
+        <img src={logoutIcon.iconImage} alt={logoutIcon.alt} onClick={logoutIcon.action} className={logoutIcon.style}  />
         <img src={userIcon.iconImage} alt={userIcon.alt} onClick={userIcon.action} />
         <Cart />
       </header>

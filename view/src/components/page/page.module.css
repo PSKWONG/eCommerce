@@ -21,7 +21,7 @@ header {
     top: 0;
 
     display: grid;
-    grid-template-columns: auto 150px 1fr 50px 50px;
+    grid-template-columns: auto 150px 1fr 50px 50px 50px;
     align-items: center;
     
 
@@ -47,6 +47,15 @@ header img {
 .logo span{
     color: white;
     font-weight: bolder;
+}
+
+/* Visibility */
+.hide {
+    visibility: hidden
+}; 
+
+.show {
+    visibility: visible;
 }
 
 /* Content Container */
