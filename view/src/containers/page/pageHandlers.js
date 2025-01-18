@@ -4,7 +4,7 @@ import { logoutAPI } from "../../features/api/API";
 import { useDispatch } from "react-redux";
 
 //---------------------------- Import Components ----------------------------
-import { checkAuth } from "../../features/authentication/authenticationSlice";
+import { logout } from "../../features/authentication/authenticationSlice";
 
 //----------------------------- Page Handlers -----------------------------
 
@@ -19,11 +19,7 @@ const usePageHandlers = () => {
     const handleProfile = () => { navigate("/user/profile"); };
     const handleHome = () => { navigate("/"); };
     const handleLogout = async () => {
-        const response = await logoutAPI();
-        if(response.status === 200){
-            await dispatch(checkAuth());
-            navigate("/");
-        }
+            await dispatch(logout(navigate));
     };
 
     return{

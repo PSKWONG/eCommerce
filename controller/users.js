@@ -24,10 +24,11 @@ const passwordencryption = async (password) => {
 const userInfoResponse = (result) => {
     result = [result]
     const newUserArray = result.map((user) => {
-        return {
-            username: user.username,
-            email: user.email,
-        };
+        exportUserData =  {...user}
+        delete exportUserData.password
+        delete exportUserData.user_id
+
+        return exportUserData
     });
     //Reconstruct the user object
     const body = {
@@ -35,6 +36,9 @@ const userInfoResponse = (result) => {
     };
     return body;
 };
+// Export the functions for autehntication use
+exports.userInfoResponse = userInfoResponse;
+
 
 //------------------------------- User Controller ------------------------------
 // UserInfo Input Vadility Checking
@@ -131,3 +135,4 @@ exports.getUserProfile = async (req, res, next) => {
     //return the response
     return res.status(200).json(response);
 }
+

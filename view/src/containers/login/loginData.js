@@ -3,14 +3,16 @@
 import emailIcon from '../../assets/images/emailIcon.png';
 import facebookIcon from '../../assets/images/facebookIcon.png';
 import styles from '../../components/login/login.module.css';
-
+import { selectFetchDataStatus } from '../../features/authentication/authenticationSlice';  
+import { useSelector } from 'react-redux';
 
 
 // ---------------------------- Login Data Container ------------------------------
 
 const useLoginData = (states , actions) => {
-    const { email, password, message } = states;
+    const { email, password } = states;
     const { isValidEmail, isValidPassword } = states;
+    const {errorMessage} = useSelector(selectFetchDataStatus);
 
 
     const loginFormData =
@@ -44,8 +46,8 @@ const useLoginData = (states , actions) => {
 
             ], 
             error:{
-                message: message,
-                msgStyle: message? styles.messgeWrapper : styles.hide
+                message: errorMessage,
+                msgStyle: errorMessage? styles.messgeWrapper : styles.hide
             }, 
             providers: [
                 {

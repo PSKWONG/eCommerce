@@ -5,6 +5,10 @@ const { siteError } = require('./utilies/customErrorHandler');
 
 
 // ---------------------------- Helper function   ------------------------------
+// User Info Response Constructor
+const { userInfoResponse } = require('./users');
+
+// Authentication Logic
 const authenticationLogic = (req, res, next, err, user, info) => {
 
     const requestPath = req.originalUrl;
@@ -28,6 +32,7 @@ const authenticationLogic = (req, res, next, err, user, info) => {
         if (isExternalPath) {
             return res.redirect('/');
         }
+        user = userInfoResponse(user);
         return res.status(200).json({ message: 'Authentication successful', user });
         
     });

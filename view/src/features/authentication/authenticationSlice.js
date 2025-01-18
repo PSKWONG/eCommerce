@@ -4,21 +4,45 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 //API Functions
 import { loginAPI, logoutAPI, checkAuthAPI } from '../api/API';
 
+
 //-------------------------------Thunks Function -------------------------------
 // Function to authenticate user
 const login = createAsyncThunk(
     'authentication/login',
-    async (credentials, thunkAPI) => {
-        const response = await loginAPI(credentials);
-        return response;
+    async ({ logindata, navigate }, thunkAPI) => {
+
+        try {
+            //Invoke the loginAPI function
+            const response = await loginAPI(logindata);
+            //If the response is successful, navigate to the home page
+            console.log('API response:', response);
+            if (response.status === 200) {
+                navigate('/');
+                return response.data; // user data
+            } else if (response.status === 401) {
+                const message = response.response.data || '';
+                return message;
+            }
+        } catch (error) {
+            return thunkAPI.rejectWithValue(error);
+        }
     }
-); 
+);
 
 const logout = createAsyncThunk(
     'authentication/logout',
-    async () => {
-        const response = await logoutAPI();
-        return response;
+    async (navigate, thunkAPI) => {
+        try {
+            const response = await logoutAPI();
+            const status = response.status;
+            if (status === 200) {
+                navigate('/');
+            }
+            thunkAPI.dispatch(checkAuth());
+        }catch(error){
+            return thunkAPI.rejectWithValue(error);
+        }
+       
     }
 );
 
@@ -38,38 +62,45 @@ const AuthenticationSlice = createSlice(
         name: 'authentication',
         initialState: {
             isAuthenticated: false,
-            user: null, 
-            fetchData:{
+            user: {},
+            fetchData: {
                 isLoading: false,
                 isError: false,
                 errorMessage: ''
             },
 
         },
-        reducers:{},
-        extraReducers: (builder) =>{
+        reducers: {
+            clearErrorMessages: (state) => {
+                state.fetchData.errorMessage = '';
+            }
+        },
+        extraReducers: (builder) => {
             builder
                 .addCase(login.pending, (state) => {
                     state.fetchData.isLoading = true;
-                    state.isError = false;
+                    state.fetchData.isError = false;
                 })
                 .addCase(login.fulfilled, (state, action) => {
                     state.fetchData.isLoading = false;
                     state.isAuthenticated = true;
-                    state.user = action.payload.users[0];
+                    
+                    state.user = action.payload.user?.users[0];
+                    console.log('This is the user data:', action.payload.user?.users[0]);
+                    state.fetchData.errorMessage = action.payload.error?.message
+                    console.log('This is the error message:', action.payload.error?.message);
                 })
                 .addCase(login.rejected, (state, action) => {
-                    state.error.hasError = true;
-                    state.error.message = action.error.message;
+                    state.fetchData.isError = true;
+                    state.fetchData.errorMessage = action.error.message;
                 })
                 .addCase(logout.pending, (state) => {
                     state.fetchData.isLoading = true;
-                    state.isError = false;
+                    state.fetchData.isError = false;
                 })
                 .addCase(logout.fulfilled, (state) => {
                     state.fetchData.isLoading = false;
                     state.fetchData.isError = false;
-                    state.isAuthenticated = false;
                     state.user = null;
                 })
                 .addCase(logout.rejected, (state, action) => {
@@ -91,12 +122,14 @@ const AuthenticationSlice = createSlice(
                     state.fetchData.errorMessage = action.error.message;
                 });
         }
-           
+
     }
 );
 
 // Export Thunk Actions 
-export { login , logout, checkAuth } ; 
+export { login, logout, checkAuth };
+// Export Slice Actions
+export const { clearErrorMessages } = AuthenticationSlice.actions;
 
 //Export Selectors
 export const selectIsAuthenticated = (state) => state.authentication.isAuthenticated;
