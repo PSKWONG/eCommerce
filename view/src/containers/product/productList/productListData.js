@@ -14,6 +14,9 @@ const useProductListData = () => { //Create a functional component named Product
     const productList = useSelector(selectProductList); //Get the productList from the store
     const fetchDataStatus = useSelector(selectProductFetchingStatus); //Get the fetchDataStatus from the store
 
+    console.log('This is the productLists:',productList);
+    console.log('This is the fetchDataStatus:',fetchDataStatus);
+
     const productData = {
         productList,
         fetchDataStatus

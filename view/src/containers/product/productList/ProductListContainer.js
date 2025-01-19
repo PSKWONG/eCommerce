@@ -4,7 +4,7 @@ import React  from 'react';
 
 
 // ----------------------------- Import Components ----------------------------- //
-import ProductList from '../../../components/product/ProductList'; //Import ProductList component
+import ProductList from '../../../components/product/productList/ProductList'; //Import ProductList component
 import useProductListData from './productListData'; //Import ProductListData component
 import useProductListEffect from './prductListEffectHook';
 

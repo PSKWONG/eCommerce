@@ -18,7 +18,7 @@ const useProductListEffect = (actions) => {
 
 
     //Component Actions
-    useEffect(() => {
+    useEffect(() => {   
         //Check if the category_id is valid
         const isValidCategoryID = category_id && !isNaN(category_id);
 
