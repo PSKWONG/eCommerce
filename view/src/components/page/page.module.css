@@ -82,7 +82,7 @@ nav a::after{
 .content {
     margin-top: calc(var(--headerHeight) - var(--headerShaddow)); 
     width: 100%;
-    height: calc(100vh - var(--headerHeight) + var(--headerShaddow)); ;
+    min-height: calc(100vh - var(--headerHeight) + var(--headerShaddow)); ;
     background-image: url('../../assets/images/background.png');
     background-size: cover;
     background-position: center;

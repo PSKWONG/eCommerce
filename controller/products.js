@@ -35,13 +35,13 @@ exports.getProductsByCategory = async (req, res, next) => {
     //Check if the category id is valid
     const isValid = inputChecking.checkId(category_id);
     if (!isValid) {
-        return next(siteError(400, 'Invalid category id'));
-    }
+        return next(siteError(400, 'Invalid category id')); 
+    } 
 
     try {
         //Find the products by category id
         const response = await ProductDB.findByCategory(category_id);
-        
+
         if (!response) {
             return next(siteError(404, 'No products found'));
         }

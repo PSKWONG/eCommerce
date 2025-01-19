@@ -10,12 +10,14 @@
 
 /* Form And Guidline */
 
+/*
 .formAndGuidelinenWrapper {
 
     display: flex;
     flex-wrap: wrap;
     overflow: hidden; 
 }
+    */
 
 .formAndGuidelinenWrapper h1{
     text-align: center;
