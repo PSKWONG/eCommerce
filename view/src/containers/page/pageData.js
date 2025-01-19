@@ -43,7 +43,7 @@ const usePageData = (actions) => {
         },
         navigation: {
             navigationItems: [
-                { name: "Products", url: "/product/list" },
+                { name: "Products", url: "/product/list/2" },
                 { name: "Accessories", url: "/" },
             ]
         }

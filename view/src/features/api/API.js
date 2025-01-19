@@ -94,3 +94,10 @@ export const checkUserInput = async (body) => {
 export const submitRegistration = async (body) => {
     return postAPI(`/user/registration`, body);
 };
+
+
+
+//---------------------Product API---------------------//
+export const getProductList = async (category_id) => {
+    return getAPI(`/product/list/${category_id}`);
+}

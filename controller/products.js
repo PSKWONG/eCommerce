@@ -41,7 +41,7 @@ exports.getProductsByCategory = async (req, res, next) => {
     try {
         //Find the products by category id
         const response = await ProductDB.findByCategory(category_id);
-        console.log(response);
+        
         if (!response) {
             return next(siteError(404, 'No products found'));
         }
