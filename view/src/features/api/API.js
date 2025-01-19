@@ -101,3 +101,7 @@ export const submitRegistration = async (body) => {
 export const getProductList = async (category_id) => {
     return getAPI(`/product/list/${category_id}`);
 }
+
+export const getProductDetail = async (product_id) => {
+    return getAPI(`/product/${product_id}`);
+}

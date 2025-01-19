@@ -4,6 +4,7 @@ import React from 'react';
 //----------------- Import Components --------------------------
 import ProductDetail from '../../../components/product/productDetail/ProductDetail';
 import useProductData from '../productList/productListData'
+import useProductDetailEffect from './prductDetailEffectHook';
 
 
 
@@ -12,6 +13,7 @@ import useProductData from '../productList/productListData'
 const ProductDetailContainer = () => {
 
     const productData = useProductData();
+    useProductDetailEffect();
 
 
 
