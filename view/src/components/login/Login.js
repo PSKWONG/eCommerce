@@ -18,14 +18,14 @@ const Login = (props) => {
     const { registration, login } = props
 
     return (
-        <div className="floatingPageWrapper">
-            <div className={`${styles.loginAndRegistrationWrapper} floatContentWrapper`}>
-                <div className={`${styles.loginFormWrapper} ${styles.formWrapper}`}>
+        <div className="PageWrapper">
+            <div className={`${styles.loginAndRegistrationWrapper} floatContentWrapper twoColumnWrapper`}>
+                <div className={`${styles.loginFormWrapper} ${styles.formWrapper} leftColumn`}>
                     <h1>Login</h1>
                     <LoginForm {...login} actions={props.actions} />
                     <ProviderLogin {...login} />
                 </div>
-                <div className={`${styles.registrationWrapper} ${styles.formWrapper}`}>
+                <div className={`${styles.registrationWrapper} ${styles.formWrapper} rightColumn`}>
                     <div className={styles.registratioInfoWrapper}>
                         <h1>Registration</h1>
                         <p>Register to enjouy the following benefit</p>
