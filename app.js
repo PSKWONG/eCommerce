@@ -59,6 +59,10 @@ const authenRouter = require('./routes/authentication');
 app.use('/api/authen', authenRouter);
 app.use('/external/authen', authenRouter);
 
+//Product Route
+const productRouter = require('./routes/products');
+app.use('/api/product', productRouter);
+
 // The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
 const frontEndRouter = require('./routes/frontend');
 app.use('/', frontEndRouter);

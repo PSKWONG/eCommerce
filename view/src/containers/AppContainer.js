@@ -22,7 +22,7 @@ const appRouter = createBrowserRouter(
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Registration />} />
       <Route path ="/product">
-        <Route path="list" element={<ProductList/>} />
+        <Route path="list/:category_id" element={<ProductList/>} />
       </Route>
     </Route>
   ), 
