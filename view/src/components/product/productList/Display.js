@@ -27,7 +27,7 @@ const Display = (props) => {
             </div>
             <div>Price: {unit_price}</div>
             <div className={styles.button}>
-                Detial
+                Details
             </div>
         </div>
     );
