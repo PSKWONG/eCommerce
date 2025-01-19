@@ -58,6 +58,26 @@ header img {
     visibility: visible;
 }
 
+/* Navigation - Menu */
+nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    font-weight:300;
+    text-decoration: none;
+}
+
+nav a::after{
+    content: ' | ';
+    display: inline-block;
+    margin: 0 10px;
+  
+}
+
 /* Content Container */
 .content {
     margin-top: calc(var(--headerHeight) - var(--headerShaddow)); 

@@ -23,7 +23,7 @@ const usePageData = (actions) => {
 
     console.log(authenStatus);
     //Component Actions
-    const {handleHome, handleLogin, handleProfile, handleLogout} = actions;
+    const { handleHome, handleLogin, handleProfile, handleLogout } = actions;
     return {
         userIcon: {
             iconImage: authenStatus ? userIcon : loginBtn,
@@ -40,6 +40,12 @@ const usePageData = (actions) => {
             alt: "Logout",
             style: authenStatus ? styles.show : styles.hide,
             action: handleLogout
+        },
+        navigation: {
+            navigationItems: [
+                { name: "Products", url: "/product/list" },
+                { name: "Accessories", url: "/" },
+            ]
         }
     }
 };

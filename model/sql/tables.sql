@@ -17,8 +17,8 @@ Create table sessions (
 Create table products (
     product_id Serial Primary Key,
     product_name varchar(100) not null,
-    description varchar(500),
-    image bytea not null,
+    description text,
+    image_path VARCHAR(255),
     unit_price money not null
 );
 
