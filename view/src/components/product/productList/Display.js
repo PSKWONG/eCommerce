@@ -1,6 +1,7 @@
 // ----------------- Import Modules ----------------- //
 import React from 'react';
 import styles from './productList.module.css'; //Import the product list module
+import { Link } from 'react-router-dom';
 
 
 
@@ -26,9 +27,10 @@ const Display = (props) => {
                 <h3>{product_name}</h3>
             </div>
             <div>Price: {unit_price}</div>
-            <div className={styles.button}>
+            <Link to={`/product/detail/${product_id}`} className={styles.button}>
                 Details
-            </div>
+            </Link>
+                
         </div>
     );
 };

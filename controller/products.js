@@ -49,7 +49,32 @@ exports.getProductsByCategory = async (req, res, next) => {
         const body = productInfoResponse(response);
         res.status(200).json(body);
     } catch (err) {
-        console.log('This is the error from product', err);
+        console.log('This is the error from getProductsByCategory', err);
+        return next(siteError(500, err));
+    }
+}; 
+
+exports.getProductById = async (req, res, next) => {
+    //Extract the product id from the request params
+    const { product_id } = req.params;
+    //Check if the product id is valid
+    const isValid = inputChecking.checkId(product_id);
+    if (!isValid) {
+        return next(siteError(400, 'Invalid product id'));
+    }
+
+    try {
+        //Find the product by id
+        const response = await ProductDB.findById(product_id);
+
+        if (!response) {
+            return next(siteError(404, 'No product found'));
+        }
+        //Construct the response body
+        const body = productInfoResponse(response);
+        res.status(200).json(body);
+    } catch (err) {
+        console.log('This is the error from getProductById', err);
         return next(siteError(500, err));
     }
 }; 

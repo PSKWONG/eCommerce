@@ -4,7 +4,6 @@ const { dbQuery } = require('./db');
 const ProductDB = {
 
     findByCategory: async (id) => {
-        console.log('Start of Query' , id);
         const result = await dbQuery(
             `SELECT products.* 
                 FROM products, products_categories 
@@ -15,7 +14,17 @@ const ProductDB = {
             [id]
         );
         return result.rows;
-    }
+    }, 
+    findById: async (id) => {
+        const result = await dbQuery(
+            `SELECT * 
+                FROM products 
+                WHERE product_id = $1 `,
+            [id]
+        );
+        return result.rows || null
+    },
+
 };
 
 module.exports = ProductDB;

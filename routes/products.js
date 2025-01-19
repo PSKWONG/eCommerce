@@ -3,15 +3,17 @@
 // ----------------- ----- ----- Imported Modules -----------
 const express = require('express');
 const productRouter = express.Router();
-const {getProductsByCategory} = require('../controller/products')
+const {getProductsByCategory, getProductById} = require('../controller/products')
 
 
 // ----------------- ----- ----- HelperFunction  -----------
 
 
-//---- -------------------------- Registration ---------------
-//user Regiration
+//---- -------------------------- Product Information Route  ---------------
+
+productRouter.get('/:product_id', getProductById) 
 productRouter.get('/list/:category_id', getProductsByCategory) 
+
 
 
 
