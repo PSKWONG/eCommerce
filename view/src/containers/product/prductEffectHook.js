@@ -34,13 +34,18 @@ export const useProductListEffect = (actions) => {
 }
 
 
-export const useProductDetailEffect = (actions) => {
+export const useProductDetailEffect = ({productStates}) => {
+
+    const {setProduct_id} = productStates;
+
+
     //Set Custom Actions 
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     //Get the category_id from the URL
     const { product_id } = useParams();
+    //
 
 
     //Component Actions
@@ -52,8 +57,9 @@ export const useProductDetailEffect = (actions) => {
             navigate('/'); //Redirect to the home page
             return;
         }
+        setProduct_id(product_id);
         dispatch(fetchProductDetail(product_id));
-    }, [product_id, dispatch]);
+    }, [product_id]);
     
 }
 

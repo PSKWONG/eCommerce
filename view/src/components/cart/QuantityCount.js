@@ -18,7 +18,7 @@ const QuantityCount = (states) => {
 
     return (
         <div className="quantityCountWrapper">
-            <button onClick={() => setCount(count - 1)}>-</button>
+            <div onClick={() => setCount(count - 1)}>-</div>
             <span>{count}</span>
             <button onClick={() => setCount(count + 1)}>+</button>
         </div>
