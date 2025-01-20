@@ -57,6 +57,14 @@
   border-top-right-radius: var(--BorderRadis) ;
   border-bottom-right-radius: var(--BorderRadis) ;
 }
+/* -------------- Number Count ------------------*/
+
+.numberCount{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 
 
 

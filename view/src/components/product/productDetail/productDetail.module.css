@@ -1,0 +1,126 @@
+/* ------------ Product List Wrapper -------------*/
+.productDetailWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.contentWrapper {
+    flex-basis: 200px;
+    padding: 20px;
+}
+
+/* ------------ Tilte -------------*/
+.productWrapper {
+    background-color: white;
+    text-align: end;
+    font-weight: 800;
+    color: #5b6150;
+
+    flex-grow: 1;
+}
+
+.productWrapper h1 {
+    font-weight: 300;
+}
+
+.productWrapper .productDetailWrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.productWrapper .productDetailWrapper .contentWrapper {
+    flex-basis: 300px;
+}
+
+.productWrapper .productDetailWrapper img {
+    max-width: 50%;
+    max-height: 80%;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 45px;
+    flex-grow: 1;
+}
+
+.productWrapper .productDetailWrapper .descriptionDisplay {
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 20px;
+    font-size: 1.2em;
+    font-weight: 200;
+    flex-grow: 3;
+}
+
+/* ------------ Product Display -------------*/
+.actionWrapper {
+    background-color: #255038;
+    color: #dfe4d7;
+
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+
+}
+
+.priceTag {
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+.priceTag em{
+    font-size: 1.8em;
+    font-weight: 600;
+}
+
+
+
+
+
+.productItemWrapper {
+    background-color: white;
+    color: #5b6150;
+    border-radius: 5px;
+    padding: 10px;
+    max-width: 50%;
+    min-height: 150px;
+    max-height: 40vh;
+
+    flex-basis: 250px;
+    flex-grow: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.productItemWrapper img {
+    max-width: 100%;
+    max-height: 60%;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.productItemWrapper .infoDisplay {
+    margin: 10px 0;
+    padding: 20px;
+
+    border-radius: 20px;
+}
+
+.productItemWrapper .button {
+    width: 100px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: 600;
+    color: #dfe4d7;
+    text-decoration: none;
+    background-color: #397B56;
+    text-align: center;
+    cursor: pointer;
+
+}
