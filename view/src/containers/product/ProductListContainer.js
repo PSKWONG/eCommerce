@@ -4,9 +4,9 @@ import React  from 'react';
 
 
 // ----------------------------- Import Components ----------------------------- //
-import ProductList from '../../../components/product/productList/ProductList'; //Import ProductList component
-import useProductListData from './productListData'; //Import ProductListData component
-import useProductListEffect from './prductListEffectHook';
+import ProductList from '../../components/product/productList/ProductList'; //Import ProductList component
+import useProductListData from './productData'; //Import ProductListData component
+import {useProductListEffect} from './prductEffectHook';
 
 
 // ----------------------------- Product List Containers ----------------------------- //

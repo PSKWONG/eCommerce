@@ -11,8 +11,8 @@ import Page from './page/PageContainer';
 import Home from './HomeContainer';
 import Login from './login/LoginContainer';
 import Registration from './registration/RegContainer'
-import ProductList from './product/productList/ProductListContainer';  //Import ProductListContainer
-import ProductDetail from './product/productDetail/ProductDetail'
+import ProductList from './product/ProductListContainer';  //Import ProductListContainer
+import ProductDetail from './product/ProductDetailContainer'
 
 
 //-------------------- Router --------------------

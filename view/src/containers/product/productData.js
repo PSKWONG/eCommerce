@@ -4,7 +4,7 @@ import React  from 'react';
 
 // ----------------------------- Import Components ----------------------------- //
 import { useSelector } from 'react-redux';
-import { selectProductList, selectProductFetchingStatus, selectProductDetail } from '../../../features/productInfo/productInfoSlice'; 
+import { selectProductList, selectProductFetchingStatus, selectProductDetail } from '../../features/productInfo/productInfoSlice'; 
 
 
 // ----------------------------- Product Data Component  ----------------------------- //
@@ -22,7 +22,7 @@ const useProductListData = () => { //Create a functional component named Product
     const productData = {
         productList,
         productDetail,
-        fetchDataStatus
+        fetchDataStatus 
     }
     
 

@@ -1,14 +1,14 @@
 //-------------------- Import Modules --------------------
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductList, setCategroyFiltering } from "../../../features/productInfo/productInfoSlice";
+import { fetchProductList, setCategroyFiltering , fetchProductDetail} from "../../features/productInfo/productInfoSlice";
 import { useNavigate, useParams } from "react-router-dom";
 
 
 
 // ------------------ Product List Effect Hook ------------------
 
-const useProductListEffect = (actions) => {
+export const useProductListEffect = (actions) => {
     //Set Custom Actions 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -33,4 +33,27 @@ const useProductListEffect = (actions) => {
         , [category_id, dispatch]);
 }
 
-export default useProductListEffect;
+
+export const useProductDetailEffect = (actions) => {
+    //Set Custom Actions 
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    //Get the category_id from the URL
+    const { product_id } = useParams();
+
+
+    //Component Actions
+    useEffect(() => {
+        //Check if the category_id is valid
+        const isValidProductID = product_id && !isNaN(product_id);
+
+        if (!isValidProductID) {
+            navigate('/'); //Redirect to the home page
+            return;
+        }
+        dispatch(fetchProductDetail(product_id));
+    }, [product_id, dispatch]);
+    
+}
+
