@@ -5,6 +5,7 @@ import React from 'react';
 //-------------------------- Import Components --------------------------
 import '../../../assets/styles/App.css';
 import styles from './ProductDetail.module.css';
+import QuantityCount from '../../cart/QuantityCount';
 //envrioment
 const environment = process.env.REACT_APP_ENV;
 //API URL
@@ -36,6 +37,7 @@ const ProductDetail = ({ productDetail, countData }) => {
                         Price: <em>{unit_price}</em>
                     </div>
                     <div>
+                        <QuantityCount {...countData} />
                     </div>
                     
 

@@ -59,7 +59,7 @@
 }
 /* -------------- Number Count ------------------*/
 
-.numberCount{
+.quantityCountWrapper{
   display: flex;
   flex-direction: row;
   justify-content: center;
