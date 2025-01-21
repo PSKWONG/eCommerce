@@ -1,7 +1,7 @@
 //-------------------- Import Modules --------------------
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchProductList, setCategroyFiltering , fetchProductDetail} from "../../features/productInfo/productInfoSlice";
+import { fetchProductList, setCategroyFiltering, fetchProductDetail, selectProductDetail } from "../../features/productInfo/productInfoSlice";
 import { useNavigate, useParams } from "react-router-dom";
 
 
@@ -18,14 +18,14 @@ export const useProductListEffect = (actions) => {
 
 
     //Component Actions
-    useEffect(() => {   
+    useEffect(() => {
         //Check if the category_id is valid
         const isValidCategoryID = category_id && !isNaN(category_id);
 
         if (!isValidCategoryID) {
             navigate('/'); //Redirect to the home page
             return;
-        }else{
+        } else {
             dispatch(setCategroyFiltering(category_id));
         }
         dispatch(fetchProductList());
@@ -34,9 +34,11 @@ export const useProductListEffect = (actions) => {
 }
 
 
-export const useProductDetailEffect = ({productStates}) => {
+export const useProductDetailEffect = (data) => {
 
-    const {setProduct_id} = productStates;
+    const { cartItemStates } = data;
+    const {setProduct_item} = cartItemStates;
+    
 
 
     //Set Custom Actions 
@@ -45,7 +47,8 @@ export const useProductDetailEffect = ({productStates}) => {
 
     //Get the category_id from the URL
     const { product_id } = useParams();
-    //
+    const productItem = useSelector(selectProductDetail); 
+
 
 
     //Component Actions
@@ -57,9 +60,12 @@ export const useProductDetailEffect = ({productStates}) => {
             navigate('/'); //Redirect to the home page
             return;
         }
-        setProduct_id(product_id);
+
         dispatch(fetchProductDetail(product_id));
     }, [product_id]);
-    
-}
 
+    useEffect(() => {
+        setProduct_item(productItem); 
+    }, [productItem]);
+
+}

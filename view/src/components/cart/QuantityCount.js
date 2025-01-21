@@ -12,15 +12,17 @@ import '../../assets/styles/App.css';
 
 
 // ---------------------------- QuantityCount Component ----------------------------
-const QuantityCount = (states) => {
+const QuantityCount = (data) => {
 
-    const {count, setCount }= states;
+    const {cartItemStates, cartHandlers} = data;
+    const {count }= cartItemStates;
+    const {handleIncrement, handleDecrement} = cartHandlers; 
 
     return (
         <div className="quantityCountWrapper">
-            <button onClick={() => setCount(count - 1)} value={`-`}> - </button>
+            <button onClick={handleDecrement} value={`-`}> - </button>
             <span>{count}</span>
-            <button onClick={() => setCount(count + 1)}>+</button>
+            <button onClick={handleIncrement}>+</button>
         </div>
     );
 };

@@ -18,9 +18,15 @@ const server_URL = environment === 'production' ? process.env.REACT_APP_API_URL_
 //-------------------------- ProductDetail Component --------------------------
 const ProductDetail = ({ productDetail, cartStates }) => {
     const { product_name, description, image_path, unit_price } = productDetail;
-    const {isExist, countStates} = cartStates;
+    const {cartItemStates, cartHandlers}   = cartStates;
+    const {command} = cartItemStates;
+    const {handleCartItems }  = cartHandlers
 
-    console.log('This is the states:',isExist);
+    console.log('This is the cartHandlers:',cartHandlers);
+
+    //const {handleCartItems} = cartHandlers;
+
+    //console.log('This is the states:',isExist);
 
     const imageBaseURL = server_URL + '/assets/productImage/';
     return (
@@ -44,10 +50,10 @@ const ProductDetail = ({ productDetail, cartStates }) => {
                         Price: <em>{unit_price}</em>
                     </div>
                     <div>
-                        <QuantityCount {...countStates} />
+                        <QuantityCount {...cartStates} />
                     </div>
-                    <div className={styles.cartActionButton}>
-                        {isExist ? "Update Cart" : "Add to Cart"}
+                    <div className={styles.cartActionButton} onClick={handleCartItems}> 
+                        {command}
                     </div>
                     
 
