@@ -10,7 +10,7 @@
     padding: 20px;
 }
 
-/* ------------ Tilte -------------*/
+/* ------------ Product -------------*/
 .productWrapper {
     background-color: white;
     text-align: end;
@@ -52,7 +52,7 @@
     flex-grow: 3;
 }
 
-/* ------------ Product Display -------------*/
+/* ------------ Cart -------------*/
 .actionWrapper {
     background-color: #255038;
     color: #dfe4d7;
@@ -61,7 +61,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    justify-content: space-between;
+    justify-content: center;
+    align-content: baseline;
 
 }
 
@@ -75,9 +76,27 @@
     font-weight: 600;
 }
 
+.actionWrapper button{
+    color: #dfe4d7;
+   background-color : #3e7c59;
+}
+
+.cartActionButton {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    background-color: #dfe4d7;
+    text-decoration: none;
+    color: #3e7c59;
+    text-align: center;
+    cursor: pointer;
+}
 
 
 
+
+
+/*
 
 .productItemWrapper {
     background-color: white;
@@ -124,3 +143,4 @@
     cursor: pointer;
 
 }
+    */

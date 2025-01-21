@@ -16,9 +16,7 @@ const server_URL = environment === 'production' ? process.env.REACT_APP_API_URL_
 //-------------------- Display Component --------------------//
 
 const Display = (props) => {
-    console.log('This is the props :', props);
     const { product_id, product_name, description, image_path, unit_price } = props;
-    console.log('This is the imagepath  :', image_path);
     const imageBaseURL = server_URL + '/assets/productImage/';
     return (
         <div className={styles.productItemWrapper}>

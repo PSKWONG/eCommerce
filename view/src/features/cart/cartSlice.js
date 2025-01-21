@@ -10,9 +10,12 @@ import { createSlice } from '@reduxjs/toolkit';
 const cartSlice = createSlice(
     {
         name: 'shoppingCart',
-        initialState: {         
+        initialState: {
             cartData: {
-                items: [],
+                items: [
+                    { product_id: 1, quantity: 10, unit_price: 100 },
+                    { product_id: 2, quantity: 12, unit_price: 20 },
+                ],
                 total: 0
             }
         },

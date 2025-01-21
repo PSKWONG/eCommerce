@@ -16,12 +16,18 @@ const server_URL = environment === 'production' ? process.env.REACT_APP_API_URL_
 
 
 //-------------------------- ProductDetail Component --------------------------
-const ProductDetail = ({ productDetail, countData }) => {
+const ProductDetail = ({ productDetail, cartStates }) => {
     const { product_name, description, image_path, unit_price } = productDetail;
+    const {isExist, countStates} = cartStates;
+
+    console.log('This is the states:',isExist);
+
     const imageBaseURL = server_URL + '/assets/productImage/';
     return (
         <div className={`PageWrapper`}> {/* A div element */}
             <div className={` floatContentWrapper twoColumnWrapper ${styles.productDetailWrapper}`}>
+
+                {/* Left Column - Product Detail  */}
                 <div className={` leftColumn ${styles.contentWrapper} ${styles.productWrapper}`}>
                     <h1>{product_name} </h1>
                     <div className={styles.productDetailWrapper}>
@@ -29,15 +35,19 @@ const ProductDetail = ({ productDetail, countData }) => {
                         <div className={`${styles.contentWrapper} ${styles.descriptionDisplay}`}>
                             <p>{description}</p>
                         </div>
-                    </div>
-                    
+                    </div>    
                 </div>
+
+                {/* Right Column - Cart Detail  */}
                 <div className={` rightColumn ${styles.contentWrapper} ${styles.actionWrapper} `}>
                     <div className={styles.priceTag}>
                         Price: <em>{unit_price}</em>
                     </div>
                     <div>
-                        <QuantityCount {...countData} />
+                        <QuantityCount {...countStates} />
+                    </div>
+                    <div className={styles.cartActionButton}>
+                        {isExist ? "Update Cart" : "Add to Cart"}
                     </div>
                     
 

@@ -6,8 +6,10 @@ import React , {useMemo} from 'react';
 import ProductDetail from '../../components/product/productDetail/ProductDetail';
 
 import { useProductStates } from './productStates'
-import useProductData from './productData'
+import {useProductDetailData} from './productData'
 import { useProductDetailEffect } from './prductEffectHook'
+//Cart Data Component
+import useCartData from '../cart/cartData'
 // Quantity Counter Component
 import { useQtyCounterStates } from '../cart/cartStates'
 import { useQtyCounterEffect } from '../cart/cartEffectHook'
@@ -17,30 +19,28 @@ import { useQtyCounterEffect } from '../cart/cartEffectHook'
 
 const ProductDetailContainer = () => {
 
-
+    // Product States 
     const productStates = useProductStates();
-    const productData = useProductData();
     useProductDetailEffect({ productStates });
 
+    // Cart States
     const countStates = useQtyCounterStates();
-    const countData = useMemo(() => [
-        { product_id: 1, quantity: 10,unit_price: 100 },
-        { product_id: 2, quantity: 12, unit_price: 20 },
-        // Add more items as needed
-    ], []);
-    
+    const countData = useCartData();
+   
     useQtyCounterEffect(
         {
             product_id: productStates.product_id,
+            setIsExist: productStates.setIsExist,
             setCount: countStates.setCount,
-            cartItems: countData
+            cartItems: countData.cartItems
         }
     );
 
-
+    // Data to export to the ProductDetail component
+    const productData = useProductDetailData({productStates,countStates} );
 
     return (
-        <ProductDetail {...productData} countData={countStates} />
+        <ProductDetail {...productData} />
     );
 };
 

@@ -15,7 +15,6 @@ import Display from './Display';
 const ProductList = (props) => { //Create a functional component named ProductList
 
     const {data, totalItems} = props.productList
-    console.log('This is the tt :',totalItems);
 
     const content = ()=>{
         if(!totalItems){
@@ -27,9 +26,6 @@ const ProductList = (props) => { //Create a functional component named ProductLi
             return displayList; 
         }
     }
-
-
-
 
     return ( //Return the following
         <div className={`PageWrapper`}> {/* A div element */}

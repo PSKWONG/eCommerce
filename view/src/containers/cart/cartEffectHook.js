@@ -20,7 +20,7 @@ import { selectIsAuthenticated } from "../../features/authentication/authenticat
 //------------------- Quantity Counter Effect  -------------------
 export const useQtyCounterEffect = (data) => {
 
-    const { product_id, setCount, cartItems } = data;
+    const { product_id, setCount, cartItems, setIsExist } = data;
     const numOfcartItems = cartItems.length;
 
 
@@ -35,13 +35,12 @@ export const useQtyCounterEffect = (data) => {
         
         //Check if the item is in the cart
         const result = cartItems.find((item)=>{
-            console.log("Qty Effect", item);
-            console.log("Qty Effect", product_id);
             return item.product_id == product_id
         })
 
         
         if (result) {
+            setIsExist(true);
             setCount(result.quantity);
         } else {
             setCount(0);

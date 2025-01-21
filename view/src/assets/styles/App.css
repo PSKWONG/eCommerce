@@ -65,6 +65,23 @@
   justify-content: center;
   align-items: center;
 }
+.quantityCountWrapper button{
+  padding: 5px 15px;
+  border: none;
+  font-size: 1.5em;
+  line-height: 1em;
+  font-weight: 800;
+  background-color: #ffffff;
+  color: #5b6150;
+  cursor: pointer;
+
+  border-radius: 15px;
+}
+
+.quantityCountWrapper span{
+  margin: 10px 15px;
+  font-size: 1.5em;
+}
 
 
 
