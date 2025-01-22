@@ -96,7 +96,6 @@ export const submitRegistration = async (body) => {
 };
 
 
-
 //---------------------Product API---------------------//
 export const getProductList = async (category_id) => {
     return getAPI(`/product/list/${category_id}`);
@@ -104,4 +103,9 @@ export const getProductList = async (category_id) => {
 
 export const getProductDetail = async (product_id) => {
     return getAPI(`/product/${product_id}`);
+}
+
+//---------------------Cart API---------------------//
+export const getCartList = async () => {
+    return getAPI(`/cart/list/`);
 }
