@@ -14,10 +14,11 @@ const { siteError } = require('./utilies/customErrorHandler');
 const productInfoResponse = (result) => {
     //Check if the result is an array
     const isArray = Array.isArray(result);
+    
+    //If the result is not an array, convert it to an array
     if (!isArray) {
         result = [result];
     }
-    //If the result is not an array, convert it to an array
 
     //Reconstruct the product object
     const body = {
