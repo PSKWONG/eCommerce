@@ -15,7 +15,4 @@ productRouter.get('/:product_id', getProductById)
 productRouter.get('/list/:category_id', getProductsByCategory) 
 
 
-
-
-
 module.exports = productRouter;
