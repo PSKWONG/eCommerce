@@ -1,8 +1,7 @@
 //--------------------- Import Modules ---------------------
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addProduct, updateProduct } from '../../features/cart/cartSlice';
-import { isPending } from '@reduxjs/toolkit';
+import { addItemToCart, updateCartItem } from '../../features/cart/cartSlice';
 
 
 
@@ -41,18 +40,18 @@ export const useProductCartHandlers = (data) => {
             case isExist && count != 0:
                 setIsPendingRemoval(false);
                 productItemToCart = {...product_item, quantity: count};
-                dispatch(updateProduct(productItemToCart));
+                dispatch(updateCartItem(productItemToCart));
                 break;
 
             case isExist && count == 0:
                 setIsPendingRemoval(true);
                 productItemToCart = {...product_item, quantity: count};
-                dispatch(updateProduct(productItemToCart));
+                dispatch(updateCartItem(productItemToCart));
                 break;
 
             case !isExist && count != 0:
                 productItemToCart = {...product_item, quantity: count};
-                dispatch(addProduct(productItemToCart));
+                dispatch(addItemToCart(productItemToCart));
                 break
 
             default:

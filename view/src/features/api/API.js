@@ -109,3 +109,11 @@ export const getProductDetail = async (product_id) => {
 export const getCartList = async () => {
     return getAPI(`/cart/list/`);
 }
+
+export const addServerCartItem = async (body)=>{
+    return postAPI(`/cart/list/`, body)
+}
+
+export const updateServerCartItem = async (body)=>{
+    return putAPI(`/cart/update/`, body)
+}
