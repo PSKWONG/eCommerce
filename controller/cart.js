@@ -2,7 +2,7 @@
 // Core Modules
 const express = require('express');
 // Import Database Connection 
-const { CartDB } = require('../model/cart');
+const  CartDB  = require('../model/cart');
 // Info Checking
 const inputChecking = require('./utilies/userInputChecking')
 //Custom Error Handler
@@ -59,12 +59,11 @@ exports.cartrequestChecking = async (req, res, next) => {
 //Get the Cart List
 exports.getCartList = async (req, res, next) => {
     //Get the user id from the request
-    const { user_id } = req.user.user_id;
-
+    const { user_id } = req.user;
     //Get the cart list
     try {
-
         const result = await CartDB.getAllCartItems(user_id);
+
         if (result) {
             const cartData = cartResponseBuilder(result);
             res.status(200).json(cartData);
@@ -79,7 +78,7 @@ exports.getCartList = async (req, res, next) => {
 
 exports.addCartItem = async (req, res, next) => {
     //Get the user id from the request
-    const { user_id } = req.user.user_id;
+    const { user_id } = req.user;
 
     //Resturcut the request body
     const requestBody = req.body;
@@ -103,7 +102,7 @@ exports.addCartItem = async (req, res, next) => {
 
 exports.updateCartItem = async (req, res, next) => {
     //Get the user id from the request
-    const { user_id } = req.user.user_id;
+    const { user_id } = req.user;
 
     //Resturcut the request body
     const requestBody = req.body;

@@ -14,6 +14,4 @@ const corsConfiguration = {
     credentials : true // Allow cookies to be sent and received
 }
 
-console.log('corsConfiguration', corsConfiguration);
-
 module.exports = cors(corsConfiguration);

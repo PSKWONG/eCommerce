@@ -2,7 +2,7 @@
 const { dbQuery } = require('./db');
 
 const CartDB = {
-    getAllCartItems: async (userID) => {
+    getAllCartItems: async (user_id) => {
         const result = await dbQuery(
             `
             SELECT users_carts.product_id, product_name, unit_price, quantity
@@ -12,7 +12,7 @@ const CartDB = {
             AND
                 user_id = $1
              `,
-            [userID]
+            [user_id]
         );
         return result.rows || null;
     },

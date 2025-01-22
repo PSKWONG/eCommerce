@@ -76,7 +76,7 @@ exports.authericationCheck = (req, res, next) => {
         return res.json(result);
 
     } else if (result) {
-        console.log('Should not be here');
+        console.log('The authentication is successful with result of ', result);
         return next();
     } else {
         return next(siteError(401, 'Unauthorized Access'));
