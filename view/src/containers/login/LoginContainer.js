@@ -19,7 +19,7 @@ const LoginContainer = () => {
     useLoginEffect(loginStates); 
     
     return (
-        <Login {...lgoinPageContent} actions = {loginHandlers} />
+        <Login {...lgoinPageContent} />
     );
 };
 export default LoginContainer;

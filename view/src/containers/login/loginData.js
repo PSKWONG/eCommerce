@@ -28,6 +28,7 @@ const useLoginData = (states , actions) => {
             ]
         },
         login: {
+            
             local: [
                 {
                     name: 'email',
@@ -45,6 +46,7 @@ const useLoginData = (states , actions) => {
                 }
 
             ], 
+            
             error:{
                 message: errorMessage,
                 msgStyle: errorMessage? styles.messgeWrapper : styles.hide
@@ -56,7 +58,8 @@ const useLoginData = (states , actions) => {
                     description: 'Facebook',
                     alt: 'Login with Facebook',
                 }
-            ]
+            ],
+            actions, 
         }
     }
 

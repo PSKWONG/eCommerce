@@ -22,7 +22,7 @@ const Login = (props) => {
             <div className={`${styles.loginAndRegistrationWrapper} floatContentWrapper twoColumnWrapper`}>
                 <div className={`${styles.loginFormWrapper} ${styles.formWrapper} leftColumn`}>
                     <h1>Login</h1>
-                    <LoginForm {...login} actions={props.actions} />
+                    <LoginForm {...login}  />
                     <ProviderLogin {...login} />
                 </div>
                 <div className={`${styles.registrationWrapper} ${styles.formWrapper} rightColumn`}>
