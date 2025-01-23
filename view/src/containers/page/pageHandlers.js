@@ -21,9 +21,10 @@ const usePageHandlers = () => {
     const handleLogout = async () => {
             await dispatch(logout(navigate));
     };
+    const handleCart = () => { navigate("/cart"); };
 
     return{
-        handleLogin, handleProfile, handleHome , handleLogout
+        handleLogin, handleProfile, handleHome , handleLogout, handleCart
     }
 };
 

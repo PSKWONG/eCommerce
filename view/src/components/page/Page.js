@@ -15,7 +15,7 @@ import styles from './page.module.css';
 // ------------------- Page Component -------------------
 
 const Page = (props) => {
-  let { userIcon, logoIcon, logoutIcon, navigation } = props;
+  let { userIcon, logoIcon, logoutIcon, navigation, cartIcon } = props;
 
   return (
     <>
@@ -25,10 +25,10 @@ const Page = (props) => {
         <MenuList {...navigation} />
         <img src={logoutIcon.iconImage} alt={logoutIcon.alt} onClick={logoutIcon.action} className={logoutIcon.style}  />
         <img src={userIcon.iconImage} alt={userIcon.alt} onClick={userIcon.action} />
-        <Cart />
+        <Cart  {...cartIcon} />
       </header>
       <div className={styles.content}>
-        <Outlet />
+        <Outlet/>
       </div>
 
     </>

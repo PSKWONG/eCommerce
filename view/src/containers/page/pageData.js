@@ -23,7 +23,7 @@ const usePageData = (actions) => {
 
     console.log(authenStatus);
     //Component Actions
-    const { handleHome, handleLogin, handleProfile, handleLogout } = actions;
+    const { handleHome, handleLogin, handleProfile, handleLogout, handleCart} = actions;
     return {
         userIcon: {
             iconImage: authenStatus ? userIcon : loginBtn,
@@ -46,6 +46,9 @@ const usePageData = (actions) => {
                 { name: "Products", url: "/product/list/2" },
                 { name: "Accessories", url: "/" },
             ]
+        },
+        cartIcon:{
+            actions: handleCart
         }
     }
 };

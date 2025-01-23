@@ -13,6 +13,7 @@ import Login from './login/LoginContainer';
 import Registration from './registration/RegContainer'
 import ProductList from './product/ProductListContainer';  //Import ProductListContainer
 import ProductDetail from './product/ProductDetailContainer'
+import CartList from './cart/cartListContainer' //Import CartListContainer
 
 
 //-------------------- Router --------------------
@@ -31,8 +32,8 @@ const appRouter = createBrowserRouter(
           <Route index element={<ProductDetail/>} />
           <Route path=":product_id" element={<ProductDetail/>} />
         </Route>
-        
       </Route>
+      <Route path="cart" element={<CartList />} />
     </Route>
   ), 
   {
