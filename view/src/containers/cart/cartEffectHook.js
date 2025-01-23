@@ -1,13 +1,26 @@
 //------------------ Import Modules ------------------
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsAuthenticated } from "../../features/authentication/authenticationSlice";
+import {selectIsAuthenticated} from  "../../features/authentication/authenticationSlice";
+import { fetchCartListAndSync } from "../../features/cart/cartSlice";
+//------------------- Cart List Effect Hook -------------------
+export const useCartListEffect = (data) => {
+
+    const isAuthenticated = useSelector(selectIsAuthenticated); 
+    //Custom Actions
+    const dispatch = useDispatch(); 
+
+    useEffect(()=>{
+        if(isAuthenticated){
+            //Fetch Cart List
+            dispatch(fetchCartListAndSync());
+        }
+    }, [isAuthenticated]);   
+    
+}; 
 
 
 //------------------- Cart Item Effect Hook -------------------
-
-
-//------------------- Highlighted Cart Effect Hook -------------------
 export const useCartItemEffect = (data) => {
     const { cartItemStates, cartListData } = data;
     const {

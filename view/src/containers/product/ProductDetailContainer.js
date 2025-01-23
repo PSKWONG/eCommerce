@@ -13,7 +13,7 @@ import { useProductDetailEffect } from './prductEffectHook'
 import { useCartItemStates } from '../cart/cartStates'
 import { useCartListData } from '../cart/cartData'
 import { useProductCartHandlers } from '../cart/cartHandlers'
-import { useCartItemEffect } from '../cart/cartEffectHook'
+import { useCartItemEffect, useCartListEffect } from '../cart/cartEffectHook'
 
 
 
@@ -39,8 +39,10 @@ const ProductDetailContainer = () => {
 
     //-------------------- Product Detail Effect Hook --------------------
     // Product Detail Effect Hook
+    useCartListEffect(); 
     useProductDetailEffect({ cartItemStates });
     useCartItemEffect({ cartItemStates, cartListData });
+    
 
     return (
         <ProductDetail {...productData} />

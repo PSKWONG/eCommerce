@@ -16,7 +16,7 @@ const ProviderLogin = (props) => {
             <div  className={styles.providerList}>
                 {
                     providerData.map((provider, index) => {
-                        const { name, url, alt, description, image } = provider;
+                        const { url, alt, description, image } = provider;
                         return (
                             <a key={index} href={url} alt={alt} className={styles.providerButton}>
                                 <img src={image} />

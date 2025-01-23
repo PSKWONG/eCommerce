@@ -1,6 +1,6 @@
 // -------------------------- Import Modules --------------------------
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { getCartList, addServerCartItem, updateServerCartItem } from '../api/API';
+import { getCartList, addServerCartItemAPI, updateServerCartItemAPI } from '../api/API';
 
 // -------------------------- Import Components --------------------------
 
@@ -43,7 +43,7 @@ const fetchCartListAndSync = createAsyncThunk(
             //Start uploading the items to the server store
             for (const Item of pendingUploadItems){
                 try {
-                    await addServerCartItem(Item); 
+                    await addServerCartItemAPI(Item); 
                 }catch(err){
                     console.log ("There is an error on uploading the cart Items", Item,  err)
                     return localCart; 
@@ -60,7 +60,7 @@ const fetchCartListAndSync = createAsyncThunk(
             //Start updating the items to the server store
             for (const item of itemsToUpdate){
                 try {
-                    await updateServerCartItem(item);
+                    await updateServerCartItemAPI(item);
                 }catch(err){
                     console.log('There is an error on updating the cart Items', item, err);
                     return localCart;
@@ -77,7 +77,7 @@ const fetchCartListAndSync = createAsyncThunk(
             //Start deleting the items to the server store
             for (const item of itemsToDelete){
                 try {
-                    await updateServerCartItem(item);
+                    await updateServerCartItemAPI(item);
                 }catch(err){
                     console.log('There is an error on deleting the cart Items', item, err);
                     return localCart; 
@@ -100,6 +100,35 @@ const fetchCartListAndSync = createAsyncThunk(
         
     }
 ); 
+
+const updateServerCartItem = createAsyncThunk(
+    'shoppingCart/updateServerCartItem',
+    async (data, thunkAPI) => {
+
+        console.log('Data to update:', data);
+
+        try {
+            const response = await updateServerCartItemAPI(data);
+            console.log('Updated Cart Item from server :', response);
+            return response.cartList[0];
+        }catch(err){
+            console.log('There is an error on updating the cart Items', err);
+        }
+    }
+); 
+
+const addServerCartItem = createAsyncThunk(
+    'shoppingCart/addServerCartItem',
+    async (data, thunkAPI) => {
+        try {
+            const response = await addServerCartItemAPI(data);
+            console.log('Added Cart Item from server :', response);
+            return response.data.cartList[0];
+        }catch(err){
+            console.log('There is an error on adding the cart Items', err);
+        }
+    }
+);
 
 
 
@@ -165,6 +194,37 @@ const cartSlice = createSlice(
                     state.fetchDataStatus.isError = true;
                     state.fetchDataStatus.error = action.error.message;
                 })
+                .addCase(updateServerCartItem.pending, (state)=>{
+                    state.fetchDataStatus.isLoading = true;
+                    state.fetchDataStatus.isError = false;
+                })
+                .addCase(updateServerCartItem.fulfilled, (state, action)=>{
+                    state.fetchDataStatus.isLoading = false;
+                    state.fetchDataStatus.isError = false;
+                    const index = state.cartData.items.findIndex(item=>item.product_id === action.payload.product_id);
+                    state.cartData.items[index] = action.payload;
+                    console.log('Updated Cart Item from server :', index, action.payload);
+                })
+                .addCase(updateServerCartItem.rejected, (state, action)=>{
+                    state.fetchDataStatus.isLoading = false;
+                    state.fetchDataStatus.isError = true;
+                    state.fetchDataStatus.error = action.error.message;
+                })
+                .addCase(addServerCartItem.pending, (state)=>{
+                    state.fetchDataStatus.isLoading = true;
+                    state.fetchDataStatus.isError = false;
+                })
+                .addCase(addServerCartItem.fulfilled, (state, action)=>{
+                    state.fetchDataStatus.isLoading = false;
+                    state.fetchDataStatus.isError = false;
+                    state.cartData.items.push(action.payload);
+                })
+                .addCase(addServerCartItem.rejected, (state, action)=>{
+                    state.fetchDataStatus.isLoading = false;
+                    state.fetchDataStatus.isError = true;
+                    state.fetchDataStatus.error = action.error.message;
+                })
+
         }
             
                     
@@ -172,7 +232,7 @@ const cartSlice = createSlice(
 );
 //-------------------------- Export Actions --------------------------
 export const { addItemToCart, updateCartItem, updateCart } = cartSlice.actions;
-export { fetchCartListAndSync };
+export { fetchCartListAndSync, updateServerCartItem, addServerCartItem };
 //-------------------------- Export Selector --------------------------
 export const selectCartData = state => state.shoppingCart.cartData;
 //-------------------------- Export Reducer --------------------------

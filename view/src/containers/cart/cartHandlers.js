@@ -1,8 +1,7 @@
 //--------------------- Import Modules ---------------------
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addItemToCart, updateCartItem } from '../../features/cart/cartSlice';
-
+import { addItemToCart, addServerCartItem, updateCartItem, updateServerCartItem } from '../../features/cart/cartSlice';
+import { selectIsAuthenticated } from '../../features/authentication/authenticationSlice';
 
 
 
@@ -21,12 +20,13 @@ export const useProductCartHandlers = (data) => {
 
     const { cartItemStates } = data;
     const {
-        product_item, 
+        product_item,
         isExist,
         count,
         setCount,
-        setIsPendingRemoval
     } = cartItemStates;
+
+    const isAuthenticated = useSelector(selectIsAuthenticated)
 
     //Custom Actions
     const dispatch = useDispatch();
@@ -37,20 +37,22 @@ export const useProductCartHandlers = (data) => {
         let productItemToCart = {}
 
         switch (true) {
-            case isExist && count != 0:
-                setIsPendingRemoval(false);
-                productItemToCart = {...product_item, quantity: count};
+            case isAuthenticated && !isExist:
+                productItemToCart = { ...product_item, quantity: count };
+                dispatch(addServerCartItem(productItemToCart));
+                break;
+            case isAuthenticated && isExist:
+                productItemToCart = { ...product_item, quantity: count };
+                dispatch(updateServerCartItem(productItemToCart));
+                break;
+
+            case !isAuthenticated && isExist:
+                productItemToCart = { ...product_item, quantity: count };
                 dispatch(updateCartItem(productItemToCart));
                 break;
 
-            case isExist && count == 0:
-                setIsPendingRemoval(true);
-                productItemToCart = {...product_item, quantity: count};
-                dispatch(updateCartItem(productItemToCart));
-                break;
-
-            case !isExist && count != 0:
-                productItemToCart = {...product_item, quantity: count};
+            case !isAuthenticated && !isExist :
+                productItemToCart = { ...product_item, quantity: count };
                 dispatch(addItemToCart(productItemToCart));
                 break
 

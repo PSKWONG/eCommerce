@@ -4,7 +4,6 @@ import {Link} from 'react-router-dom';
 
 
 // -------------------------- Import Components --------------------------
-import styles from './page.module.css';
 
 
 
