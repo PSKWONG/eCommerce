@@ -10,15 +10,34 @@ import {Link} from 'react-router-dom';
 
 // -------------------------- MenuList Component --------------------------
 
-const MenuList = ({ navigationItems }) => {
-    return (
-        <nav>
-           { navigationItems.map((item, index) => {
+const MenuList = (props) => {
+
+    //Set the default value for navigation 
+    const defaultValue = []; 
+
+    //Get the value from the props
+    const navigationItems = props.navigationItems || defaultValue;
+
+    //Conditional Rendering for Menu List
+    let content;
+    const numberOfNavigationItems = navigationItems.length
+
+    switch (true){
+        case numberOfNavigationItems === 0:
+            content = <></>
+            break;
+        default:
+            content = navigationItems.map((item, index) => {
                 return (
                     <Link key={index} to={item.url} >{item.name}</Link>
                 )
             })
-        }
+        
+    }
+
+    return (
+        <nav>
+           {content}
         </nav>
     );
 }

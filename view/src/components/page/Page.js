@@ -8,6 +8,8 @@ import { Outlet } from 'react-router-dom';
 import Logo from './Logo.js';
 import Cart from './Cart.js';
 import MenuList from './MenuList.js';
+import AuthenticationButton from './authenticationButton.js';
+import ProfileIcon from './profile.js';
 
 //Assets
 import styles from './page.module.css';
@@ -15,16 +17,21 @@ import styles from './page.module.css';
 // ------------------- Page Component -------------------
 
 const Page = (props) => {
-  let { userIcon, logoIcon, logoutIcon, navigation, cartIcon } = props;
+
+  //Destructuring Props
+  let { userIcon, logoIcon, navigation, cartIcon } = props;
+
+
+
 
   return (
     <>
       <header>
         <span></span>
         <Logo logoinfo = {logoIcon}/>
-        <MenuList {...navigation} />
-        <img src={logoutIcon.iconImage} alt={logoutIcon.alt} onClick={logoutIcon.action} className={logoutIcon.style}  />
-        <img src={userIcon.iconImage} alt={userIcon.alt} onClick={userIcon.action} />
+        <MenuList  {...navigation} />
+        <ProfileIcon {...props} />
+        <AuthenticationButton  {...props} />
         <Cart  {...cartIcon} />
       </header>
       <div className={styles.content}>

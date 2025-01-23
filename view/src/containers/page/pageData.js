@@ -25,21 +25,22 @@ const usePageData = (actions) => {
     //Component Actions
     const { handleHome, handleLogin, handleProfile, handleLogout, handleCart} = actions;
     return {
-        userIcon: {
-            iconImage: authenStatus ? userIcon : loginBtn,
-            alt: authenStatus ? "User Profile" : "Login",
-            action: authenStatus ? handleProfile : handleLogin
-        },
+        
         logoIcon: {
             //iconImage: logoIcon,
             //alt: "Logo",
             action: handleHome
         },
-        logoutIcon: {
-            iconImage: logoutIcon,
-            alt: "Logout",
+        authenticationButton:{
+            iconImage: authenStatus ? logoutIcon : loginBtn,
+            alt: authenStatus ? "Logout" : "Login",
+            action: authenStatus ? handleLogout : handleLogin,
+        },
+        profileIcon: {
+            iconImage: userIcon,
+            alt: "Profile",
             style: authenStatus ? styles.show : styles.hide,
-            action: handleLogout
+            action: handleProfile
         },
         navigation: {
             navigationItems: [
