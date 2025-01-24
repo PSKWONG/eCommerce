@@ -27,18 +27,7 @@ const useLoginData = (states , actions) => {
                 }
             ]
         },
-        login: {
-            
-            
-            providers: [
-                {
-                    image: facebookIcon,
-                    url: '/external/authen/login/facebook',
-                    description: 'Facebook',
-                    alt: 'Login with Facebook',
-                }
-            ]
-        }
+        
     }
 
     return loginFormData;

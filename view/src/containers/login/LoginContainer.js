@@ -10,6 +10,7 @@ import useLoginHandlers from './loginHandlers';
 import useLoginEffect from './loginEffect';
 
 import useFormInputData from './formInput';
+import useProviderLoginData from './provider';
 
 // ------------------------------ Login Container ------------------------------
 
@@ -21,10 +22,12 @@ const LoginContainer = () => {
    // useLoginEffect(loginStates);
 
     const localLoginFormData = useFormInputData();
+    const localProviderLoginData = useProviderLoginData();
 
     return (
         <Login
             localLoginFormData={localLoginFormData}
+            localProviderLoginData={localProviderLoginData}
             {...lgoinPageContent}
         />
     );
