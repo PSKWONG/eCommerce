@@ -29,28 +29,7 @@ const useLoginData = (states , actions) => {
         },
         login: {
             
-            local: [
-                {
-                    name: 'email',
-                    title: 'Email:',
-                    type: 'email',
-                    value: email,
-                    error: isValidEmail === false ? styles.error : styles.valid,
-                },
-                {
-                    name: 'password',
-                    title: 'Password:',
-                    type: 'password',
-                    value: password,
-                    error: isValidPassword === false ? styles.error : styles.valid,
-                }
-
-            ], 
             
-            error:{
-                message: errorMessage,
-                msgStyle: errorMessage? styles.messgeWrapper : styles.hide
-            }, 
             providers: [
                 {
                     image: facebookIcon,
@@ -58,8 +37,7 @@ const useLoginData = (states , actions) => {
                     description: 'Facebook',
                     alt: 'Login with Facebook',
                 }
-            ],
-            actions, 
+            ]
         }
     }
 

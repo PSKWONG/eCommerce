@@ -8,9 +8,10 @@ import React from 'react';
 import styles from './login.module.css';
 
 
-// ----------------------------- Registration Form ------------------------------
 
 const LoginForm = (props) => {
+
+    //------------------------------- Data for the form ------------------------------
 
     //Set the default values for the form
     const defaultValue =
@@ -20,29 +21,25 @@ const LoginForm = (props) => {
             message: "System is under maintainance",
             msgStyle: styles.messgeWrapper
         },
-        actions: {
-            handleOnChange: (e) => {
-                e.preventDefault();
-                console.log('System is under maintainance');
-            },
-            handLoginSubmit: (e) => {
-                e.preventDefault();
-                console.log('System is under maintainance');
-            }
-        }
+        submission: {}
     }
 
     //Set the value for the form 
-    const formItems = props.local ? props.local : defaultValue.local;
-    const error = props.local ? props.error : defaultValue.error;
-    const { handleOnChange, handLoginSubmit } = props.actions ? props.actions : defaultValue.actions;
+    const formItems = props.localLoginFormData ? props.localLoginFormData : defaultValue.local;
+    const error = props.localLoginFormError ? props.localLoginFormError : defaultValue.error;
+    const submission = props.localLoginSubmission ? props.localLoginSubmission : defaultValue.submission;
+    
+
+    //------------------------------- Conditional Rendering on form items  ------------------------------
 
     //Set the Content for the form Items 
+    //The Form and Submit Button will only be displayed if there are form items
     const isFormItemEmpty = formItems.length === 0 ? true : false;
     let formContent;
     let submiteContenet;
 
     switch (isFormItemEmpty) {
+
         case true:
             formContent = <></>
             submiteContenet = <></>
@@ -50,36 +47,39 @@ const LoginForm = (props) => {
 
         case false:
 
+            //Set the Content for the form Items
             formContent = formItems.map((section, index) => {
+                const { name, title, type, value, error, actions } = section;
+                const { onChange } = actions;
                 return (
                     <div key={index}>
-                        <label htmlFor={section.name}>{section.title}</label>
-                        <input type={section.type} id={section.name} name={section.name} value={section.value} onChange={handleOnChange} className={section.error} />
+                        <label htmlFor={name}>{title}</label>
+                        <input type={type} id={name} name={name} value={value} onChange={onChange} className={error} />
                     </div>
                 )
             })
 
+            //Set the Content for the Submit Button
+            const { onSubmit } = submission.actions;
+
             submiteContenet =
                 <div className={styles.submitButtonWrapper}>
-                    <div className={styles.submitButton} onClick={handLoginSubmit}>
+                    <div className={styles.submitButton} onClick={onSubmit}>
                         Submit
                     </div>
                 </div>
-
             break;
 
         default:
             formContent = <></>
+            submiteContenet = <></>
             break;
     }
 
     //Set the Content for the Error Message  Items 
     const { msgStyle, message } = error;
 
-    //Set the Content for the form Items 
-
-
-
+    //------------------------------- Return the Form  ------------------------------
     return (
 
         <form className={styles.loginForm}>

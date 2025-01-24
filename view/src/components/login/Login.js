@@ -15,14 +15,16 @@ import ProviderLogin from './ProviderLogin';
 
 const Login = (props) => {
 
-    const { registration, login } = props
+    const { registration, login, localLoginFormData } = props
 
     return (
         <div className="PageWrapper">
             <div className={`${styles.loginAndRegistrationWrapper} floatContentWrapper twoColumnWrapper`}>
+
+                {/* Login Form */}
                 <div className={`${styles.loginFormWrapper} ${styles.formWrapper} leftColumn`}>
                     <h1>Login</h1>
-                    <LoginForm {...login}  />
+                    <LoginForm {...localLoginFormData} />
                     <ProviderLogin {...login} />
                 </div>
                 <div className={`${styles.registrationWrapper} ${styles.formWrapper} rightColumn`}>

@@ -9,6 +9,8 @@ import useStates from './loginStates';
 import useLoginHandlers from './loginHandlers';
 import useLoginEffect from './loginEffect';
 
+import useFormInputData from './formInput';
+
 // ------------------------------ Login Container ------------------------------
 
 const LoginContainer = () => {
@@ -16,10 +18,15 @@ const LoginContainer = () => {
     const loginHandlers = useLoginHandlers(loginStates);
     const lgoinPageContent = useLoginData(loginStates, loginHandlers);
 
-    useLoginEffect(loginStates); 
-    
+   // useLoginEffect(loginStates);
+
+    const localLoginFormData = useFormInputData();
+
     return (
-        <Login {...lgoinPageContent} />
+        <Login
+            localLoginFormData={localLoginFormData}
+            {...lgoinPageContent}
+        />
     );
 };
 export default LoginContainer;

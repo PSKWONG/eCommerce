@@ -24,6 +24,7 @@ const login = createAsyncThunk(
                 return message;
             }
         } catch (error) {
+            console.log('Local Login API error:', error);
             return thunkAPI.rejectWithValue(error);
         }
     }
@@ -40,6 +41,7 @@ const logout = createAsyncThunk(
             }
             thunkAPI.dispatch(checkAuth());
         }catch(error){
+            console.log('Logout API error:', error);
             return thunkAPI.rejectWithValue(error);
         }
        
@@ -71,8 +73,8 @@ const AuthenticationSlice = createSlice(
 
         },
         reducers: {
-            clearErrorMessages: (state) => {
-                state.fetchData.errorMessage = '';
+            setErrorMessages: (state, action) => {
+                state.fetchData.errorMessage = action.payload;
             }
         },
         extraReducers: (builder) => {
@@ -129,7 +131,7 @@ const AuthenticationSlice = createSlice(
 // Export Thunk Actions 
 export { login, logout, checkAuth };
 // Export Slice Actions
-export const { clearErrorMessages } = AuthenticationSlice.actions;
+export const { clearErrorMessages, setErrorMessages } = AuthenticationSlice.actions;
 
 //Export Selectors
 export const selectIsAuthenticated = (state) => state.authentication.isAuthenticated;
