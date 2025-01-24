@@ -1,5 +1,5 @@
 // ------------------------ Import Modules ------------------------
-import {useEffect} from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 
@@ -12,7 +12,7 @@ import { checkAuth } from "../../features/authentication/authenticationSlice";
 
 //----------------------------- Page Effect -----------------------------
 const usePageEffect = (actions) => {
-      //Dispatch Action
+  //Dispatch Action
   const dispatch = useDispatch();
 
 

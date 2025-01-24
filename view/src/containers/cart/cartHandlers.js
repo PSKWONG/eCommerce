@@ -20,10 +20,10 @@ export const useProductCartHandlers = (data) => {
 
     const { cartItemStates } = data;
     const {
-        product_item,
+        cartItem,setCartItem,
         isExist,
-        count,
-        setCount,
+        setIsUpdated,
+        count,setCount,
     } = cartItemStates;
 
     const isAuthenticated = useSelector(selectIsAuthenticated)
@@ -34,26 +34,29 @@ export const useProductCartHandlers = (data) => {
     const handleCartItems = (e) => {
 
         e.preventDefault();
-        let productItemToCart = {}
+        let productItemToCart = {...cartItem}; 
+        productItemToCart.quantity = count;
 
         switch (true) {
             case isAuthenticated && !isExist:
-                productItemToCart = { ...product_item, quantity: count };
                 dispatch(addServerCartItem(productItemToCart));
+                setIsUpdated(true);
                 break;
             case isAuthenticated && isExist:
-                productItemToCart = { ...product_item, quantity: count };
                 dispatch(updateServerCartItem(productItemToCart));
+                setIsUpdated(true);
                 break;
 
             case !isAuthenticated && isExist:
-                productItemToCart = { ...product_item, quantity: count };
+                console.log('This is the productItemToCart to update:',productItemToCart);
                 dispatch(updateCartItem(productItemToCart));
+                setIsUpdated(true);
                 break;
 
             case !isAuthenticated && !isExist :
-                productItemToCart = { ...product_item, quantity: count };
+                console.log('This is the productItemToCart to add:',productItemToCart);
                 dispatch(addItemToCart(productItemToCart));
+                setIsUpdated(true);
                 break
 
             default:

@@ -19,7 +19,7 @@ import styles from './page.module.css';
 const Page = (props) => {
 
   //Destructuring Props
-  let { userIcon, logoIcon, navigation, cartIcon } = props;
+  let { navigation, cartIcon } = props;
 
 
 
@@ -28,7 +28,7 @@ const Page = (props) => {
     <>
       <header>
         <span></span>
-        <Logo logoinfo = {logoIcon}/>
+        <Logo {...props}/>
         <MenuList  {...navigation} />
         <ProfileIcon {...props} />
         <AuthenticationButton  {...props} />

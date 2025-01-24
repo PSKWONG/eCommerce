@@ -1,5 +1,5 @@
 //---------------------------- Import Modules ------------------------------//
-import React from 'react';
+import React, { useMemo } from 'react';
 
 
 // ----------------------------- Import Components ----------------------------- //
@@ -41,7 +41,7 @@ export const useProductDetailData = (data) => { //Create a functional component 
 
     console.log('This is the ProductDetailData:');
 
-    return (
+    const productDetailData = useMemo(()=>(
         {
             productDetail,
             cartStates: {
@@ -50,6 +50,10 @@ export const useProductDetailData = (data) => { //Create a functional component 
             },
             fetchDataStatus
         }
-    )
+    ), [productDetail, fetchDataStatus, cartItemStates, cartHandlers]); 
+
+
+
+    return productDetailData; //Return the productDetailData
 
 };     

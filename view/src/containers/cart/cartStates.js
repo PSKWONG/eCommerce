@@ -21,12 +21,15 @@ export const useQtyCounterStates = () => {
 
 //------------------------- Cart Item  States -------------------------
 
-export const useCartItemStates = () => {
+export const useCartItemStates = (props) => {
+
+
     const [product_item, setProduct_item] = useState({});
     const [cartItem, setCartItem] = useState({});
     const [count , setCount] = useState(0);
     const [isExist, setIsExist] = useState(false);
     const [isPendingRemoval, setIsPendingRemoval] = useState(false);
+    const [isUpdated, setIsUpdated] = useState(true);
     const [command, setCommand] = useState('add');
     
 
@@ -36,6 +39,7 @@ export const useCartItemStates = () => {
         count, setCount,
         isExist, setIsExist,
         isPendingRemoval, setIsPendingRemoval,
+        isUpdated, setIsUpdated,
         command, setCommand
     };
 } 

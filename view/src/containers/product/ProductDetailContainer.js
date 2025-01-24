@@ -39,10 +39,10 @@ const ProductDetailContainer = () => {
 
     //-------------------- Product Detail Effect Hook --------------------
     // Product Detail Effect Hook
-    useCartListEffect(); 
+    useCartListEffect();
     useProductDetailEffect({ cartItemStates });
     useCartItemEffect({ cartItemStates, cartListData });
-    
+
 
     return (
         <ProductDetail {...productData} />

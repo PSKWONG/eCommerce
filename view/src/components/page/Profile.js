@@ -11,6 +11,8 @@ import defaultValue from './pauseIcon';
 //------------------- AuthenticationButton Component -------------------
 const ProfileIcon = (props) => {
 
+    console.log('profile icon with props:' , props);
+
     //Retrieve the values
     const profileIcon = props?.profileIcon || defaultValue;
 

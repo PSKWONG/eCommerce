@@ -22,67 +22,69 @@ export const useCartListEffect = (data) => {
 
 //------------------- Cart Item Effect Hook -------------------
 export const useCartItemEffect = (data) => {
-    const { cartItemStates, cartListData } = data;
+    const {cartItemStates,cartListData} = data;
     const {
-        product_item,
-        isExist,
-        setIsExist,
-        isPendingRemoval,
-        setIsPendingRemoval,
+        isExist,setIsExist,
+        isPendingRemoval,setIsPendingRemoval,
         setCommand,
-        setCount,
-        cartItem, setCartItem
+        count,setCount,
+        cartItem, setCartItem, 
+        isUpdated,setIsUpdated
     } = cartItemStates;
 
-    const cartList = cartListData.items
+    const cartList = cartListData.items ;
+    const productId = cartItem.product_id;
+    console.log('This is the cartList:',cartList);
+    console.log('This is the cartItem:',cartItem);
 
-
+    
     //Reset states from th existing product
     useEffect(() => {
         setCount(0);
-        setCartItem({});
         setIsExist(false);
         setIsPendingRemoval(false);
-    }, [product_item]);
+        setIsUpdated(true);
+    }, [productId]);
 
-
-    //Check the Cart List for the existing product
+    
+    //Set the initial value for the cart item
     useEffect(() => {
-
-        //Check if the product is in the cart
+        
+        //Check if the product is in the cart----------------------------------------
         const result = cartList.find((item) => {
-            return item.product_id == product_item.product_id
+            return item.product_id == cartItem.product_id
         });
+
 
         //If the cart item is found, set the cart item
         if (result) {
-            setCartItem(result);
             setIsExist(true);
+            setCartItem(result);
+        }else{
+            const newCartItem = {...cartItem, quantity: 0};
+            setCartItem(newCartItem);
         }
 
+        
+    }, [cartList, productId]);
 
-    }, [product_item, cartList, cartItem]);
 
-
-
-    //Check whether products are pending for removal
     useEffect(() => {
+        // To Check whether the product is pending to remove -------------------------
         if (isExist) {
             const initialQuantity = Number(cartItem.quantity);
+            console.log('This is the cartItem:',cartItem);
             if (initialQuantity === 0) {
                 setIsPendingRemoval(true);
             }
         }
+
     }, [isExist]);
 
-
-    // Set Initial Value for the Counter 
     useEffect(() => {
-
         const initialQuantity = Number(cartItem.quantity);
 
         switch (true) {
-
             case isPendingRemoval:
                 setCount(0);
                 break;
@@ -92,8 +94,17 @@ export const useCartItemEffect = (data) => {
             default:
                 setCount(0);
         }
-    }, [isExist, isPendingRemoval, cartItem]);
 
+    }, [isExist, isPendingRemoval]);
+
+
+    //Check whether the Quantity has been updated
+    useEffect(()=>{
+        const quantity = Number(cartItem.quantity);
+        const isUpdated = quantity == count;
+
+        setIsUpdated(isUpdated);
+    },[count, cartItem]);
 
     // Set the Command for the Cart Item
     useEffect(() => {
@@ -102,12 +113,17 @@ export const useCartItemEffect = (data) => {
             case isExist && isPendingRemoval:
                 setCommand('Add to Cart');
                 break;
-            case isExist && !isPendingRemoval:
-                setCommand('update');
+            case isExist && !isPendingRemoval && !isUpdated:
+                setCommand('Update the cart');
                 break;
+
+            case isExist && !isPendingRemoval && isUpdated:
+                setCommand('Updated');
+                break;
+
             default:
                 setCommand('Add to Cart');
         }
-    }, [isExist, isPendingRemoval]);
+    }, [isExist, isPendingRemoval, isUpdated ]);
 
 }

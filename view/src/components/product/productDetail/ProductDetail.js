@@ -22,7 +22,6 @@ const ProductDetail = ({ productDetail, cartStates }) => {
     const {command} = cartItemStates;
     const {handleCartItems }  = cartHandlers
 
-    console.log('This is the cartHandlers:',cartHandlers);
 
     //const {handleCartItems} = cartHandlers;
 

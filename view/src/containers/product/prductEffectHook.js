@@ -37,7 +37,7 @@ export const useProductListEffect = (actions) => {
 export const useProductDetailEffect = (data) => {
 
     const { cartItemStates } = data;
-    const {setProduct_item} = cartItemStates;
+    const {setCartItem} = cartItemStates;
     
 
 
@@ -65,7 +65,7 @@ export const useProductDetailEffect = (data) => {
     }, [product_id]);
 
     useEffect(() => {
-        setProduct_item(productItem); 
+        setCartItem(productItem); 
     }, [productItem]);
 
 }
