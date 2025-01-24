@@ -1,43 +1,36 @@
-// --------------------------- Import modules ---------------------------
-import { checkUserInput, submitRegistration } from '../../features/api/API';
-import { useNavigate } from 'react-router-dom';
+// ------------------ Import Modules ------------------
+import React, { useEffect, useMemo, useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { checkAuth } from "../../features/authentication/authenticationSlice";
-import { useDispatch } from 'react-redux';
+import { checkUserInput, submitRegistration } from '../../features/api/API';
+
+//-------------------- Import Components --------------------
+import styles from '../../components/registration/registration.module.css';
 
 
 
 
-//------------------------- Form actions ----------------------- //
+const useRegFormData = () => {
 
-const useFormActions = (states) => {
+    //-------------------------- Registration Form States --------------------------
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [isValidUsername, setIsValidUsername] = useState();
+    const [isValidEmail, setIsValidEmail] = useState();
+    const [isValidPassword, setIsValidPassword] = useState();
+    const [isValidConfirmPassword, setIsValidConfirmPassword] = useState();
+    const [isFormCompleted, setIsFormCompleted] = useState(false);
+    const [guideline, setGuideline] = useState([]);
 
-    // Form states
-    const {
-        username,
-        email,
-        password,
-        confirmPassword,
-        guideline,
-        isFormCompleted,
-        isValidPassword,
-        isValidEmail,
-        isValidConfirmPassword,
-        isValidUsername,
-        setIsValidConfirmPassword,
-        setGuideline,
-        setUsername,
-        setEmail,
-        setPassword,
-        setConfirmPassword,
-        setIsValidUsername,
-        setIsValidEmail,
-        setIsValidPassword
-    } = states;
 
-    //Custom Actions 
-    //Naviagtion
-    const navigate = useNavigate();
+
+    //-------------------------- Registration Form Handlers --------------------------
+    //custom actions
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const handleOnChange = (e) => {
         // Update the state unpon change in the input field
@@ -59,6 +52,7 @@ const useFormActions = (states) => {
                 break;
         }
     };
+
     const handleValidation = async (e) => {
         // Validate the input field upon out of focus on the input field
         const { name, value } = e.target;
@@ -98,7 +92,7 @@ const useFormActions = (states) => {
                         message = response.response.data.error.message;
                     }
                 } catch (error) {
-                    console.log(error);
+                    console.log(`Error in Registration Validation `, error);
                 }
                 break;
 
@@ -165,7 +159,7 @@ const useFormActions = (states) => {
                 }
 
             } catch (err) {
-                console.log(err);
+                console.log(`Error in Registration Submission `, err);
             }
         }
         //Set the error message in the guideline
@@ -175,13 +169,96 @@ const useFormActions = (states) => {
         return;
     };
 
+    //-------------------------- Effect Hook --------------------------
+
+    //Reset Confirmed Password when password is changed
+    useEffect(() => {
+        setConfirmPassword('');
+        setIsValidConfirmPassword();
+    }, [password, setConfirmPassword, setIsValidConfirmPassword]);
+
+    //Reset confirmed password when confirm password is changed
+    useEffect(() => {
+        setIsValidConfirmPassword();
+    }, [confirmPassword, setIsValidConfirmPassword]);
+
+    //Check if the form is completed
+    useEffect(() => {
+        const isCompleted = isValidUsername && isValidEmail && isValidPassword;
+        setIsFormCompleted(isCompleted);
+    }, [isValidUsername, isValidEmail, isValidPassword, setIsFormCompleted]);
+
+    //------------------------- Registration Form Data --------------------------
+
+    const regFormInputData = useMemo(() => [
+        {
+            name: 'username',
+            title: 'Username:',
+            type: 'text',
+            value: username,
+            error: isValidUsername === false ? styles.error : styles.valid,
+            actions: {
+                onChange: handleOnChange,
+                onBlur: handleValidation
+            }
+        },
+        {
+            name: 'email',
+            title: 'Email:',
+            type: 'email',
+            value: email,
+            error: isValidEmail === false ? styles.error : styles.valid,
+            actions: {
+                onChange: handleOnChange,
+                onBlur: handleValidation
+            }
+        },
+        {
+            name: 'password',
+            title: 'Password:',
+            type: 'password',
+            value: password,
+            error: isValidPassword === false ? styles.error : styles.valid,
+            actions: {
+                onChange: handleOnChange,
+                onBlur: handleValidation
+            }
+        },
+        {
+            name: 'confirmPassword',
+            title: 'Confirm Password:',
+            type: 'password',
+            value: confirmPassword,
+            error: isValidConfirmPassword === false ? styles.error : styles.valid,
+            actions: {
+                onChange: handleOnChange,
+                onBlur: handleValidation
+            }
+        }
+    ], [username, email, password, confirmPassword, isValidUsername, isValidEmail, isValidPassword, isValidConfirmPassword]);
+
+
+    const regFormSubmitData = useMemo(() => (
+        {
+            title: 'Submit',
+            style: isFormCompleted ? styles.submitButton : styles.submitButtonDisabled,
+            actions: {
+                onSubmit: handleSubmission
+            }
+        }
+    ), [handleSubmission]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    const regFormGuidelineData = useMemo(() => {
+        return {
+            guideline: guideline
+        }
+    });
 
     return {
-        handleOnChange,
-        handleValidation, 
-        handleSubmission
+        regFormInputData,
+        regFormSubmitData,
+        regFormGuidelineData
     };
-
 };
 
-export default useFormActions;
+export default useRegFormData;

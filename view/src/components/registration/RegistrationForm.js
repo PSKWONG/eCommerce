@@ -11,30 +11,50 @@ import styles from './registration.module.css';
 // ----------------------------- Registration Form ------------------------------
 
 const RegistrationForm = (props) => {
-    const formItems = props.data;
-    const submitBtn = props.submit;
-    const { handleOnChange, handleValidation, handleSubmission } = props.actions;
 
-    return (
+    //------------------- Form Data -------------------
+    const regFormData = props?.regFormInputData || [];
+    const submitData = props?.regFormSubmitData || {};
+    const { onSubmit } = submitData.actions;
 
-        <form className={styles.registrationForm}>
-            {
-                formItems.map((section, index) => {
-                    return (
-                        <div key={index}>
-                            <label htmlFor={section.name}>{section.title}</label>
-                            <input type={section.type} id={section.name} name={section.name} value={section.value} onChange={handleOnChange} onBlur={handleValidation} className={section.error} />
+    //------------------- Conditional Rendering -------------------
+    const isEmpty = regFormData.length === 0 ? true : false;
+    let content;
+
+    switch (true) {
+        case isEmpty:
+            content = <> </>
+            break;
+
+        default:
+            content =
+                <form className={styles.registrationForm}>
+                    {
+                        regFormData.map((section, index) => {
+                            const { name, title, type, value, error, actions } = section;
+                            const { onChange, onBlur } = actions;
+
+                            return (
+                                <div key={index}>
+                                    <label htmlFor={name}>{title}</label>
+                                    <input type={type} id={name} name={name} value={value} onChange={onChange} onBlur={onBlur} className={error} />
+                                </div>
+                            )
+                        })
+                    }
+                    <div className={styles.submitButtonWrapper}>
+                        <div className={submitData.style} onClick={onSubmit}>
+                            Submit
                         </div>
-                    )
-                })
-            }
-            <div className={styles.submitButtonWrapper}>
-                <div className={submitBtn.style} onClick={handleSubmission}>
-                    Submit
-                </div>
-            </div>
+                    </div>
 
-        </form>
+                </form>
+            break;
+    };
+    return (
+        <>
+            {content}
+        </>
     );
 }
 

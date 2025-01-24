@@ -4,31 +4,25 @@ import React from 'react';
 
 // ------------------------------ Import Components ------------------------------
 import Login from '../../components/login/Login';
-import useLoginData from './loginData';
-import useStates from './loginStates';
-import useLoginHandlers from './loginHandlers';
-import useLoginEffect from './loginEffect';
 
 import useFormInputData from './formInput';
-import useProviderLoginData from './provider';
+import useProviderLoginData from './loginProvider';
+import useRegProviderData from './regProvider';
 
 // ------------------------------ Login Container ------------------------------
 
 const LoginContainer = () => {
-    const loginStates = useStates();
-    const loginHandlers = useLoginHandlers(loginStates);
-    const lgoinPageContent = useLoginData(loginStates, loginHandlers);
 
    // useLoginEffect(loginStates);
-
     const localLoginFormData = useFormInputData();
-    const localProviderLoginData = useProviderLoginData();
+    const ProviderLoginData = useProviderLoginData();
+    const regProviderData = useRegProviderData();
 
     return (
         <Login
             localLoginFormData={localLoginFormData}
-            localProviderLoginData={localProviderLoginData}
-            {...lgoinPageContent}
+            loginProviderData={ProviderLoginData}
+            regProviderData = {regProviderData}
         />
     );
 };

@@ -1,23 +1,4 @@
-/* Login */
 
-/*
-.loginPageWarpper {
-    width: 100%;
-    height: 100%;
-    display: grid;
-    place-items: center;
-}
-    */
-
-/* Login And Registration Form */
-
-/*
-.loginAndRegistrationWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: hidden;
-}
-*/
 .loginAndRegistrationWrapper h1 {
     text-align: center;
     margin-bottom: 20px;
@@ -184,15 +165,39 @@ a.providerButton:visited{
     border-bottom: 1px solid #e8e8e5;
 }
 
+
 .registerOptions {
     display: flex;
     justify-content: space-around;
 }
 
-.registrationButton {
+.registerOptions .optionButton {
+    border: 1px solid #e8e8e5;
+    border-radius: 5px;
+}
+
+.registerOptions span,
+.registerOptions  a ,
+.registerOptions  a:link,
+.registerOptions a:visited,
+.registerOptions a:active,
+.registerOptions a:hover {
+    text-decoration: none;
+    color: #e8e8e5;
+}
+
+
+/* Button List Wrapper */
+.buttonListWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.optionButton {
+
 
     padding: 5px;
-    border: 1px solid #e8e8e5;
     border-radius: 5px;
     cursor: pointer;
     text-decoration: none;
@@ -203,19 +208,14 @@ a.providerButton:visited{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
-.registrationButton img {
+.optionButton img {
     max-width: 30px;
     max-height: 30px;
 }
 
-.registrationButton span,
-.registrationButton a ,
-.registrationButton a:link,
-.registrationButton a:visited,
-.registrationButton a:active,
-.registrationButton a:hover {
-    text-decoration: none;
-    color: #e8e8e5;
+a.optionButton:visited{
+    color: #848680;
 }

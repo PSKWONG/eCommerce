@@ -10,12 +10,15 @@ import styles from './login.module.css';
 import RegButton from './RegistrationButton';
 import LoginForm from './LoginForm';
 import ProviderLogin from './ProviderLogin';
+import ButtonList from './ButtonList';
 
 
 
 const Login = (props) => {
 
-    const { registration, localProviderLoginData, localLoginFormData } = props
+    const { regProviderData, loginProviderData, localLoginFormData } = props
+    const providerList = loginProviderData.providers;
+    const regProviderList = regProviderData.providers;
 
     return (
         <div className="PageWrapper">
@@ -25,7 +28,11 @@ const Login = (props) => {
                 <div className={`${styles.loginFormWrapper} ${styles.formWrapper} leftColumn`}>
                     <h1>Login</h1>
                     <LoginForm {...localLoginFormData} />
-                    <ProviderLogin {...localProviderLoginData} />
+                    <div className={styles.providerOptionsWrapper} >
+                        <h3>Other login options</h3>
+                        <ButtonList buttonList = {providerList}/>
+                    </div>
+                    
                 </div>
 
                 {/* Registration Section */}
@@ -42,13 +49,7 @@ const Login = (props) => {
                     <div>
                         <p className={styles.registerInstruct}>Register with:</p>
                         <div className={styles.registerOptions}>
-                            {
-                                registration.option.map((option, index) => {
-                                    return (
-                                        <RegButton key={index} {...option} />
-                                    )
-                                })
-                            }
+                            <ButtonList buttonList = {regProviderList}/>
                         </div>
                     </div>
 

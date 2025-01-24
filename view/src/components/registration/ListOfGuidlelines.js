@@ -9,19 +9,42 @@ import styles from './registration.module.css';
 
 
 // ------------------------ List of Guidelines --------------------------
-const ListOfGuidelines = ({data}) => {
+const ListOfGuidelines = (props) => {
+
+    //------------------- Guildeline Data -------------------
+    const guidelineData = props?.regFormGuidelineData.guideline || [];
+
+    //------------------- Conditional Rendering -------------------
+    let content;
+    const isEmpty = guidelineData.length === 0 ? true : false;
+
+    switch (true) {
+        case isEmpty:
+            content = 
+            <div className={styles.guidelineList}></div>
+            break;
+        default:
+            content =
+                <div className={styles.guidelineList}>
+                    {
+                        guidelineData.map((guideline, index) => {
+                            return (
+                                <div key={index} className={styles.guidelineRow}>
+                                    {guideline}
+                                </div>
+                            );
+                        })
+                    }
+                </div>
+            break;
+    }
+
+
+
     return (
-        <div className={styles.guidelineList}>
-            {
-                data.map((guideline, index) => {
-                    return (
-                        <div key={index} className={styles.guidelineRow}>
-                            {guideline}
-                        </div>
-                    );
-                })
-            }
-        </div>
+        <>
+            {content}
+        </>
     );
 };
 

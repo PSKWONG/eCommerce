@@ -1,37 +1,45 @@
 // ------------------------ Import Modules --------------------------
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+
+
 
 // ------------------------ Import Components --------------------------
 import RegPage from '../../components/registration/Registration';
-
-// Form States 
-import useFormStates from './states';
-//Form Actions
-import useFormActions from './formHandlers';
-//Form Effect Hook 
-import useFormEffect from './effectHook';
-//Form Data Constructor Hook 
-import useFormData from './formData';
-
-
+import { selectIsAuthenticated } from "../../features/authentication/authenticationSlice";
+import useRegFormData from './regFormData';
 
 // ------------------------ Registration Container --------------------------
 const RegContainer = () => {
 
-    //States in registration forms 
-    const formStates = useFormStates();
+    //Selector for authentication status
+    const authenStatus = useSelector(selectIsAuthenticated);
 
-    //Form Handlers 
-    const formHandlers = useFormActions(formStates);
+    //---------------------------------- Import Data ----------------------------------
 
-    //Effect Hook
-    useFormEffect(formStates);
+    const regFormData = useRegFormData();
+    const { regFormInputData, regFormSubmitData, regFormGuidelineData } = regFormData
 
-    //Form Data Constructor Hook 
-    const formData = useFormData(formStates, formHandlers);
-   
+
+    //---------------------------------- Effect Hook ----------------------------------
+    //Custom Actions
+    const navigate = useNavigate();
+
+    // When user is authenticated, redirect to the home page
+    useEffect(() => {
+        if (authenStatus) {
+            navigate('/');
+        }
+    }, [authenStatus, navigate]);
+
+
     return (
-        < RegPage {...formData} />
+        < RegPage 
+            regFormInputData={regFormInputData}
+            regFormSubmitData={regFormSubmitData}
+            regFormGuidelineData={regFormGuidelineData}
+         />
     );
 };
 

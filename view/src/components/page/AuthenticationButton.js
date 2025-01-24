@@ -14,8 +14,6 @@ import pauseIcon from '../../assets/images/pause.png';
 //------------------- AuthenticationButton Component -------------------
 const AuthenticationButton = (props) => {
 
-    console.log(props);
-
     //Default Values for AuthenticationButton Component
     const defaultValue = {
         iconImage: pauseIcon ,

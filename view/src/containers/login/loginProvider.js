@@ -16,6 +16,7 @@ const useProviderLoginData = (login) => {
                     url: '/external/authen/login/facebook',
                     description: 'Facebook',
                     alt: 'Login with Facebook',
+                    isExternal: true
                 }
             ]
         }
