@@ -14,8 +14,15 @@ import Display from './Display';
 
 const ProductList = (props) => { //Create a functional component named ProductList
 
-    const {data, totalItems} = props.productList
+    const defaultProductList = {
+        data: [],
+        totalItems: 0
+    }
 
+    
+    const {data, totalItems} = props.productList || defaultProductList; //Get the data and totalItems from the props
+
+    
     const content = ()=>{
         if(!totalItems){
             return <div className={styles.noProduct}>No product available</div>
@@ -28,7 +35,7 @@ const ProductList = (props) => { //Create a functional component named ProductLi
     }
 
     return ( //Return the following
-        <div className={`PageWrapper`}> {/* A div element */}
+        <div className={`PageWrapper`}> 
         <div className={`${styles.productListWrapper} flatContentWrapper twoColumnWrapper`}>
             <div className={`${styles.contentWrapper} ${styles.titleWrapper} leftColumn`}>
                 <h2>Product List </h2>
@@ -39,6 +46,8 @@ const ProductList = (props) => { //Create a functional component named ProductLi
         </div>
     </div>
     );
+    
 };
+
 
 export default ProductList; //Export the ProductList component

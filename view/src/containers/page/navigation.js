@@ -8,7 +8,7 @@ const useNavigationData = () => {
     const navigation = {
         navigationItems: [
             { name: "Products", url: "/product/list/2" },
-            { name: "Accessories", url: "/" },
+            { name: "Accessories", url: "/product/list/1" },
         ]
     }
 
