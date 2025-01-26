@@ -11,12 +11,8 @@ const fetchProductList = createAsyncThunk( //Create a fetchProductList async thu
     'productInfo/fetchProductList', //Slice name
     async (params, thunkAPI) => { //Async function
 
-        console.log('Start of fetchProductList');
         const state = thunkAPI.getState(); //Get the state
-        console.log(`Step 6: Slice get the categoryID as : ${state.productInfo.productList.catergroy}`);
         const category_id = state.productInfo.productList.catergroy; //Get the category_id from the state
-
-        console.log(`Step 6: Slice get the categoryID as : ${category_id}`);
 
         //Make call to the server
         try {
@@ -85,7 +81,7 @@ const productInfoSlice = createSlice({
         },
         setCategroyFiltering: (state, action) => { //setCategroyFiltering reducer\
             state.productList.catergroy = action.payload; //Set the catergroy property to the payload
-            console.log(`Step 4: Slice Received the categoryID as : ${action.payload} and the state is :`, state.productList.catergroy);
+            //console.log(`Step 4: Slice Received the categoryID as : ${action.payload} and the state is :`, state.productList.catergroy);
         },
         setDisplayItems: (state, action) => { //setDisplayItems reducer 
             state.productList.displayItems = action.payload; //Set the displayItems property to the payload
@@ -99,20 +95,15 @@ const productInfoSlice = createSlice({
             .addCase(fetchProductList.pending, (state) => { //Add case for pending fetchProductList
                 state.fetchDataStatus.isLoading = true; //Set the isLoading property to true
                 state.fetchDataStatus.isError = false; //Set the isError property to false
-                console.log('fetchProductDetail pending', state.fetchDataStatus.isLoading);
             })
             .addCase(fetchProductList.fulfilled, (state, action) => { //Add case for fulfilled fetchProductList
                 state.fetchDataStatus.isLoading = false; //Set the isLoading property to false
                 state.productList.data = action.payload; //Set the data property to the payload
                 state.productList.totalItems = action.payload.length; //Set the totalItems property to the payload
-                console.log('total product in list ', action.payload.length);
-                console.log('product list in slice:', state.productList.data);
-                console.log('fetchProductDetail pending', state.fetchDataStatus.isLoading);
             })
             .addCase(fetchProductList.rejected, (state, action) => { //Add case for rejected fetchProductList
                 state.fetchDataStatus.isError = true; //Set the isError property to true
-                console.log('fetchProductDetail error', state.fetchDataStatus.isError);
-                console.log('fetchProductDetail error message', action.error.message);
+                console.log('There is an Error in Fetch Product List', action.error.message);
             })
             .addCase(fetchProductDetail.pending, (state) => { //Add case for pending fetchProductDetail
                 state.fetchDataStatus.isLoading = true; //Set the isLoading property to true
@@ -123,8 +114,9 @@ const productInfoSlice = createSlice({
                 state.fetchDataStatus.isLoading = false; //Set the isLoading property to false
                 state.productDetail = action.payload; //Set the productDetail property to the payload
             })  
-            .addCase(fetchProductDetail.rejected, (state) => { //Add case for rejected fetchProductDetail
+            .addCase(fetchProductDetail.rejected, (state, action) => { //Add case for rejected fetchProductDetail
                 state.fetchDataStatus.isError = true; //Set the isError property to true
+                console.log('There is an Error in Fetch Product Detail', action.error.message);
             });
 
     }

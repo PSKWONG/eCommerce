@@ -16,50 +16,88 @@ const server_URL = environment === 'production' ? process.env.REACT_APP_API_URL_
 
 
 //-------------------------- ProductDetail Component --------------------------
-const ProductDetail = ({ productDetail, cartStates }) => {
-    const { product_name, description, image_path, unit_price } = productDetail;
-    const {cartItemStates, cartHandlers}   = cartStates;
-    const {command} = cartItemStates;
-    const {handleCartItems }  = cartHandlers
+const ProductDetail = (data) => {
 
+    //Set default value for the productDetail
+    const productDetail = data.productDetailData || {};
+    const productDetailFetchingData = data.productDetailFetchingData || {}; //Phase 2 - Loading Status on conditional rendering 
+    const counterData = data.counterData || {};
+    const updateCartItemData = data.updateCartItemData || {};
+    const updateCartItemInProductData = data.updateCartItemInProductData || {};
 
-    //const {handleCartItems} = cartHandlers;
+    //--------------------------- Conditional Rendering ---------------------------
+    //Check the intiquity of the productDetail
+    const isEmpty = Object.keys(productDetail).length === 0;
 
-    //console.log('This is the states:',isExist);
+    //Set Variable for the Conditional Contents
+    let productContent;
+    let cartContent;
 
-    const imageBaseURL = server_URL + '/assets/productImage/';
-    return (
-        <div className={`PageWrapper`}> {/* A div element */}
-            <div className={` floatContentWrapper twoColumnWrapper ${styles.productDetailWrapper}`}>
+    //Conditional Switching 
+    switch (true) {
+        case isEmpty:
+            productContent = <div>Product Detail is Empty</div>;
+            break;
 
-                {/* Left Column - Product Detail  */}
-                <div className={` leftColumn ${styles.contentWrapper} ${styles.productWrapper}`}>
+        case !isEmpty:
+            const { product_name, description, image_path, unit_price } = productDetail;
+            const imageBaseURL = server_URL + '/assets/productImage/';
+
+            productContent =
+                <>
                     <h1>{product_name} </h1>
                     <div className={styles.productDetailWrapper}>
-                        <img src={imageBaseURL + image_path} alt={product_name} className={styles.contentWrapper}/>
+                        <img src={imageBaseURL + image_path} alt={product_name} className={styles.contentWrapper} />
                         <div className={`${styles.contentWrapper} ${styles.descriptionDisplay}`}>
                             <p>{description}</p>
                         </div>
-                    </div>    
-                </div>
+                    </div>
 
-                {/* Right Column - Cart Detail  */}
-                <div className={` rightColumn ${styles.contentWrapper} ${styles.actionWrapper} `}>
+                </>;
+
+            const { command } = updateCartItemInProductData;
+            const { handleUpdateCartItem } = updateCartItemData.cartItemUpdateHandlers;
+
+
+            cartContent =
+                <>
                     <div className={styles.priceTag}>
                         Price: <em>{unit_price}</em>
                     </div>
                     <div>
-                        <QuantityCount {...cartStates} />
+                        <QuantityCount counterData={counterData} />
                     </div>
-                    <div className={styles.cartActionButton} onClick={handleCartItems}> 
+                    <div className={styles.cartActionButton} onClick={handleUpdateCartItem}>
                         {command}
                     </div>
-                    
+                </>
+            break;
+        default:
+            productContent = <></>
+            break;
 
+    }
+
+
+
+
+    return (
+        <div className={`PageWrapper`}>
+            <div className={` floatContentWrapper twoColumnWrapper ${styles.productDetailWrapper}`}>
+
+                {/* Product Detail */}
+                <div className={` leftColumn ${styles.contentWrapper} ${styles.productWrapper}`}>
+                    {productContent}
+                </div>
+
+                {/* Cart Action */}
+                <div className={` rightColumn ${styles.contentWrapper} ${styles.actionWrapper} `}>
+                    {cartContent}
                 </div>
             </div>
         </div>
     );
+
 };
 
 export default ProductDetail;

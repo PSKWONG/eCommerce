@@ -10,6 +10,8 @@ const fetchCartListAndSync = createAsyncThunk(
     'shoppingCart/fetchCartListAndSync',
     async (data, thunkAPI) => {
 
+        console.log('Start the fetch & Sync ');
+
         // Get the local store items
         const localCart = thunkAPI.getState().shoppingCart.cartData.items;
         const isLocalEmpty = localCart.length > 0 ? false : true; 
@@ -164,6 +166,7 @@ const cartSlice = createSlice(
             },
             addItemToCart: (state,action)=>{
                 state.cartData.items.push(action.payload);
+                console.log('Added Cart Item:', action.payload);
             },
             updateCartItem: (state,action)=>{
                 const index = state.cartData.items.findIndex(item=>item.product_id === action.payload.product_id);

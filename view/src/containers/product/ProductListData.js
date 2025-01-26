@@ -21,14 +21,13 @@ const useProductListData = (data) => {
     useEffect(() => {
         //Check the categoryID is valid
         const isValidCategoryID = data && !isNaN(data);
+        setIsValidID(isValidCategoryID);
 
         if (isValidCategoryID) {
             data = Number(data);
             setCategoryID(data);
-            setIsValidID(true);
             return;
         } else {
-            setIsValidID(false);
             navigate('/'); //Redirect to the home page
             return;
         }
