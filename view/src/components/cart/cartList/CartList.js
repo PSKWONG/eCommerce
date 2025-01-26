@@ -7,28 +7,38 @@ import React from 'react';
 import '../../../assets/styles/App.css';
 import styles from './CartList.module.css';
 
-import Listing from './Listing';
+import CartItem from '../../../containers/cart/cartItemContainer';
 
 
 
 
-//-------------------- CartList --------------------
 const CartList = (props) => {
 
-    //Extracting data from props
+    //----------------------- Cart List Data -----------------------
     const cartList = props.items || [];
 
 
-    //Set the CartListing Data 
+    //----------------------- Conditional rendering -----------------------
     const numberOfCartItems = cartList.length || 0;
-    let content; 
+    let cartListContent;
 
     switch (true) {
         case numberOfCartItems === 0:
-            content = <div>There are no items in the cart</div>
+            cartListContent = <div>There are no items in the cart</div>
             break;
         default:
-            content =  <Listing cartList = {cartList}  />
+            cartListContent =
+                <>
+                    <div>
+                        {
+                            cartList.map((cartItem, index) => {
+                                return (
+                                    <CartItem key={index} cartItem={cartItem} />
+                                )
+                            })
+                        }
+                    </div>
+                </>
 
             break;
     }
@@ -40,13 +50,13 @@ const CartList = (props) => {
 
                 {/* Left Column - Product Detail  */}
                 <div className={` leftColumn ${styles.contentWrapper} ${styles.cartListWrapper}`}>
-                      {content}
+                    {cartListContent}
                 </div>
 
                 {/* Right Column - Cart Detail  */}
                 <div className={` rightColumn ${styles.contentWrapper} ${styles.actionWrapper} `}>
-                    
-                    
+
+
                 </div>
 
             </div>

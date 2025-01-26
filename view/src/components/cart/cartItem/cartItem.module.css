@@ -1,0 +1,62 @@
+
+/* CartItem Component */
+
+.cartItemWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+    padding: 10px;
+    margin: 5px 0;
+
+    font-size: 1em;
+    font-weight: 400;
+
+    border: 1px solid #a5a4a4;
+    border-radius: 5px;
+}
+
+.productInfo{
+    flex-grow: 1;
+    text-align: left;
+}
+
+.cartItemWrapper img{
+    max-width:25px;
+    max-height:25px;
+    padding: 5px;
+    border-radius: 100%;
+}
+
+
+
+.disabled{
+    display: none;
+}
+
+.enabled{
+    display: block;
+}
+
+.enableIcon{
+    background-color: #255038;
+    cursor: pointer;
+}
+
+.disableIcon{
+    background-color: #d3d3d3;
+    cursor:default;
+}
+
+
+
+
+
+/* Phase  2 for Product Image Display */
+.cartItemWrapper .productImage{
+    max-width: 50px;
+    max-height: 50px;
+    padding: 5px;
+
+}; 
+
