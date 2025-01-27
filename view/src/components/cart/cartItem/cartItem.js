@@ -3,7 +3,6 @@ import React from 'react';
 
 
 // ---------------------- Import Components ----------------------
-import useCartItemTemplate from '../../../containers/cart/cartData';
 import QuantityCount from '../QuantityCount'
 import styles from './cartItem.module.css';
 
@@ -72,7 +71,8 @@ const CartItem = (props) => {
                 <div className={styles.cartItemWrapper}>
                     <span className={styles.productInfo}>{product_name}</span>
                     <span>{unit_price}</span>
-                    <QuantityCount counterData={counterData} className={`${counterDisplayStyle}`} />
+                    <span> <b>X</b> </span>
+                    <QuantityCount counterData={counterData} counterDisplayStyle={counterDisplayStyle} />
                     <span className={`${qantityDisplayStyle}`}>{quantity}</span>
                     <img src={updateIcon} alt="update" onClick={updateHandler} className={`${updateDisplayStyle}`} />
                     <img src={deleteIcon} alt="delete" onClick={deleteHandler} className={`${deleteDisplayStyle}`} />

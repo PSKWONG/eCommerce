@@ -7,39 +7,28 @@ import { useDispatch, useSelector } from 'react-redux';
 // --------------------------- Import Components ----------------------
 //Cart List Components 
 import CartList from '../../components/cart/cartList/CartList';
-import {useCartListData} from '../../containers/cart/cartData';
-import { useCartListEffect } from './cartEffectHook';
 import { fetchCartListAndSync, selectCartData } from '../../features/cart/cartSlice';
 
 
 //Autherntication Slice
 import { selectIsAuthenticated } from '../../features/authentication/authenticationSlice';
+import useProductListData from './cartListData';
 
 
 const CartListContainer = () => {
 
-    //-------------------------- Cart List External Data --------------------------
-    //Get the authentication stsatus
-    const isAuthenticated = useSelector(selectIsAuthenticated);
-
-    // External Data from Slices
-    const cartListData = useSelector(selectCartData);
-
-
-    //--------------------------Cart List Actions --------------------------
-    //Get the authentication stsatus
-    const dispatch = useDispatch(); 
-
-    useEffect(()=>{
-        if(isAuthenticated){
-            //Fetch Cart List
-            dispatch(fetchCartListAndSync());
-        }
-    }, [isAuthenticated]);   
-
+    const cartListPageData = useProductListData();
+    const cartListData = cartListPageData.cartListDataExport; 
+    const cartListControllerData = cartListPageData.cartListControllerData;
+    const cartCostData = cartListPageData.cartCost;
 
     return (
-        <CartList {...cartListData}/>
+        <CartList 
+            cartListData={cartListData}
+            cartListControllerData={cartListControllerData}
+            cartCostData = {cartCostData}
+
+        />
     )
 }
 

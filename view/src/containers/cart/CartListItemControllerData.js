@@ -7,10 +7,10 @@ import deleteIcon from '../../assets/images/deleteIcon.png';
 
 
 
-const useCartListItemControllerData = (updateCartItemData) => {
+const useCartListItemControllerData = (updateCartItemData, cartListProgress) => {
 
     //---------------------- Controller State ----------------------
-    const [cartStatus , setCartStatus] = useState(1);
+    const [cartStatus , setCartStatus] = useState(cartListProgress);
     const [quantityStatus, setQuantityStatus] = useState(false);
     const [counterStatus, setCounterStatus] = useState(false);
     const [updateStatus, setUpdateStatus] = useState(false);
@@ -23,6 +23,11 @@ const useCartListItemControllerData = (updateCartItemData) => {
     const { handleUpdateCartItem, handleDeleteCartItem } = updateCartItemData.cartItemUpdateHandlers;
 
     //----------------------Actions ----------------------
+    //Update the Cart Status
+    useEffect(()=>{
+        setCartStatus(cartListProgress);
+    },[cartListProgress, cartStatus]);
+
     //Control the Cart Icon based on the Cart Status 
     useEffect(()=>{
         switch (cartStatus){
@@ -33,11 +38,15 @@ const useCartListItemControllerData = (updateCartItemData) => {
                 setRemoveStatus(true);
                 break;
             case 2:
-                //Add Condition Here 
+                setQuantityStatus(true);
+                setCounterStatus(false);
+                setUpdateStatus(false);
+                setRemoveStatus(false);
                 break;
         }
 
     },[cartStatus]);
+    
 
     //Control the Quantity Icon Status
 

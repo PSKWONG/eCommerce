@@ -4,10 +4,6 @@ import React, { useEffect, useMemo } from 'react';
 
 ///-------------------------- Import Components  --------------------------
 import CartItem from '../../components/cart/cartItem/cartItem';
-import { useCartItemStates } from '../../containers/cart/cartStates';
-import { useCartItemEffect } from '../../containers/cart/cartEffectHook';
-import { useCartListData, useCartItemData } from '../../containers/cart/cartData';
-import { useProductCartHandlers } from './cartHandlers';
 //Counter Data
 import useCounterData from './counterData';
 
@@ -22,6 +18,7 @@ const CartItemContainer = (data) => {
     //----------------------Imported Data ----------------------
     //Extract cart Item Data
     const cartItemData = data.cartItem || {}; 
+    const {cartListProgress} = data.progressGuideline || 1;
 
     //Counter Data
     const counterData = useCounterData(cartItemData);
@@ -30,7 +27,7 @@ const CartItemContainer = (data) => {
     const updateCartItemData = useUpdateCartItemData(cartItemData, counterData);
 
     // Cart Item Container controller data 
-    const cartItemControllerData = useCartListItemControllerData(updateCartItemData);
+    const cartItemControllerData = useCartListItemControllerData(updateCartItemData, cartListProgress);
 
 
 

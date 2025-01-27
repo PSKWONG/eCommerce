@@ -151,8 +151,10 @@ const cartSlice = createSlice(
                         quantity: 1
                     }
                     */
-                ],
-                total: 0
+                ]
+            },
+            cost:{
+                cartTotal:0
             },
             fetchDataStatus:{
                 isLoading: false,
@@ -173,7 +175,7 @@ const cartSlice = createSlice(
                 state.cartData.items[index] = action.payload;
             },
             totalCost: (state)=>{
-                state.cartData.total = state.cartData.items.reduce((acc, cur)=>{
+                state.cost.cartTotal = state.cartData.items.reduce((acc, cur)=>{
                     const price = parseFloat(cur.unit_price.replace('$','')) || 0;
                     const quantity = Number(cur.quantity) || 0;
                     return acc + (price * quantity);
@@ -234,10 +236,11 @@ const cartSlice = createSlice(
     }
 );
 //-------------------------- Export Actions --------------------------
-export const { addItemToCart, updateCartItem, updateCart } = cartSlice.actions;
+export const { addItemToCart, updateCartItem, updateCart, totalCost } = cartSlice.actions;
 export { fetchCartListAndSync, updateServerCartItem, addServerCartItem };
 //-------------------------- Export Selector --------------------------
 export const selectCartData = state => state.shoppingCart.cartData;
+export const selectCartCost = state => state.shoppingCart.cost;
 //-------------------------- Export Reducer --------------------------
 export default cartSlice.reducer;
 

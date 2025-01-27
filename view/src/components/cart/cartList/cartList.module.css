@@ -1,4 +1,4 @@
-/* ------------ Product List Wrapper -------------*/
+/* ------------ Cart List & Action Wrapper -------------*/
 .cartListAndACtionWrapper {
     display: flex;
     flex-wrap: wrap;
@@ -10,49 +10,32 @@
     padding: 20px;
 }
 
-/* ------------ Product -------------*/
+/* ------------ Cart List  -------------*/
 .cartListWrapper {
     background-color: white;
-    text-align: end;
+    text-align: left;
     font-weight: 800;
     color: #5b6150;
 
     flex-grow: 1;
 }
 
-.productWrapper h1 {
-    font-weight: 300;
+
+
+/* Cart List Controlling Buttons*/
+.disable {
+    background-color: #234934;
+    cursor: default;
+    visibility: hidden;
 }
 
-.productWrapper .productDetailWrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+.enable {
+    background-color: #3e7c59;
+    cursor: pointer;
 }
 
-.productWrapper .productDetailWrapper .contentWrapper {
-    flex-basis: 300px;
-}
 
-.productWrapper .productDetailWrapper img {
-    max-width: 50%;
-    max-height: 80%;
-    object-fit: cover;
-    overflow: hidden;
-    border-radius: 45px;
-    flex-grow: 1;
-}
-
-.productWrapper .productDetailWrapper .descriptionDisplay {
-    margin: 10px 0;
-    padding: 20px;
-    border-radius: 20px;
-    font-size: 1.2em;
-    font-weight: 200;
-    flex-grow: 3;
-}
-
-/* ------------ Cart -------------*/
+/* ------------ Cart Actions  -------------*/
 .actionWrapper {
     background-color: #255038;
     color: #dfe4d7;
@@ -63,33 +46,74 @@
     gap: 20px;
     justify-content: center;
     align-content: baseline;
+    flex-direction: column;
 
 }
+/* Guidelines*/
 
-.priceTag {
-    font-size: 1.5em;
-    font-weight: 400;
-}
-
-.priceTag em{
-    font-size: 1.8em;
-    font-weight: 600;
-}
-
-.actionWrapper button{
-    color: #dfe4d7;
-   background-color : #3e7c59;
-}
-
-.cartActionButton {
-    padding: 10px 20px;
+.guidelinesWrapper {
+    padding:10px; 
+    border: 1px solid #1d422d;
     border-radius: 10px;
-    font-weight: 600;
-    background-color: #dfe4d7;
-    text-decoration: none;
-    color: #3e7c59;
-    text-align: center;
-    cursor: pointer;
+    cursor: default ;
 }
+
+.loginButton {
+    background-color: #1e422e;
+    color: #dfe4d7;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+
+
+
+/* Guiding Buttons*/
+.guidingButtonsWrapper {
+    width: 100%;
+    flex-grow: 1;
+
+    display: flex;
+    align-items:end;
+    padding: 5px;
+}
+
+.guidingList {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+
+    display: flex;
+
+}
+
+.guidingButtons {
+    max-height: 30px;
+    padding: 10px;
+    flex-basis: 50%;
+    
+
+}
+
+.guidingButtons img{
+    max-width: 50px;
+    max-height: 25px; 
+}
+
+
+.guidingButtonsLeft{
+    text-align: left;
+}
+
+.guidingButtonsRight{
+    text-align: right;
+}
+
+
+
 
 

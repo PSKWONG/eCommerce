@@ -17,6 +17,7 @@ const QuantityCount = (props) => {
 
     //---------------------------Extract Data ---------------------------
     const counterData = props.counterData || {};
+    const displaystyle = props.counterDisplayStyle || null; 
 
     //-------------------------- Conditional Rendering ------------------
     //Check the intiquity of the productDetail
@@ -39,7 +40,7 @@ const QuantityCount = (props) => {
             const { handleIncrement, handleDecrement } = counterData.actions;
             content =
                 <>
-                    <div className="quantityCountWrapper">
+                    <div className={`quantityCountWrapper ${displaystyle}`}>
                         <button onClick={handleDecrement} value={`-`}> - </button>
                         <span>{count}</span>
                         <button onClick={handleIncrement}>+</button>

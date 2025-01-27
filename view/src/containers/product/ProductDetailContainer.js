@@ -13,9 +13,6 @@ import useProductDetailData from './productDetailData';
 
 
 //Cart Data Component
-import { useCartItemStates } from '../cart/cartStates'
-import { useCartListData } from '../cart/cartData'
-import { useProductCartHandlers } from '../cart/cartHandlers'
 
 import useCounterData from '../cart/counterData';
 import useUpdateCartItemData from '../cart/updateCartItemData';
