@@ -18,7 +18,7 @@ const useStripleData = () => {
                         {
                             id: "xl-tshirt",
                             quantity: 1,
-                            amount: 1000
+                            unit_price: '$1000'
                         }
                     ]
                 }

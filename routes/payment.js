@@ -8,7 +8,7 @@ const striplePaymentController = require('../controller/payment');
 
 //----------- Payment Route -------------------------
 
-paymentRouter.post('/striple/create-payment-intent', authericationCheck,striplePaymentController); 
+paymentRouter.post('/striple/create-payment-intent', striplePaymentController); 
 
 
 module.exports = paymentRouter;

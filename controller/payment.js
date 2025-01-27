@@ -7,11 +7,14 @@ const { siteError } = require('./utilies/customErrorHandler');
 const calculateOrderAmount = (items) => {
     // Calculate the order total on the server to prevent
     // people from directly manipulating the amount on the client
+
+    console.log('This is the items received from the client for payment', items);
+
     let total = 0;
     items.forEach((item) => {
 
         //Extract information from the item object
-        const price = parseFloat(item.unit_price.replace('$', '').toFixed(2)) || 0;
+        const price = parseFloat(item.unit_price.replace('$', '')).toFixed(2) || 0;
         const quantity = Number(item.quantity) || 0;
 
         //Calculate the total amount for the item
