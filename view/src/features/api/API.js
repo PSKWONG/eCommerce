@@ -117,3 +117,8 @@ export const addServerCartItemAPI = async (body)=>{
 export const updateServerCartItemAPI = async (body)=>{
     return putAPI(`/cart/update/`, body)
 }
+
+//---------------------Payment API---------------------//
+export const paymentAPI = async (body)=>{
+    return postAPI(`/payment/striple/create-payment-intent`, body)
+}
