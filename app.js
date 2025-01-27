@@ -67,6 +67,10 @@ app.use('/api/product', productRouter);
 const cartRouter = require('./routes/cart');
 app.use('/api/cart', cartRouter);
 
+//Payment Route
+const paymentRouter = require('./routes/payment');
+app.use('/api/payment', paymentRouter);
+
 
 // The "catchall" handler: for any request that doesn't match one above, send back React's index.html file.
 const frontEndRouter = require('./routes/frontend');
