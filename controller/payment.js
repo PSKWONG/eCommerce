@@ -1,6 +1,7 @@
 //--------------- Import Modules --------------------------
 require('dotenv').config();
 const stripe = require('./modules/stripe'); // Import the Stripe module
+const { siteError } = require('./utilies/customErrorHandler');
 
 //-------------------------- Helper Functions --------------------------
 const calculateOrderAmount = (items) => {
@@ -8,15 +9,15 @@ const calculateOrderAmount = (items) => {
     // people from directly manipulating the amount on the client
     let total = 0;
     items.forEach((item) => {
-        
+
         //Extract information from the item object
-        const price = parseFloat(item.unit_price.replace('$', '').tofixed(2)) || 0;
+        const price = parseFloat(item.unit_price.replace('$', '').toFixed(2)) || 0;
         const quantity = Number(item.quantity) || 0;
-        
+
         //Calculate the total amount for the item
         item.amount = price * quantity;
         total += item.amount;
-        
+
     });
     return total;
 };
@@ -25,22 +26,36 @@ const calculateOrderAmount = (items) => {
 const striplePaymentController = async (req, res, next) => {
     const { items } = req.body;
 
-    // Create a PaymentIntent with the order amount and currency
-    const paymentIntent = await stripe.paymentIntents.create({
+    //Check the items array to determine if it is empty
+    const isEmpty = !req.body || !items || items.length === 0;
+    if (isEmpty) {
+        return next(siteError(400, 'The shopping cart is empty'));
+    }
 
-        amount: calculateOrderAmount(items),
-        currency: "usd",
-        // In the latest version of the API, 
-        // specifying the `automatic_payment_methods` parameter is optional 
-        // because Stripe enables its functionality by default.
-        automatic_payment_methods: {
-            enabled: true,
-        },
-    });
+    try {
 
-    res.send({
-        clientSecret: paymentIntent.client_secret,
-    });
+        // Create a PaymentIntent with the order amount and currency
+        const paymentIntent = await stripe.paymentIntents.create({
+
+            amount: calculateOrderAmount(items),
+            currency: "usd",
+            // In the latest version of the API, 
+            // specifying the `automatic_payment_methods` parameter is optional 
+            // because Stripe enables its functionality by default.
+            automatic_payment_methods: {
+                enabled: true,
+            },
+        });
+
+        res.send({
+            clientSecret: paymentIntent.client_secret,
+        });
+
+
+    } catch (err) {
+        console.log('There is error in the payment controller', err);
+        return next(siteError(500, 'There is an error in the payment controller'));
+    }
 
 };
 
