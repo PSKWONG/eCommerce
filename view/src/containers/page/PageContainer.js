@@ -12,17 +12,6 @@ import useNavigationData from "./navigation";
 import useProfileIcon from "./profile";
 import useCartIcon from "./cartIcon";
 
-//------------------------Import Striple Promise --------------------------
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import useStripleData from "../payment/stripleData";
-//Get the Public Key from the environment
-const environment = process.env.REACT_APP_ENV || 'development';
-const striplePKey = environment === 'development' ? process.env.REACT_APP_STRIPE_PUBLIC_KEY_TEST : process.env.REACT_APP_STRIPE_PUBLIC_KEY;
-// Make sure to call loadStripe outside of a component’s render to avoid
-// recreating the Stripe object on every render.
-// This is your test publishable API key.
-const stripePromise = loadStripe(striplePKey);
 
 
 // ----------------------- Page Container -----------------------
@@ -41,17 +30,14 @@ const PageContainer = () => {
   //Cart Icon Data
   const cartIcon = useCartIcon();
 
-  //Striple Data
-  const stripleData = useStripleData();
-  const { clientSecret, appearance, loader } = stripleData.options;
+
 
   //Check the Authentication Status for the Page
   usePageEffect();
 
   return (
     <>
-      {clientSecret && (
-        <Elements options={{ clientSecret, appearance, loader }} stripe={stripePromise}>
+      
           <Page
             logoinfo={logoData}
             authenticationButton={authenticationButton}
@@ -59,8 +45,7 @@ const PageContainer = () => {
             profileIcon={profileIcon}
             cartIcon={cartIcon}
           />
-        </Elements>
-      )}
+        
     </>
   );
 };
