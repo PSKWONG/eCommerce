@@ -9,20 +9,23 @@ const calculateOrderAmount = (items) => {
     // people from directly manipulating the amount on the client
 
     console.log('This is the items received from the client for payment', items);
-
     let total = 0;
-    items.forEach((item) => {
 
-        //Extract information from the item object
-        const price = parseFloat(item.unit_price.replace('$', '')).toFixed(2) || 0;
+    items.forEach((item) => {
+        // Ensure unit_price is a string
+        const unitPriceString = String(item.unit_price);
+
+        // Extract information from the item object
+        const price = parseFloat(unitPriceString.replace('$', '')).toFixed(2) || 0;
         const quantity = Number(item.quantity) || 0;
 
-        //Calculate the total amount for the item
+        // Calculate the total amount for the item
         item.amount = price * quantity;
         total += item.amount;
-
     });
-    return total;
+
+    // Convert total to cents and ensure it's an integer
+    return Math.round(total * 100);
 };
 
 

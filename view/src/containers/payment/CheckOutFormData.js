@@ -63,6 +63,8 @@ const useCheckOutFormData = () => {
         status: {
             message,
             isLoading,
+            stripe,
+            elements
         }, 
         paymentElementOptions
     }

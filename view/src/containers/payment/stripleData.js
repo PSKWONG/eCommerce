@@ -2,26 +2,27 @@
 
 import { useEffect, useState } from "react";
 import { paymentAPI } from "../../features/api/API";
+import { useSelector } from "react-redux";
+import { selectCartData } from "../../features/cart/cartSlice";
 
 const useStripleData = () => {
 
     //Create state to store the client secret
     const [clientSecret, setClientSecret] = useState("");
 
+    //Get the Cart List Items 
+    const cartListData = useSelector(selectCartData);
+
+
+
+    //------------------------ Actions --------------------------
+
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
         const fetchClientSecret = async () => {
             try {
-                const requestBody =
-                {
-                    items: [
-                        {
-                            id: "xl-tshirt",
-                            quantity: 1,
-                            unit_price: '$1000'
-                        }
-                    ]
-                }
+                const requestBody = cartListData
+
                 const response = await paymentAPI(requestBody);
                 console.log('This is the response from initial request to striple:', response);
                 setClientSecret(response.data.clientSecret);
@@ -34,7 +35,7 @@ const useStripleData = () => {
 
         fetchClientSecret();
 
-    }, []);
+    }, [cartListData]);
 
     //------------------------Exported Striple Data --------------------------
     const appearance = {
@@ -46,7 +47,7 @@ const useStripleData = () => {
 
 
     const stripleData = {
-        options:{
+        options: {
             clientSecret,
             appearance,
             loader

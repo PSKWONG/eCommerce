@@ -6,7 +6,7 @@ export default function CheckoutForm(porps) {
     // Destructure the props - Core Data
     const {handlers, status, paymentElementOptions} = porps.checkOutFormData;
     const {onSubmit} = handlers;
-    const {message, isLoading} = status;
+    const {message, isLoading, stripe, elements} = status;
 
     // Destructure the props - Optional Data
     const formController = porps.formController || null;

@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux';
 // --------------------------- Import Components ----------------------
 //Cart List Components 
 import CartList from '../../components/cart/cartList/CartList';
-import { fetchCartListAndSync, selectCartData } from '../../features/cart/cartSlice';
 
 
 //Autherntication Slice
@@ -38,17 +37,17 @@ const CartListContainer = () => {
 
     //Striple Data
     const stripleData = useStripleData();
-    const { clientSecret, appearance, loader } = stripleData.options;
+    const { clientSecret } = stripleData.options;
+    
 
     return (
         <>
             {clientSecret && (
-                <Elements options={{ clientSecret, appearance, loader }} stripe={stripePromise}>
+                <Elements key = {clientSecret} options={stripleData.options} stripe={stripePromise}>
                     <CartList
                         cartListData={cartListData}
                         cartListControllerData={cartListControllerData}
                         cartCostData={cartCostData}
-
                     />
                 </Elements>
             )}
