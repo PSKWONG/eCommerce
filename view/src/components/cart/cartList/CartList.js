@@ -11,6 +11,7 @@ import CartItem from '../../../containers/cart/cartItemContainer';
 import Cost from './Cost';
 import GuidingButton from './guideButton';
 import Authentication from './guideline';
+import CartListing from './CartListing';
 
 
 
@@ -20,40 +21,23 @@ const CartList = (props) => {
     //----------------------- Cart List Data -----------------------
     const cartList = props.cartListData.items || [];
 
+    //------------------------ Cart List Controller Data -----------------
+    const cartListControllerData = props.cartListControllerData || {};
+    const { instruction } = cartListControllerData.progressGuideline
+
 
     //----------------------- Conditional rendering -----------------------
-    const numberOfCartItems = cartList.length || 0;
     let cartListContent;
     let guideButtonContent;
 
     switch (true) {
-        case numberOfCartItems === 0:
+        case cartList == []:
             cartListContent = <div>There are no items in the cart</div>
             guideButtonContent = <></>
             break;
         default:
             const { progressGuideline } = props.cartListControllerData;
-            const { instruction } = progressGuideline;
-
-
-            cartListContent =
-                <>
-                    <div>
-                        <h3>{instruction}</h3>
-                        {
-                            cartList.map((cartItem, index) => {
-                                return (
-                                    <CartItem key={index} cartItem={cartItem} progressGuideline={progressGuideline} />
-                                )
-                            })
-                        }
-                    </div>
-                </>
-
-            guideButtonContent =
-                <div className={styles.guidingButtonsWrapper}>
-                    <GuidingButton progressGuideline={progressGuideline} />
-                </div>
+                
             break;
     }
 
@@ -64,14 +48,19 @@ const CartList = (props) => {
 
                 {/* Left Column - Cart List  */}
                 <div className={` leftColumn ${styles.contentWrapper} ${styles.cartListWrapper}`}>
-                    {cartListContent}
+                    <h3>{instruction}</h3>
+                    <CartListing cartListData={props.cartListData} cartListControllerData={cartListControllerData} />
+
                 </div>
 
                 {/* Right Column - Cart Actions  */}
                 <div className={` rightColumn ${styles.contentWrapper} ${styles.actionWrapper} `}>
                     <Cost cartCostData={props.cartCostData} />
                     <Authentication authentication={props.cartListControllerData.authentication} />
-                    {guideButtonContent}
+
+                    <div className={styles.guidingButtonsWrapper}>
+                        <GuidingButton cartListControllerData={cartListControllerData} />
+                    </div>
                 </div>
 
             </div>

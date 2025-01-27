@@ -6,7 +6,7 @@ import styles from './cartList.module.css';
 const GuidingButton = (props) => {
 
     //-----------------------Extract Buttons Data-----------------------
-    const { backButton, nextButton } = props.progressGuideline;
+    const { backButton, nextButton } = props.cartListControllerData.progressGuideline;
 
     return (
         <div className={styles.guidingList}>

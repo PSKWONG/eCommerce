@@ -10,6 +10,17 @@
     padding: 20px;
 }
 
+
+/* Control the Page Component Visbility */
+.disable {
+    display: none !important;
+}
+
+.enable {
+    display: block !important;
+}
+
+
 /* ------------ Cart List  -------------*/
 .cartListWrapper {
     background-color: white;
@@ -22,17 +33,6 @@
 
 
 
-/* Cart List Controlling Buttons*/
-.disable {
-    background-color: #234934;
-    cursor: default;
-    visibility: hidden;
-}
-
-.enable {
-    background-color: #3e7c59;
-    cursor: pointer;
-}
 
 
 /* ------------ Cart Actions  -------------*/
@@ -56,6 +56,8 @@
     border: 1px solid #1d422d;
     border-radius: 10px;
     cursor: default ;
+    background-color: #dfe4d7;
+    color: #1d422d;
 }
 
 .loginButton {
@@ -88,15 +90,29 @@
     border-radius: 10px;
 
     display: flex;
+}
+
+
+.guidingButtonsWrapper .disable{
+    display: block !important;
+    visibility: hidden;
+    cursor: default;
+}
+
+.guidingButtonsWrapper .enable{
+    visibility: visible;
+    cursor: pointer;
+    background-color: #2f774e;
+    border: 1px solid #1d422d;
 
 }
+
+
 
 .guidingButtons {
     max-height: 30px;
     padding: 10px;
     flex-basis: 50%;
-    
-
 }
 
 .guidingButtons img{

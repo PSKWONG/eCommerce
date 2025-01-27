@@ -17,8 +17,8 @@ const CartItemContainer = (data) => {
 
     //----------------------Imported Data ----------------------
     //Extract cart Item Data
-    const cartItemData = data.cartItem || {}; 
-    const {cartListProgress} = data.progressGuideline || 1;
+    const cartItemData = data.cartItemData || {}; 
+    const {cartListProgress} = data.cartItemControllerData.progressGuideline || 1;
 
     //Counter Data
     const counterData = useCounterData(cartItemData);
