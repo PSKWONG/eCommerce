@@ -24,7 +24,7 @@ const useProductListData = () => {
     const [backButtonStatus, setBackButtonStatus] = useState(false);
     const [nextButtonStatus, setNextButtonStatus] = useState(false);
     const [loginButtonStatus, setLoginButtonStatus] = useState(false);
-    const [paymentButtonStatus, setPaymentButtonStatus] = useState(false);
+    const [paymentStatus, setPaymentStatus] = useState(false);
 
     //----------------------- Actions -----------------------
     const navigate = useNavigate();
@@ -99,8 +99,8 @@ const useProductListData = () => {
                 setCartListStatus(false);
                 setBackButtonStatus(false);
                 setNextButtonStatus(false);
-                setPaymentButtonStatus(false);
                 setLoginButtonStatus(false);
+                setPaymentStatus(false);
                 break; 
 
             case 1:
@@ -108,19 +108,22 @@ const useProductListData = () => {
                 setCartListStatus(true);
                 setBackButtonStatus(false);
                 setNextButtonStatus(true);
-                setPaymentButtonStatus(false);
                 setLoginButtonStatus(false);
+                setPaymentStatus(false);
                 break;
             case 2:
                 //Phase 2 - Address and delivery date confirmation
                 setInstruction('Step 2/3 : Login and confirm the cart Item');
                 setCartListStatus(true);
                 setBackButtonStatus(true);
+                setPaymentStatus(false);
                 break;
             case 3:
                 setInstruction('Step 3/3 : Proceed the payment');
                 setCartListStatus(false);
-                setPaymentButtonStatus(true);
+                setPaymentStatus(true);
+                setNextButtonStatus(false);
+
 
 
 
@@ -193,8 +196,8 @@ const useProductListData = () => {
             }
 
         },
-        payement: {
-
+        payment: {
+            style: paymentStatus ? styles.enable : styles.disable
         }
     }
 

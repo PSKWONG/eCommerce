@@ -1,5 +1,6 @@
 import React from "react";
 import { PaymentElement } from "@stripe/react-stripe-js";
+import styles from  '../../components/cart/cartList/CartList.module.css';
 
 export default function CheckoutForm(porps) {
 
@@ -12,10 +13,10 @@ export default function CheckoutForm(porps) {
     const formController = porps.formController || null;
 
     return (
-        <form id="payment-form" onSubmit={onSubmit}>
+        <form id="payment-form" onSubmit={onSubmit} className={formController.style}>
 
             <PaymentElement id="payment-element" options={paymentElementOptions} />
-            <button disabled={isLoading || !stripe || !elements} id="submit">
+            <button disabled={isLoading || !stripe || !elements} id="submit" className={styles.checkOutFormSubmit}>
                 <span id="button-text">
                     {isLoading ? <div className="spinner" id="spinner"></div> : "Pay now"}
                 </span>

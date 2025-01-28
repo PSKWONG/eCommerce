@@ -35,6 +35,7 @@
 
 
 
+
 /* ------------ Cart Actions  -------------*/
 .actionWrapper {
     background-color: #255038;
@@ -68,6 +69,19 @@
     cursor: pointer;
     text-align: center;
     margin-top: 10px;
+}
+
+/*------------ Submit Form --------------------*/ 
+.checkOutFormSubmit {
+    background-color: #1e422e;
+    color: antiquewhite;
+    width: 100%;
+    border: none;
+    padding: 15px;
+    border-radius: 15px;
+    margin-top: 10px;
+    cursor: pointer;
+    
 }
 
 

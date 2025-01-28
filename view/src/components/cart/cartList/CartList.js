@@ -51,7 +51,7 @@ const CartList = (props) => {
                 <div className={` leftColumn ${styles.contentWrapper} ${styles.cartListWrapper}`}>
                     <h3>{instruction}</h3>
                     <CartListing cartListData={props.cartListData} cartListControllerData={cartListControllerData} />
-                    <CheckoutFormContainer />
+                    <CheckoutFormContainer formController = {cartListControllerData.payment}/>
 
                 </div>
 

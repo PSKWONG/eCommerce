@@ -176,10 +176,11 @@ const cartSlice = createSlice(
             },
             totalCost: (state)=>{
                 state.cost.cartTotal = state.cartData.items.reduce((acc, cur)=>{
-                    const price = parseFloat(cur.unit_price.replace('$','')).toFixed(2) || 0;
+                    const price = parseFloat(cur.unit_price.replace('$','')) || 0;
                     const quantity = Number(cur.quantity) || 0;
                     return acc + (price * quantity);
                 } ,0);
+                state.cost.cartTotal = parseFloat(state.cost.cartTotal.toFixed(2));
             }
 
         }, 
