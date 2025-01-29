@@ -2,15 +2,18 @@
 import React from 'react';
 import useCompletePageData from './completePageData';
 
+//--------------- Import Components -------------------
+import CompletePage from '../../components/payment/Complete';
+
 
 const CompletePageContainer = ()=>{
     
     const completePageData = useCompletePageData();
 
     return(
-        <div>
-            <h1>Checkout</h1>
-        </div>
+        <>
+            <CompletePage {...completePageData}/>
+        </>
     )
 }
 

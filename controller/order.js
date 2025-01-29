@@ -24,23 +24,18 @@ exports.createOrder = async (req , res , next) =>{
 
     //Create a new OrderID
     try {
-
-        
-
+        //Convert the cartRecord to a string
         const record = JSON.stringify(cartRecord);
 
-        console.log("This is the JSON", record);
-
+        //Create a new order in the database
         const result = await OrderDB.create(paymentIntentId, user_id, record );
-        
-        console.log('This is the result from new ORDER ID', result); 
 
         // Initialize the order object in the request
         req.order = req.order || {}; 
 
         // Add the order id to the request object
         req.order.order_id = result.order_id;
-        console.log('This is the order id in request:', req.order.order_id);
+        
         next();
 
     }catch(err){

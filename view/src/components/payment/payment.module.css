@@ -21,7 +21,7 @@
 }
 
 
-/* ------------ Cart List  -------------*/
+/* ------------ Checkout Page  -------------*/
 .checkOutFormtWrapper {
     background-color: white;
     text-align: left;
@@ -30,10 +30,6 @@
 
     flex-grow: 1;
 }
-
-
-
-
 
 
 /* ------------ Cart Actions  -------------*/
@@ -156,5 +152,17 @@
 
 
 
+/* -----------Complete Page ---------------*/
+
+.completePageWrapper {
+    background-color: white;
+    text-align: left;
+    font-weight: 800;
+    color: #5b6150;
+    border-radius: 15px;
+    padding: 10px;
+
+    flex-grow: 1;
+}
 
 
