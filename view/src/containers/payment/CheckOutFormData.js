@@ -8,6 +8,9 @@ const useCheckOutFormData = () => {
     const [message, setMessage] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
 
+    const environment = process.env.REACT_APP_ENV === "production" ? "production" : "development";
+    const checkoutURL = environment === "production" ? process.env.REACT_APP_RETRUN_URL : process.env.REACT_APP_RETRUN_URL_DEV;
+
     //----------------------- Handlers --------------------------
     const stripe = useStripe();
     const elements = useElements();
@@ -32,7 +35,7 @@ const useCheckOutFormData = () => {
             elements,
             confirmParams: {
                 // Make sure to change this to your payment completion page
-                return_url: "http://localhost:4040",
+                return_url:checkoutURL,
             },
         });
 

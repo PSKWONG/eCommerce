@@ -49,7 +49,7 @@ const useProductListData = () => {
 
     const handleNextButton = (e) => {
         e.preventDefault();
-        if (cartListProgress < 3) {
+        if (cartListProgress < 2) {
             setCartListProgress(cartListProgress + 1);
             return
         }
@@ -104,7 +104,7 @@ const useProductListData = () => {
                 break; 
 
             case 1:
-                setInstruction('Step 1/3 : Check and adjust your shopping cart items.');
+                setInstruction('Step 1/2 : Check and adjust your shopping cart items.');
                 setCartListStatus(true);
                 setBackButtonStatus(false);
                 setNextButtonStatus(true);
@@ -113,21 +113,12 @@ const useProductListData = () => {
                 break;
             case 2:
                 //Phase 2 - Address and delivery date confirmation
-                setInstruction('Step 2/3 : Login and confirm the cart Item');
+                setInstruction('Step 2/2 : Login and confirm the cart Item');
                 setCartListStatus(true);
                 setBackButtonStatus(true);
-                setPaymentStatus(false);
-                break;
-            case 3:
-                setInstruction('Step 3/3 : Proceed the payment');
-                setCartListStatus(false);
-                setPaymentStatus(true);
                 setNextButtonStatus(false);
-
-
-
-
                 break;
+        
             default:
                 break;
         }
@@ -139,11 +130,11 @@ const useProductListData = () => {
         if (cartListProgress === 2) {
             if (isAuthenticated) {
                 setLoginButtonStatus(false);
-                setNextButtonStatus(true);
+                setPaymentStatus(true);
                 return;
             } else {
                 setLoginButtonStatus(true);
-                setNextButtonStatus(false);
+                setPaymentStatus(false);
                 return;
             }
         }
@@ -197,7 +188,8 @@ const useProductListData = () => {
 
         },
         payment: {
-            style: paymentStatus ? styles.enable : styles.disable
+            guideline: 'Proceed to payment',
+            style: paymentStatus ? styles.enable : styles.disable, 
         }
     }
 

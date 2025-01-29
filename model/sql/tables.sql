@@ -33,7 +33,8 @@ Create table orders (
     order_id Serial Primary Key,
     order_date TIMESTAMP,
     delivery_date date,
-    total_price money,
+    cartRecord JSON, 
+    payment_id varchar(300), 
     user_id integer,
     CONSTRAINT fk_user
   	FOREIGN KEY (user_id)
@@ -66,7 +67,6 @@ CREATE TABLE users_carts(
 Create table orders_products (
     order_id integer ,
     product_id integer ,
-    quantity integer,
     unit_price money,
     CONSTRAINT fk_order
   	FOREIGN KEY (order_id)

@@ -5,7 +5,7 @@ import { paymentAPI } from "../../features/api/API";
 import { useSelector } from "react-redux";
 import { selectCartData } from "../../features/cart/cartSlice";
 
-const useStripleData = () => {
+const useStripleData = (data) => {
 
     //Create state to store the client secret
     const [clientSecret, setClientSecret] = useState("");
@@ -19,6 +19,8 @@ const useStripleData = () => {
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
+
+
         const fetchClientSecret = async () => {
             try {
                 const requestBody = cartListData
@@ -33,7 +35,18 @@ const useStripleData = () => {
             }
         };
 
-        fetchClientSecret();
+        const extractedClientSecret = data.paymentPageData.clientSecret;
+
+        const isEmpty = extractedClientSecret === null
+        if (isEmpty) {
+            fetchClientSecret();
+            return; 
+        }else{
+            setClientSecret(extractedClientSecret);
+        }
+
+
+
 
     }, [cartListData]);
 

@@ -2,7 +2,7 @@
 const express = require('express');
 const paymentRouter = express.Router();
 const {authericationCheck} = require('../controller/authentication');
-const striplePaymentController = require('../controller/payment');
+const {striplePaymentController} = require('../controller/payment');
 
 
 

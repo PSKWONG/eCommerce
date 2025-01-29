@@ -8,12 +8,20 @@ import {createBrowserRouter, createRoutesFromElements, Route, RouterProvider} fr
 // ------------------- Import Components -------------------
 //import App from '../components/App';
 import Page from './page/PageContainer';
+//Index Page
 import Home from './HomeContainer';
+//Authentication 
 import Login from './login/LoginContainer';
 import Registration from './registration/RegContainer'
+//Product
 import ProductList from './product/ProductListContainer';  //Import ProductListContainer
 import ProductDetail from './product/ProductDetailContainer'
+//Cart
 import CartList from './cart/cartListContainer' //Import CartListContainer
+import Payment from './payment/PaymentContainer'
+import CheckOut from '../components/payment/CheckOut'
+import Complete from './payment/CompleteContainer'
+
 
 
 //-------------------- Router --------------------
@@ -33,7 +41,14 @@ const appRouter = createBrowserRouter(
           <Route path=":product_id" element={<ProductDetail/>} />
         </Route>
       </Route>
-      <Route path="cart" element={<CartList />} />
+      <Route path="/cart" >
+        <Route index element={<CartList />} />
+      </Route>
+      <Route path="/payment" element={<Payment />} >
+        <Route index element={<CheckOut />} />
+        <Route path='complete' element={<Complete />} />
+      </Route>
+
     </Route>
   ), 
   {

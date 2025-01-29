@@ -9,11 +9,8 @@ export default function CheckoutForm(porps) {
     const {onSubmit} = handlers;
     const {message, isLoading, stripe, elements} = status;
 
-    // Destructure the props - Optional Data
-    const formController = porps.formController || null;
-
     return (
-        <form id="payment-form" onSubmit={onSubmit} className={formController.style}>
+        <form id="payment-form" onSubmit={onSubmit} >
 
             <PaymentElement id="payment-element" options={paymentElementOptions} />
             <button disabled={isLoading || !stripe || !elements} id="submit" className={styles.checkOutFormSubmit}>

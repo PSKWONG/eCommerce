@@ -28,8 +28,9 @@ const calculateOrderAmount = (items) => {
     return Math.round(total * 100);
 };
 
+//-------------------------- Payment Controller --------------------------
 
-const striplePaymentController = async (req, res, next) => {
+exports.striplePaymentController = async (req, res, next) => {
     const { items } = req.body;
 
     //Check the items array to determine if it is empty
@@ -65,4 +66,24 @@ const striplePaymentController = async (req, res, next) => {
 
 };
 
-module.exports = striplePaymentController;
+exports.stripePaymentStatusChecking = async (req, res, next) => {
+    const { paymentIntentId } = req.body;
+
+    if (!paymentIntentId) {
+        return next(siteError(400, 'Please check your request body'));
+    }
+
+    try {
+        const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
+
+        if (paymentIntent.status === 'succeeded') {
+            next(); 
+        } else {
+            return next(siteError(400, 'Payment is not successful'));
+        }
+
+    } catch (err) {
+        console.log('There is an error in the payment status checking', err);
+        return next(siteError(500, 'There is an error in the payment status checking'));
+    }
+}; 

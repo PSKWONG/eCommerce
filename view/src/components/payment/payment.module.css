@@ -1,5 +1,5 @@
-/* ------------ Cart List & Action Wrapper -------------*/
-.cartListAndACtionWrapper {
+/* ------------ Payment & Action Wrapper -------------*/
+.paymentAndACtionWrapper {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -22,7 +22,7 @@
 
 
 /* ------------ Cart List  -------------*/
-.cartListWrapper {
+.checkOutFormtWrapper {
     background-color: white;
     text-align: left;
     font-weight: 800;
