@@ -14,7 +14,7 @@ const useProfileIcon = (authenStatus) => {
     const navigate = useNavigate();
 
     // Component Handlers
-    const handleProfile = () => { navigate("/user/profile"); };
+    const handleProfile = () => { navigate("/user"); };
 
     // Component States
     const [profileIcon, setProfileIcon] = useState(

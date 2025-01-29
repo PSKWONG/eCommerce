@@ -80,7 +80,7 @@ export const logoutAPI = async () => {
 //---------------------User API---------------------//
 //Get User
 export const getUser = async (id) => {
-    return getAPI(`/users/profile`);
+    return getAPI(`/user/profile`);
 };
 
 

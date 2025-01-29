@@ -21,6 +21,9 @@ import CartList from './cart/cartListContainer' //Import CartListContainer
 import Payment from './payment/PaymentContainer'
 import CheckOut from '../components/payment/CheckOut'
 import Complete from './payment/CompleteContainer'
+//User
+import UserWrapper from './user/UserContainer'
+import Profile from './user/ProfileContainer'
 
 
 
@@ -48,7 +51,10 @@ const appRouter = createBrowserRouter(
         <Route index element={<CheckOut />} />
         <Route path='complete' element={<Complete />} />
       </Route>
-
+      <Route path ="/user" element={<UserWrapper/>}>
+        <Route index element={<Profile/>} />
+        <Route path="profile" element={<Profile/>} />
+      </Route>
     </Route>
   ), 
   {
