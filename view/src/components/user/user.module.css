@@ -1,0 +1,190 @@
+/*------------- General Structure -------------*/
+.userWrapper{
+
+}
+
+
+.contentWrapper{
+    flex-basis: 150px;
+    flex-grow: 1;
+    flex-shrink: 1;
+}
+
+.menuWrapper a{
+    display: block;
+    width: 90%;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #756537;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.mainWrapper{
+    padding: 20px;
+    background-color: #255038;
+    text-align: center;
+    color: #e8e8e5; 
+    flex-grow: 1;  
+}
+
+
+.formAndGuidelinenWrapper h1{
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Guideline */
+
+.guidelineWrapper{
+    padding: 10px;
+    flex-shrink: 5;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center; 
+    justify-content: space-around;
+
+    
+}
+.guidelineWrapper h1{
+    flex-basis: 25px;
+    flex-grow: 0;
+}
+
+
+.guidelineList{
+    flex-grow: 10;
+    width: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.guidelineRow{
+    font-size: 0.8em;
+    border: 1px solid #c4e0da;
+    padding: 10px;
+    border-radius: 10px;
+    margin: 5px 0;
+}
+
+
+
+/* Registration */
+.registrationWrapper{
+    padding: 20px;
+    background-color: #255038;
+    text-align: center;
+    color: #e8e8e5; 
+    flex-grow: 5;   
+}
+
+.registrationForm{
+    text-align: left;
+}
+
+.registrationForm div{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.registrationForm label{
+    flex-basis: 150px;
+    margin-right: 10px;
+    text-align: right;
+    font-weight: bold;
+}
+
+.registrationForm input{
+    flex-basis: 150px;
+    flex-grow: 1;
+    padding: 5px;
+    border-radius: 5px;
+    color: black;
+    margin-bottom: 10px;
+    
+}
+
+.error{
+    border: 3px solid rgb(163, 10, 10);
+}
+
+.valid{
+    border: 0px
+}
+
+.submitButtonWrapper{
+    border-top: 1px solid #e8e8e5;
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+}
+.submitButtonWrapper div {
+
+    margin: 10px;
+    margin-right: 0px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    
+
+}
+
+.submitButton{
+    background-color: #e8e8e5;
+    border: 1px solid #e8e8e5;
+    color: #255038;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/*hover */ 
+
+
+.submitButtonDisabled{
+    background-color: none;
+    border: 1px solid #3b6b52;
+    color: #3b6b52;
+}
+
+
+
+
+
+
+
+
+
